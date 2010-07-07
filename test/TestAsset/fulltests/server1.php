@@ -23,7 +23,40 @@
 /**
  * @namespace
  */
-namespace ZendTest\Soap\_files\fulltests;
+namespace ZendTest\Soap\TestAsset\fulltests;
+
+/**
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Server1
+{
+    /**
+     * @param  \ZendTest\Soap\TestAsset\fulltests\ComplexTypeB
+     * @return \ZendTest\Soap\TestAsset\fulltests\ComplexTypeA[]
+     */
+    public function request($request)
+    {
+        $a = new ComplexTypeA();
+
+        $b1 = new ComplexTypeB();
+        $b1->bar = "bar";
+        $b1->foo = "bar";
+        $a->baz[] = $b1;
+
+        $b2 = new ComplexTypeB();
+        $b2->bar = "foo";
+        $b2->foo = "foo";
+        $a->baz[] = $b2;
+
+        $a->baz[] = $request;
+
+        return array($a);
+    }
+}
 
 /**
  * @category   Zend
@@ -51,27 +84,19 @@ class ComplexTypeB
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Server2
+class ComplexTypeA
 {
     /**
-     * @param  string $foo
-     * @param  string $bar
-     * @return \ZendTest\Soap\_files\fulltests\ComplexTypeB
+     * @var \ZendTest\Soap\TestAsset\fulltests\ComplexTypeB[]
      */
-    public function request($foo, $bar)
-    {
-        $b = new ComplexTypeB();
-        $b->bar = $bar;
-        $b->foo = $foo;
-        return $b;
-    }
+    public $baz = array();
 }
 
 if(isset($_GET['wsdl'])) {
-    $server = new \Zend\Soap\AutoDiscover\AutoDiscover(new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex());
+    $server = new \Zend\Soap\AutoDiscover(new \Zend\Soap\WSDL\Strategy\ArrayOfTypeComplex());
 } else {
     $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
-    $server = new \Zend\Soap\Server\Server($uri);
+    $server = new \Zend\Soap\Server($uri);
 }
-$server->setClass('ZendTest\Soap\_files\fulltests\Server2');
+$server->setClass('\ZendTest\Soap\TestAsset\fulltests\Server1');
 $server->handle();
