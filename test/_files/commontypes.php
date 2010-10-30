@@ -17,12 +17,8 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id: commontypes.php 21858 2010-04-15 19:58:12Z beberlei $
  */
-
-/**
- * @namespace
- */
-namespace ZendTest\Soap\TestAsset;
 
 /* Test Functions */
 
@@ -32,7 +28,7 @@ namespace ZendTest\Soap\TestAsset;
  * @param string $arg
  * @return string
  */
-function TestFunc($who)
+function Zend_Soap_AutoDiscover_TestFunc($who)
 {
     return "Hello $who";
 }
@@ -40,7 +36,7 @@ function TestFunc($who)
 /**
  * Test Function 2
  */
-function TestFunc2()
+function Zend_Soap_AutoDiscover_TestFunc2()
 {
     return "Hello World";
 }
@@ -50,7 +46,7 @@ function TestFunc2()
  *
  * @return bool
  */
-function TestFunc3()
+function Zend_Soap_AutoDiscover_TestFunc3()
 {
     return false;
 }
@@ -60,7 +56,7 @@ function TestFunc3()
  *
  * @return bool
  */
-function TestFunc4()
+function Zend_Soap_AutoDiscover_TestFunc4()
 {
     return true;
 }
@@ -70,7 +66,7 @@ function TestFunc4()
  *
  * @return int
  */
-function TestFunc5()
+function Zend_Soap_AutoDiscover_TestFunc5()
 {
     return 123;
 }
@@ -80,7 +76,7 @@ function TestFunc5()
  *
  * @return string
  */
-function TestFunc6()
+function Zend_Soap_AutoDiscover_TestFunc6()
 {
     return "string";
 }
@@ -90,7 +86,7 @@ function TestFunc6()
  *
  * @return array
  */
-function TestFunc7()
+function Zend_Soap_AutoDiscover_TestFunc7()
 {
     return array('foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123);
 }
@@ -100,7 +96,7 @@ function TestFunc7()
  *
  * @return StdClass
  */
-function TestFunc8()
+function Zend_Soap_AutoDiscover_TestFunc8()
 {
     $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
     return $return;
@@ -113,7 +109,7 @@ function TestFunc8()
  * @param string $bar
  * @return string
  */
-function TestFunc9($foo, $bar)
+function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
 {
     return "$foo $bar";
 }
@@ -125,7 +121,7 @@ function TestFunc9($foo, $bar)
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestFixingMultiplePrototypes
+class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
 {
     /**
      * Test function
@@ -148,7 +144,7 @@ class TestFixingMultiplePrototypes
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Test {
+class Zend_Soap_AutoDiscover_Test {
     /**
      * Test Function 1
      *
@@ -193,7 +189,7 @@ class Test {
     }
 }
 
-class AutoDiscoverTestClass1
+class Zend_Soap_AutoDiscoverTestClass1
 {
     /**
      * @var integer $var
@@ -213,31 +209,31 @@ class AutoDiscoverTestClass1
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AutoDiscoverTestClass2
+class Zend_Soap_AutoDiscoverTestClass2
 {
     /**
      *
-     * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 $test
+     * @param Zend_Soap_AutoDiscoverTestClass1 $test
      * @return boolean
      */
-    public function add(AutoDiscoverTestClass1 $test)
+    public function add(Zend_Soap_AutoDiscoverTestClass1 $test)
     {
         return true;
     }
 
     /**
-     * @return \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1[]
+     * @return Zend_Soap_AutoDiscoverTestClass1[]
      */
     public function fetchAll()
     {
         return array(
-            new AutoDiscoverTestClass1(),
-            new AutoDiscoverTestClass1(),
+            new Zend_Soap_AutoDiscoverTestClass1(),
+            new Zend_Soap_AutoDiscoverTestClass1(),
         );
     }
 
     /**
-     * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1[]
+     * @param Zend_Soap_AutoDiscoverTestClass1[]
      */
     public function addMultiple($test)
     {
@@ -252,7 +248,7 @@ class AutoDiscoverTestClass2
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexTypeB
+class Zend_Soap_Wsdl_ComplexTypeB
 {
     /**
      * @var string
@@ -271,10 +267,10 @@ class ComplexTypeB
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexTypeA
+class Zend_Soap_Wsdl_ComplexTypeA
 {
     /**
-     * @var \ZendTest\Soap\TestAsset\ComplexTypeB[]
+     * @var Zend_Soap_Wsdl_ComplexTypeB[]
      */
     public $baz = array();
 }
@@ -286,7 +282,7 @@ class ComplexTypeA
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexTest
+class Zend_Soap_Wsdl_ComplexTest
 {
     /**
      * @var int
@@ -301,7 +297,7 @@ class ComplexTest
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexObjectStructure
+class Zend_Soap_Wsdl_ComplexObjectStructure
 {
     /**
      * @var boolean
@@ -331,10 +327,10 @@ class ComplexObjectStructure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexObjectWithObjectStructure
+class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
 {
     /**
-     * @var \ZendTest\Soap\TestAsset\ComplexTest
+     * @var Zend_Soap_Wsdl_ComplexTest
      */
     public $object;
 }
@@ -346,24 +342,24 @@ class ComplexObjectWithObjectStructure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MyService
+class Zend_Soap_AutoDiscover_MyService
 {
     /**
      *    @param string $foo
-     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
+     *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function foo($foo) {
     }
     /**
      *    @param string $bar
-     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
+     *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function bar($bar) {
     }
 
     /**
      *    @param string $baz
-     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
+     *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function baz($baz) {
     }
@@ -376,7 +372,7 @@ class MyService
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MyServiceSequence
+class Zend_Soap_AutoDiscover_MyServiceSequence
 {
     /**
      *    @param string $foo
@@ -413,7 +409,7 @@ class MyServiceSequence
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MyResponse
+class Zend_Soap_AutoDiscover_MyResponse
 {
     /**
      * @var string
@@ -428,15 +424,15 @@ class MyResponse
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Recursion
+class Zend_Soap_AutoDiscover_Recursion
 {
     /**
-     * @var \ZendTest\Soap\TestAsset\Recursion
+     * @var Zend_Soap_AutoDiscover_Recursion
      */
     public $recursion;
 
     /**
-     * @return \ZendTest\Soap\TestAsset\Recursion
+     * @return Zend_Soap_AutoDiscover_Recursion
      */
     public function create() {}
 }
@@ -444,7 +440,7 @@ class Recursion
 /**
  * @param string $message
  */
-function OneWay($message)
+function Zend_Soap_AutoDiscover_OneWay($message)
 {
 
 }
@@ -456,7 +452,7 @@ function OneWay($message)
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NoReturnType
+class Zend_Soap_AutoDiscover_NoReturnType
 {
     /**
      *
@@ -466,179 +462,4 @@ class NoReturnType
     {
 
     }
-}
-
-/* Client test classes */
-/** Test Class */
-class TestClass {
-    /**
-     * Test Function 1
-     *
-     * @return string
-     */
-    function testFunc1()
-    {
-        return "Hello World";
-    }
-
-    /**
-     * Test Function 2
-     *
-     * @param string $who Some Arg
-     * @return string
-     */
-    function testFunc2($who)
-    {
-        return "Hello $who!";
-    }
-
-    /**
-     * Test Function 3
-     *
-     * @param string $who Some Arg
-     * @param int $when Some
-     * @return string
-     */
-    function testFunc3($who, $when)
-    {
-        return "Hello $who, How are you $when";
-    }
-
-    /**
-     * Test Function 4
-     *
-     * @return string
-     */
-    static function testFunc4()
-    {
-        return "I'm Static!";
-    }
-}
-
-/** Test class 2 */
-class TestData1 {
-    /**
-     * Property1
-     *
-     * @var string
-     */
-     public $property1;
-
-    /**
-     * Property2
-     *
-     * @var float
-     */
-     public $property2;
-}
-
-/** Test class 2 */
-class TestData2 {
-    /**
-     * Property1
-     *
-     * @var integer
-     */
-     public $property1;
-
-    /**
-     * Property1
-     *
-     * @var float
-     */
-     public $property2;
-}
-
-/** Server test classes */
-class ServerTestClass
-{
-    /**
-     * Test Function 1
-     *
-     * @return string
-     */
-    function testFunc1()
-    {
-        return "Hello World";
-    }
-
-    /**
-     * Test Function 2
-     *
-     * @param string $who Some Arg
-     * @return string
-     */
-    function testFunc2($who)
-    {
-        return "Hello $who!";
-    }
-
-    /**
-     * Test Function 3
-     *
-     * @param string $who Some Arg
-     * @param int $when Some
-     * @return string
-     */
-    function testFunc3($who, $when)
-    {
-        return "Hello $who, How are you $when";
-    }
-
-    /**
-     * Test Function 4
-     *
-     * @return string
-     */
-    static function testFunc4()
-    {
-        return "I'm Static!";
-    }
-
-    /**
-     * Test Function 5 raises a user error
-     *
-     * @return void
-     */
-    function testFunc5()
-    {
-        trigger_error("Test Message", E_USER_ERROR);
-    }
-}
-
-if (extension_loaded('soap')) {
-
-/** Local SOAP client */
-class TestLocalSoapClient extends \SoapClient
-{
-    /**
-     * Server object
-     *
-     * @var Zend_Soap_Server
-     */
-    public $server;
-
-    /**
-     * Local client constructor
-     *
-     * @param Zend_Soap_Server $server
-     * @param string $wsdl
-     * @param array $options
-     */
-    function __construct(\Zend\Soap\Server $server, $wsdl, $options)
-    {
-        $this->server = $server;
-        parent::__construct($wsdl, $options);
-    }
-
-    function __doRequest($request, $location, $action, $version, $one_way = 0)
-    {
-        ob_start();
-        $this->server->handle($request);
-        $response = ob_get_clean();
-
-        return $response;
-    }
-}
-
 }

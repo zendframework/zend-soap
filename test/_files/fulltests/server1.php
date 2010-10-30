@@ -17,12 +17,12 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id: server1.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-/**
- * @namespace
- */
-namespace ZendTest\Soap\TestAsset\fulltests;
+require_once "Zend/Soap/AutoDiscover.php";
+require_once "Zend/Soap/Server.php";
+require_once "Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php";
 
 /**
  * @category   Zend
@@ -31,22 +31,22 @@ namespace ZendTest\Soap\TestAsset\fulltests;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Server1
+class Zend_Soap_Service_Server1
 {
     /**
-     * @param  \ZendTest\Soap\TestAsset\fulltests\ComplexTypeB
-     * @return \ZendTest\Soap\TestAsset\fulltests\ComplexTypeA[]
+     * @param  Zend_Soap_Wsdl_ComplexTypeB
+     * @return Zend_Soap_Wsdl_ComplexTypeA[]
      */
     public function request($request)
     {
-        $a = new ComplexTypeA();
+        $a = new Zend_Soap_Wsdl_ComplexTypeA();
 
-        $b1 = new ComplexTypeB();
+        $b1 = new Zend_Soap_Wsdl_ComplexTypeB();
         $b1->bar = "bar";
         $b1->foo = "bar";
         $a->baz[] = $b1;
 
-        $b2 = new ComplexTypeB();
+        $b2 = new Zend_Soap_Wsdl_ComplexTypeB();
         $b2->bar = "foo";
         $b2->foo = "foo";
         $a->baz[] = $b2;
@@ -64,7 +64,7 @@ class Server1
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexTypeB
+class Zend_Soap_Wsdl_ComplexTypeB
 {
     /**
      * @var string
@@ -83,19 +83,19 @@ class ComplexTypeB
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ComplexTypeA
+class Zend_Soap_Wsdl_ComplexTypeA
 {
     /**
-     * @var \ZendTest\Soap\TestAsset\fulltests\ComplexTypeB[]
+     * @var Zend_Soap_Wsdl_ComplexTypeB[]
      */
     public $baz = array();
 }
 
 if(isset($_GET['wsdl'])) {
-    $server = new \Zend\Soap\AutoDiscover(new \Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex());
+    $server = new Zend_Soap_AutoDiscover(new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex());
 } else {
     $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
-    $server = new \Zend\Soap\Server($uri);
+    $server = new Zend_Soap_Server($uri);
 }
-$server->setClass('\ZendTest\Soap\TestAsset\fulltests\Server1');
+$server->setClass('Zend_Soap_Service_Server1');
 $server->handle();
