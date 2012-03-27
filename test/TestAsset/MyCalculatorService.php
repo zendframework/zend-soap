@@ -14,21 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @subpackage AutoDiscover
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Soap;
+namespace ZendTest\Soap\TestAsset;
 
 /**
- * @uses       \Zend\Soap\Exception
- * @package    Zend_Soap
- * @subpackage AutoDiscover
+ * MyCalculatorService 
+ *
+ * Class used in DocumentLiteralWrapperTest
  */
-class AutoDiscoverException extends Exception
+class MyCalculatorService
 {
+    /**
+     * @param int $x
+     * @param int $y
+     * @return int
+     */
+    public function add($x, $y)
+    {
+        return $x+$y;
+    }
 }
+
