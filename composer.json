@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-soap",
-    "description": "Zend\\Soap component",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -9,11 +9,11 @@
     "homepage": "https://github.com/zendframework/zend-soap",
     "autoload": {
         "psr-4": {
-            "Zend\\Soap\\": "src/"
+            "Zend\\Soap": "src/"
         }
     },
     "require": {
-        "php": ">=5.3.23",
+        "php": ">=5.3.3",
         "zendframework/zend-server": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-uri": "self.version"
