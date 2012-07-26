@@ -10,7 +10,5 @@
 
 namespace Zend\Soap\Exception;
 
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class ExtensionNotLoadedException extends RuntimeException
 {}
