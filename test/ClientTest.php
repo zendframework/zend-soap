@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Soap
  */
 
 namespace ZendTest\Soap;
@@ -30,8 +19,6 @@ use Zend\Soap\Server;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -82,7 +69,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client->setOptions($nonWSDLOptions);
         $this->assertTrue($client->getOptions() == $nonWSDLOptions);
-
 
         /*************************************************************
          * ------ Test non-WSDL mode options -----------------------------
@@ -243,7 +229,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('compression', $options);
     }
 
-
     public function testGetFunctions()
     {
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -272,6 +257,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
@@ -302,6 +288,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testGetLastResponse() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
@@ -333,6 +320,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
@@ -342,6 +330,38 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
         $this->assertEquals($client->testFunc2('World'), 'Hello World!');
+    }
+
+    public function testCallDirect()
+    {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
+
+            return;
+        }
+
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
+
+        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+
+        $this->assertEquals($client->call('testFunc2', array('World')), 'Hello World!');
+    }
+
+    public function testCallDirectWithArgString()
+    {
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
+
+            return;
+        }
+
+        $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
+        $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
+
+        $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
+
+        $this->assertEquals($client->call('testFunc2', 'World'), 'Hello World!');
     }
 
     public function testSetOptionsWithZendConfig()
@@ -384,6 +404,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         if (headers_sent()) {
             $this->markTestSkipped('Cannot run testSetInputHeaders() when headers have already been sent; enable output buffering to run this test');
+
             return;
         }
 
@@ -419,7 +440,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
 
-
         // Add request header
         $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader3', 'SOAP header content 3'));
 
@@ -444,7 +464,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                          . '</env:Envelope>' . "\n";
 
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
-
 
         $client->resetSoapInputHeaders();
 

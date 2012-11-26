@@ -9,7 +9,7 @@
     "homepage": "https://github.com/zendframework/zend-soap",
     "autoload": {
         "psr-4": {
-            "Zend\\Soap": "src/"
+            "Zend\\Soap\\": "src/"
         }
     },
     "require": {
