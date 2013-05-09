@@ -11,19 +11,21 @@
 namespace ZendTest\Soap\TestAsset;
 
 /**
- * MyCalculatorService
- *
- * Class used in DocumentLiteralWrapperTest
+ * Allows mocking of call_user_func.
  */
-class MyCalculatorService
+class MockCallUserFunc
 {
     /**
-     * @param int $x
-     * @param int $y
-     * @return int
+     * Whether to mock the call_user_func function.
+     *
+     * @var bool
      */
-    public function add($x, $y)
-    {
-        return $x+$y;
-    }
+    public static $mock = false;
+
+    /**
+     * Passed parameters.
+     *
+     * @var array
+     */
+    public static $params = array();
 }
