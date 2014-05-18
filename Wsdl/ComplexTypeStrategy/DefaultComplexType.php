@@ -32,19 +32,19 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
             ));
         }
 
-        $class   = new ReflectionClass($type);
-        $phpType = $class->getName();
-
-        if (($soapType = $this->scanRegisteredTypes($phpType)) !== null) {
+        if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
             return $soapType;
         }
 
         $dom = $this->getContext()->toDomDocument();
-        $soapTypeName = $this->getContext()->translateType($phpType);
+        $class = new ReflectionClass($type);
+
+        $soapTypeName = $this->getContext()->translateType($type);
         $soapType     = Wsdl::TYPES_NS . ':' . $soapTypeName;
 
         // Register type here to avoid recursion
-        $this->getContext()->addType($phpType, $soapType);
+        $this->getContext()->addType($type, $soapType);
+
 
         $defaultProperties = $class->getDefaultProperties();
 
