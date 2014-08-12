@@ -14,6 +14,7 @@ use DOMDocument;
 use DOMDocumentFragment;
 use DOMElement;
 use DOMXPath;
+use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 use Zend\Uri\Uri;
 
