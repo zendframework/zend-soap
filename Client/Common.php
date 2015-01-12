@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,9 +11,7 @@ namespace Zend\Soap\Client;
 
 use SoapClient;
 
-if (! extension_loaded('soap')) {
-    return;
-}
+if (extension_loaded('soap')) {
 
 class Common extends SoapClient
 {
@@ -59,3 +57,5 @@ class Common extends SoapClient
         return call_user_func($this->doRequestCallback, $this, ltrim($request), $location, $action, $version, $oneWay);
     }
 }
+
+} // end if (extension_loaded('soap')
