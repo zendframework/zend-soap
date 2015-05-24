@@ -27,6 +27,8 @@
     "suggest": {
         "zendframework/zend-http": "Zend\\Http component"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.4-dev",
