@@ -28,7 +28,7 @@
              functionality works as expected. Such tests include those for
              Zend\Soap and Zend\Session, which require that headers not be sent
              in order to work. -->
-        <const name="TESTS_ZEND_OB_ENABLED" value="false" />
+        <env name="TESTS_ZEND_OB_ENABLED" value="false" />
 
         <!-- Zend\Soap\AutoDiscover scenario tests for complex objects and wsdl
              generation
@@ -41,6 +41,6 @@
              NOTE: Make sure the servers are using the correct Zend Framework
              copy, when having more than one version installed and include
              paths are changing. -->
-        <const name="TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI" value="false" />
+        <env name="TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI" value="false" />
     </php>
 </phpunit>
