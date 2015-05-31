@@ -601,10 +601,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllSslMethodsAreSupported()
     {
-        if (!version_compare(PHP_VERSION, '5.5.0', '>=')) {
-            $this->markTestSkipped('SSL method option is available since PHP 5.5');
-        }
-
         $constants = get_defined_constants(true);
         $soapConstants = $constants['soap'];
 
