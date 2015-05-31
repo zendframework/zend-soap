@@ -83,6 +83,30 @@ class Client implements ServerClient
      */
     protected $wsdl = null;
 
+    /**
+     * Whether to send the "Connection: Keep-Alive" header (true) or "Connection: close" header (false)
+     * Available since PHP 5.4.0
+     * @var bool
+     */
+    protected $keepAlive;
+
+    /**
+     * One of SOAP_SSL_METHOD_TLS, SOAP_SSL_METHOD_SSLv2, SOAP_SSL_METHOD_SSLv3 or SOAP_SSL_METHOD_SSLv23
+     * Available since PHP 5.5.0
+     * @var int
+     */
+    protected $sslMethod;
+
+    /**
+     * @var int[]
+     */
+    protected static $supportedSslMethods = array(
+        SOAP_SSL_METHOD_TLS,
+        SOAP_SSL_METHOD_SSLv2,
+        SOAP_SSL_METHOD_SSLv3,
+        SOAP_SSL_METHOD_SSLv23
+    );
+
     /**#@+
      * @var string
      */
@@ -275,6 +299,16 @@ class Client implements ServerClient
                     $this->connectionTimeout = $value;
                     break;
 
+                case 'keepalive':
+                case 'keep_alive':
+                    $this->setKeepAlive($value);
+                    break;
+
+                case 'sslmethod':
+                case 'ssl_method':
+                    $this->setSslMethod($value);
+                    break;
+
                 default:
                     throw new Exception\InvalidArgumentException('Unknown SOAP client option');
             }
@@ -315,6 +349,8 @@ class Client implements ServerClient
         $options['cache_wsdl']     = $this->getWSDLCache();
         $options['features']       = $this->getSoapFeatures();
         $options['user_agent']     = $this->getUserAgent();
+        $options['keep_alive']     = $this->getKeepAlive();
+        $options['ssl_method']     = $this->getSslMethod();
 
         foreach ($options as $key => $value) {
             /*
@@ -1209,5 +1245,56 @@ class Client implements ServerClient
         $soapClient = $this->getSoapClient();
         $soapClient->__setCookie($cookieName, $cookieValue);
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getKeepAlive()
+    {
+        return $this->keepAlive;
+    }
+
+    /**
+     * @param boolean $keepAlive
+     * @return self
+     */
+    public function setKeepAlive($keepAlive)
+    {
+        $this->keepAlive = (bool) $keepAlive;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSslMethod()
+    {
+        return $this->sslMethod;
+    }
+
+    /**
+     * @param int $sslMethod
+     * @return self
+     */
+    public function setSslMethod($sslMethod)
+    {
+        if (!in_array($sslMethod, static::$supportedSslMethods, true)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid SSL method specified. Use on of %s constants.',
+                implode(', ', static::$supportedSslMethods)
+            ));
+        }
+
+        $this->sslMethod = $sslMethod;
+        return $this;
+    }
+
+    /**
+     * @return int[]
+     */
+    public static function getSupportedSslMethods()
+    {
+        return static::$supportedSslMethods;
     }
 }
