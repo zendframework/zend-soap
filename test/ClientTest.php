@@ -588,6 +588,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Zend\Soap\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid SSL method specified.
      */
     public function testSetInvalidSslMethod()
     {
