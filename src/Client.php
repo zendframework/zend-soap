@@ -1281,8 +1281,8 @@ class Client implements ServerClient
     {
         if (!in_array($sslMethod, static::$supportedSslMethods, true)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Invalid SSL method specified. Use on of %s constants.',
-                implode(', ', static::$supportedSslMethods)
+                'Invalid SSL method specified. Use one of %s constants.',
+                'SOAP_SSL_METHOD_TLS, SOAP_SSL_METHOD_SSLv2, SOAP_SSL_METHOD_SSLv3, SOAP_SSL_METHOD_SSLv23'
             ));
         }
 
