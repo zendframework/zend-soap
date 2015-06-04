@@ -618,7 +618,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array_values($sslMethodConstantsValues),
-            \PHPUnit_Framework_Assert::readAttribute('Zend\Soap\Client', 'supportedSslMethods')
+            self::readAttribute('Zend\Soap\Client', 'supportedSslMethods')
         );
     }
 
