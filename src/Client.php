@@ -1289,12 +1289,4 @@ class Client implements ServerClient
         $this->sslMethod = $sslMethod;
         return $this;
     }
-
-    /**
-     * @return int[]
-     */
-    public static function getSupportedSslMethods()
-    {
-        return static::$supportedSslMethods;
-    }
 }

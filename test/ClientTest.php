@@ -616,7 +616,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // get constants values
         $sslMethodConstantsValues = array_intersect_key($soapConstants, array_flip($sslMethodsConstants));
 
-        $this->assertEquals(array_values($sslMethodConstantsValues), Client::getSupportedSslMethods());
+        $this->assertEquals(
+            array_values($sslMethodConstantsValues),
+            \PHPUnit_Framework_Assert::readAttribute('Zend\Soap\Client', 'supportedSslMethods')
+        );
     }
 
     /**
