@@ -81,7 +81,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                                 'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
                                 'typemap'        => $typeMap,
                                 'keep_alive'     => true,
-                                'ssl_method'     => SOAP_SSL_METHOD_SSLv23,
+                                'ssl_method'     => 3,
         ];
 
         $client->setOptions($nonWSDLOptions);
@@ -116,7 +116,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                              'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
                              'typemap'        => $typeMap,
                              'keep_alive'     => true,
-                             'ssl_method'     => SOAP_SSL_METHOD_SSLv23,
+                             'ssl_method'     => 3,
         ];
 
         $client1->setOptions($wsdlOptions);
@@ -169,7 +169,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                          'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
                          'typemap'        => $typeMap,
                          'keep_alive'     => true,
-                         'ssl_method'     => SOAP_SSL_METHOD_SSLv23,
+                         'ssl_method'     => 3,
         ];
 
         $client->setOptions($options);
@@ -584,42 +584,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $soap->setSoapClient($clientMock);
 
         $this->assertSame($clientMock, $soap->getSoapClient());
-    }
-
-    /**
-     * @expectedException \Zend\Soap\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Invalid SSL method specified.
-     */
-    public function testSetInvalidSslMethod()
-    {
-        new Client(null, [
-            'ssl_method' => 'invalid',
-        ]);
-    }
-
-    /**
-     * Are all SSL method constants defined in SOAP extension supported?
-     */
-    public function testAllSslMethodsAreSupported()
-    {
-        $constants = get_defined_constants(true);
-        $soapConstants = $constants['soap'];
-
-        // filter all constant names started with 'SOAP_SSL_METHOD_' string
-        $sslMethodsConstants = array_filter(
-            array_keys($soapConstants),
-            function ($constantName) {
-                return (strpos($constantName, 'SOAP_SSL_METHOD_') === 0);
-            }
-        );
-
-        // get constants values
-        $sslMethodConstantsValues = array_intersect_key($soapConstants, array_flip($sslMethodsConstants));
-
-        $this->assertEquals(
-            array_values($sslMethodConstantsValues),
-            self::readAttribute('Zend\Soap\Client', 'supportedSslMethods')
-        );
     }
 
     /**

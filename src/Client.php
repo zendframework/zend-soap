@@ -97,16 +97,6 @@ class Client implements ServerClient
      */
     protected $sslMethod;
 
-    /**
-     * @var int[]
-     */
-    protected static $supportedSslMethods = [
-        SOAP_SSL_METHOD_TLS,
-        SOAP_SSL_METHOD_SSLv2,
-        SOAP_SSL_METHOD_SSLv3,
-        SOAP_SSL_METHOD_SSLv23
-    ];
-
     /**#@+
      * @var string
      */
@@ -1279,13 +1269,6 @@ class Client implements ServerClient
      */
     public function setSslMethod($sslMethod)
     {
-        if (!in_array($sslMethod, static::$supportedSslMethods, true)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Invalid SSL method specified. Use one of %s constants.',
-                'SOAP_SSL_METHOD_TLS, SOAP_SSL_METHOD_SSLv2, SOAP_SSL_METHOD_SSLv3, SOAP_SSL_METHOD_SSLv23'
-            ));
-        }
-
         $this->sslMethod = $sslMethod;
         return $this;
     }
