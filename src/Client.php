@@ -100,12 +100,12 @@ class Client implements ServerClient
     /**
      * @var int[]
      */
-    protected static $supportedSslMethods = array(
+    protected static $supportedSslMethods = [
         SOAP_SSL_METHOD_TLS,
         SOAP_SSL_METHOD_SSLv2,
         SOAP_SSL_METHOD_SSLv3,
         SOAP_SSL_METHOD_SSLv23
-    );
+    ];
 
     /**#@+
      * @var string
