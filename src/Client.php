@@ -1111,8 +1111,8 @@ class Client implements ServerClient
         $result = $soapClient->__soapCall(
             $name,
             $this->_preProcessArguments($arguments),
-            array(), /* Options are already set to the SOAP client object */
-            (count($soapHeaders) > 0)? $soapHeaders : array(),
+            [], /* Options are already set to the SOAP client object */
+            (count($soapHeaders) > 0)? $soapHeaders : [],
             $this->soapOutputHeaders
         );
 
