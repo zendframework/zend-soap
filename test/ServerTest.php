@@ -644,6 +644,20 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResponse, $server1->handle($request));
     }
 
+    public function testEmptyRequest()
+    {
+        $server = new Server();
+        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setReturnResponse(true);
+
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+
+        $request = '';
+        $response = $server->handle($request);
+
+        $this->assertContains('Empty request', $response->getMessage());
+    }
+
     /**
      * @dataProvider dataProviderForRegisterFaultException
      *
