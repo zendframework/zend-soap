@@ -54,7 +54,7 @@ $wsdl->dump("/path/to/file.wsdl");
 $dom = $wsdl->toDomDocument();
 ```
 
-> ## Note
+> ### Note
 #### Zend\\Soap\\Autodiscover is not a Soap Server
 It is very important to note, that the class `Zend\Soap\AutoDiscover` does not act as a *SOAP*
 Server on its own.
