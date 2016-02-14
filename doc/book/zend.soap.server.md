@@ -114,7 +114,8 @@ The second method of defining Web Service *API* is using set of functions and `a
  * @param integer $inputParam
  * @return string
  */
-function function1($inputParam) {
+function function1($inputParam)
+{
     ...
 }
 
@@ -125,7 +126,8 @@ function function1($inputParam) {
  * @param string  $inputParam2
  * @return float
  */
-function function2($inputParam1, $inputParam2) {
+function function2($inputParam1, $inputParam2)
+{
     ...
 }
 ...

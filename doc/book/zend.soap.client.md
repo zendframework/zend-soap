@@ -74,14 +74,16 @@ Use it like in the following example:
 //****************************************************************
 //                Server code
 //****************************************************************
-// class MyClass {
+// class MyClass
+// {
 //     /**
 //      * This method takes ...
 //      *
 //      * @param integer $inputParam
 //      * @return string
 //      */
-//     public function method1($inputParam) {
+//     public function method1($inputParam)
+//     {
 //         ...
 //     }
 //
@@ -92,7 +94,8 @@ Use it like in the following example:
 //      * @param string  $inputParam2
 //      * @return float
 //      */
-//     public function method2($inputParam1, $inputParam2) {
+//     public function method2($inputParam1, $inputParam2)
+//     {
 //         ...
 //     }
 //
