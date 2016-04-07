@@ -146,6 +146,12 @@ class Server implements ZendServerServer
     protected $wsdlCache;
 
     /**
+     * send_errors Options of SOAP Server
+     * @var bool
+     */
+    protected $sendErrors;
+
+    /**
      * Constructor
      *
      * Sets display_errors INI setting to off (prevent client errors due to bad
@@ -229,6 +235,10 @@ class Server implements ZendServerServer
                     $this->setSoapFeatures($value);
                     break;
 
+                case 'send_errors':
+                    $this->setSendErrors($value);
+                    break;
+
                 default:
                     break;
             }
@@ -275,6 +285,10 @@ class Server implements ZendServerServer
 
         if (null !== $this->wsdlCache) {
             $options['cache_wsdl'] = $this->getWSDLCache();
+        }
+        
+        if (null !== $this->sendErrors) {
+            $options['send_errors'] = $this->getSendErrors();
         }
 
         return $options;
@@ -536,6 +550,26 @@ class Server implements ZendServerServer
         return $this->wsdlCache;
     }
 
+    /**
+     * Set the SOAP send_errors Option
+     *
+     * @param  bool $sendErrors
+     * @return self
+     */
+    public function setSendErrors($sendErrors)
+    {
+        $this->sendErrors = $sendErrors;
+        return $this;
+    }
+
+    /**
+     * Get current SOAP WSDL Caching option
+     */
+    public function getSendErrors()
+    {
+        return $this->sendErrors;
+    }
+    
     /**
      * Attach a function as a server method
      *
