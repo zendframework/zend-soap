@@ -324,7 +324,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Soap\Exception\InvalidArgumentException',
             'A class has already been registered with this soap server instance'
-            );
+        );
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
     }
 
@@ -596,10 +596,14 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
-        $localClient = new TestAsset\TestLocalSoapClient($server,
-                                                         null,
-                                                         ['location'=>'test://',
-                                                               'uri'=>'http://framework.zend.com']);
+        $localClient = new TestAsset\TestLocalSoapClient(
+            $server,
+            null,
+            [
+                'location'=>'test://',
+                'uri'=>'http://framework.zend.com'
+            ]
+        );
 
         // Local SOAP client call automatically invokes handle method of the provided SOAP server
         $this->assertEquals('Hello World!', $localClient->testFunc2('World'));
@@ -642,6 +646,20 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server1->setReturnResponse(true);
 
         $this->assertEquals($expectedResponse, $server1->handle($request));
+    }
+
+    public function testEmptyRequest()
+    {
+        $server = new Server();
+        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setReturnResponse(true);
+
+        $server->setClass(TestAsset\ServerTestClass::class);
+
+        $request = '';
+        $response = $server->handle($request);
+
+        $this->assertContains('Empty request', $response->getMessage());
     }
 
     /**
