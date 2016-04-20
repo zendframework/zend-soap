@@ -744,6 +744,10 @@ class Server implements ZendServerServer
             }
             $xml = trim($xml);
 
+            if (strlen($xml) === 0) {
+                throw new Exception\InvalidArgumentException('Empty request');
+            }
+
             $loadEntities = libxml_disable_entity_loader(true);
 
             $dom = new DOMDocument();
@@ -752,7 +756,7 @@ class Server implements ZendServerServer
             libxml_disable_entity_loader($loadEntities);
 
             // @todo check libxml errors ? validate document ?
-            if (strlen($xml) == 0 || !$loadStatus) {
+            if (!$loadStatus) {
                 throw new Exception\InvalidArgumentException('Invalid XML');
             }
 
