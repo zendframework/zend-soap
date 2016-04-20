@@ -180,7 +180,8 @@ $wsdl = new Zend\Soap\Wsdl('My_Web_Service', $myWebServiceUri);
 $soapIntType = $wsdl->getType('int');
 
 ...
-class MyClass {
+class MyClass
+{
     ...
 }
 ...

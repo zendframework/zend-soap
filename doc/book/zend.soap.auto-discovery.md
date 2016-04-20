@@ -40,7 +40,8 @@ generates the WSDL object and in conjunction with `toXml()` function you can pos
 browser.
 
 ```php
-class MySoapServerClass {
+class MySoapServerClass
+{
 ...
 }
 
@@ -60,15 +61,15 @@ It is very important to note, that the class `Zend\Soap\AutoDiscover` does not a
 Server on its own.
 ```php
 if (isset($_GET['wsdl'])) {
-$autodiscover = new Zend\Soap\AutoDiscover();
-$autodiscover-setClass('HelloWorldService')
--setUri('http://example.com/soap.php');
-echo $autodiscover-toXml();
+    $autodiscover = new Zend\Soap\AutoDiscover();
+    $autodiscover->setClass('HelloWorldService')
+                 ->setUri('http://example.com/soap.php');
+    echo $autodiscover->toXml();
 } else {
-// pointing to the current file here
-$soap = new Zend\Soap\Server("http://example.com/soap.php?wsdl");
-$soap-setClass('HelloWorldService');
-$soap-handle();
+    // pointing to the current file here
+    $soap = new Zend\Soap\Server("http://example.com/soap.php?wsdl");
+    $soap->setClass('HelloWorldService');
+    $soap->handle();
 }
 ```
 
