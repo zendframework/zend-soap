@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#1](https://github.com/zendframework/zend-soap/pull/1) adds
   support for the `SoapClient` options `keep_alive` and `ssl_method`.
+- [#20](https://github.com/zendframework/zend-soap/pull/20) adds support for
+  the  `SoapServer` `send_errors` constructor option.
 
 ### Deprecated
 
