@@ -99,7 +99,7 @@ $server->setObject(new MyClass());
 $server->handle();
 ```
 
-> ## Important
+> ### Important
 You should completely describe each method using method docblock if you plan to use autodiscover
 functionality to prepare corresponding Web Service WSDL.
 
@@ -138,7 +138,7 @@ $server->handle();
 
 ## Request and response objects handling
 
-> ## Note
+> ### Note
 This section describes **advanced** request/response processing options and may be skipped.
 
 `Zend\Soap\Server` component performs request/response processing automatically, but allows to catch
@@ -187,7 +187,7 @@ may be blocked using `setReturnResponse()` with `TRUE` or `FALSE` as a parameter
 response is returned by `handle()` method in this case. Returned response can be a string or a
 SoapFault exception object.
 
-> ## Caution
+> ### Caution
 Always check the returned response type to avoid returning SoapFault object as a string, which will
 be returned to the customer as a string with the exception stacktrace.
 

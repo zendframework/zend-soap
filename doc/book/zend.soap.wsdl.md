@@ -1,6 +1,6 @@
 # WSDL Accessor
 
-> ## Note
+> ### Note
 `Zend\Soap\Wsdl` class is used by `Zend\Soap\Server` component internally to operate with WSDL
 documents. Nevertheless, you could also use functionality provided by this class for your own needs.
 The `Zend\Soap\Wsdl` package contains both a parser and a builder of WSDL documents.
@@ -34,7 +34,7 @@ associative array: 'part name' (SOAP call parameter name) =&gt; 'part type'.
 Type mapping management is performed using `addTypes()`, `addTypes()` and `addComplexType()` methods
 (see below).
 
-> ## Note
+> ### Note
 Messages parts can use either 'element' or 'type' attribute for typing (see
 <http://www.w3.org/TR/wsdl#_messages).
 'element' attribute must refer to a corresponding element of data type definition. 'type' attribute
@@ -66,7 +66,7 @@ Each port operation corresponds to a class method (if Web Service is based on a 
 It also adds corresponding port operation messages depending on specified `$input`, `$output` and
 `$fault` parameters.
 
-> ## Note
+> ### Note
 `Zend\Soap\Server` component generates two messages for each port operation while describing service
 based on `Zend\Soap\Server` class:
 - input message with name *$methodName . 'Request'*.
