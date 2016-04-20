@@ -10,13 +10,13 @@ If you don't plan to do this, you can skip this documentation section.
 
 `Zend\Soap\Wsdl` constructor takes three parameters:
 
-- `$name` - name of the Web Service being described.
-- `$uri` - *URI* where the WSDL will be available (could also be a reference to the file in the
+* `$name` - name of the Web Service being described.
+* `$uri` - *URI* where the WSDL will be available (could also be a reference to the file in the
 filesystem.)
-- `$strategy` - optional flag used to identify the strategy for complex types (objects) detection.
+* `$strategy` - optional flag used to identify the strategy for complex types (objects) detection.
 To read more on complex type detection strategies go to the section: \[Add complex
 types\](zend.soap.wsdl.types.add\_complex).
-- `$classMap` - Optional array of class name translations from PHP Type (key) to WSDL type (value).
+* `$classMap` - Optional array of class name translations from PHP Type (key) to WSDL type (value).
 
 ## addMessage() method
 
@@ -69,8 +69,8 @@ It also adds corresponding port operation messages depending on specified `$inpu
 > ### Note
 `Zend\Soap\Server` component generates two messages for each port operation while describing service
 based on `Zend\Soap\Server` class:
-- input message with name *$methodName . 'Request'*.
-- output message with name *$methodName . 'Response'*.
+* input message with name *$methodName . 'Request'*.
+* output message with name *$methodName . 'Response'*.
 
 See <http://www.w3.org/TR/wsdl#_request-response> for the details.
 
@@ -138,10 +138,10 @@ used by `Zend\Soap\Server` implementation and not supported by `Zend\Soap\Wsdl` 
 
 `Zend\Soap\Server` implementation uses:
 
-- *$name . 'Service'* as a Web Service name,
-- *$name . 'Port'* as a port type name,
-- *'tns:' . $name . 'Binding'* [1] as binding name,
-- script *URI* [2] as a service URI for Web Service definition using classes.
+* *$name . 'Service'* as a Web Service name,
+* *$name . 'Port'* as a port type name,
+* *'tns:' . $name . 'Binding'* [1] as binding name,
+* script *URI* [2] as a service URI for Web Service definition using classes.
 
 where `$name` is a class name for the Web Service definition mode using class and script name for
 the Web Service definition mode using set of functions.
@@ -153,16 +153,16 @@ See <http://www.w3.org/TR/wsdl#_services> for the details.
 `ZendSoap` WSDL accessor implementation uses the following type mapping between *PHP* and *SOAP*
 types:
 
-- PHP strings &lt;-&gt; *xsd:string*.
-- PHP integers &lt;-&gt; *xsd:int*.
-- PHP floats and doubles &lt;-&gt; *xsd:float*.
-- PHP booleans &lt;-&gt; *xsd:boolean*.
-- PHP arrays &lt;-&gt; *soap-enc:Array*.
-- PHP object &lt;-&gt; *xsd:struct*.
-- *PHP* class &lt;-&gt; based on complex type strategy (See: \[this
+* PHP strings &lt;-&gt; *xsd:string*.
+* PHP integers &lt;-&gt; *xsd:int*.
+* PHP floats and doubles &lt;-&gt; *xsd:float*.
+* PHP booleans &lt;-&gt; *xsd:boolean*.
+* PHP arrays &lt;-&gt; *soap-enc:Array*.
+* PHP object &lt;-&gt; *xsd:struct*.
+* *PHP* class &lt;-&gt; based on complex type strategy (See: \[this
 section\](zend.soap.wsdl.types.add\_complex)) [3].
-- PHP void &lt;-&gt; empty type.
-- If type is not matched to any of these types by some reason, then *xsd:anyType* is used.
+* PHP void &lt;-&gt; empty type.
+* If type is not matched to any of these types by some reason, then *xsd:anyType* is used.
 
 Where *xsd:* is "<http://www.w3.org/2001/XMLSchema>" namespace, *soap-enc:* is a
 "<http://schemas.xmlsoap.org/soap/encoding/>" namespace, *tns:* is a "target namespace" for a
@@ -201,20 +201,20 @@ of a `Zend\Soap\Wsdl\ComplexTypeStrategy` implementation as the third parameter 
 or using the `setComplexTypeStrategy($strategy)` function of `Zend\Soap\Wsdl`. The following
 detection strategies currently exist:
 
-- Class `Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType`: Enabled by default (when no third
+* Class `Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType`: Enabled by default (when no third
 constructor parameter is set). Iterates over the public attributes of a class type and registers
 them as subtypes of the complex object type.
-- Class `Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType`: Casts all complex types into the simple XSD
+* Class `Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType`: Casts all complex types into the simple XSD
 type xsd:anyType. Be careful this shortcut for complex type detection can probably only be handled
 successfully by weakly typed languages such as *PHP*.
-- Class `Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence`: This strategy allows to specify
+* Class `Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence`: This strategy allows to specify
 return parameters of the type: *int\[\]* or *string\[\]*. As of Zend Framework version 1.9 it can
 handle both simple *PHP* types such as int, string, boolean, float as well as objects and arrays of
 objects.
-- Class `Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex`: This strategy allows to detect very
+* Class `Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex`: This strategy allows to detect very
 complex arrays of objects. Objects types are detected based on the
 `Zend\Soap\Wsdl\Strategy\DefaultComplexType` and an array is wrapped around that definition.
-- Class `Zend\Soap\Wsdl\ComplexTypeStrategy\Composite`: This strategy can combine all strategies by
+* Class `Zend\Soap\Wsdl\ComplexTypeStrategy\Composite`: This strategy can combine all strategies by
 connecting *PHP* Complex types (Classnames) to the desired strategy via the
 `connectTypeToStrategy($type, $strategy)` method. A complete typemap can be given to the constructor
 as an array with `$type`-&gt; `$strategy` pairs. The second parameter specifies the default strategy

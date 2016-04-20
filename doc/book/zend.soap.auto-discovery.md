@@ -9,9 +9,9 @@
 
 There are three configurations for *SOAP* applications where Zend Framework may be utilized:
 
-- SOAP server *PHP* application &lt;---&gt; *SOAP* client *PHP* application
-- SOAP server non-PHP application &lt;---&gt; *SOAP* client *PHP* application
-- SOAP server *PHP* application &lt;---&gt; *SOAP* client non-PHP application
+* SOAP server *PHP* application &lt;---&gt; *SOAP* client *PHP* application
+* SOAP server non-PHP application &lt;---&gt; *SOAP* client *PHP* application
+* SOAP server *PHP* application &lt;---&gt; *SOAP* client non-PHP application
 
 We always have to know, which functionality is provided by *SOAP* server to operate with it.
 [WSDL](http://www.w3.org/TR/wsdl) is used to describe network service *API* in details.
@@ -27,8 +27,8 @@ necessary information and generates correct WSDL using this information.
 
 There are two ways for using Zend Framework for *SOAP* server application:
 
-- Use separated class.
-- Use set of functions.
+* Use separated class.
+* Use set of functions.
 
 Both methods are supported by Zend Framework Autodiscovery functionality.
 
@@ -88,22 +88,22 @@ $wsdl = $autodiscover->generate();
 
 The following rules are used while WSDL generation:
 
-- Generated WSDL describes an RPC/Encoded style Web Service. If you want to use a document/literal
+* Generated WSDL describes an RPC/Encoded style Web Service. If you want to use a document/literal
 server use the `setBindingStyle()` and `setOperationBodyStyle()` methods.
-- Class name is used as a name of the Web Service being described unless `setServiceName()` is used
+* Class name is used as a name of the Web Service being described unless `setServiceName()` is used
 explicitly to set the name. When only functions are used for generation the service name has to be
 set explicitly or an exception is thrown during generation of the WSDL document.
-- You can set the endpoint of the actual SOAP Server via the `setUri()` method. This is a required
+* You can set the endpoint of the actual SOAP Server via the `setUri()` method. This is a required
 option.
 
 It's also used as a target namespace for all service related names (including described complex
 types).
 
-- Class methods are joined into one [Port Type](http://www.w3.org/TR/wsdl#_porttypes). *$serviceName
+* Class methods are joined into one [Port Type](http://www.w3.org/TR/wsdl#_porttypes). *$serviceName
 . 'Port'* is used as Port Type name.
-- Each class method/function is registered as a corresponding port operation.
-- Only the "longest" available method prototype is used for generation of the WSDL.
-- WSDL autodiscover utilizes the *PHP* docblocks provided by the developer to determine the
+* Each class method/function is registered as a corresponding port operation.
+* Only the "longest" available method prototype is used for generation of the WSDL.
+* WSDL autodiscover utilizes the *PHP* docblocks provided by the developer to determine the
 parameter and return types. In fact, for scalar types, this is the only way to determine the
 parameter types, and for return types, this is the only way to determine them. That means, providing
 correct and fully detailed docblocks is not only best practice, but is required for discovered
@@ -129,17 +129,17 @@ The same rules apply to generation as described in the class autodiscover sectio
 
 Input/output datatypes are converted into network service types using the following mapping:
 
-- PHP strings &lt;-&gt; *xsd:string*.
-- PHP integers &lt;-&gt; *xsd:int*.
-- PHP floats and doubles &lt;-&gt; *xsd:float*.
-- PHP booleans &lt;-&gt; *xsd:boolean*.
-- PHP arrays &lt;-&gt; *soap-enc:Array*.
-- PHP object &lt;-&gt; *xsd:struct*.
-- *PHP* class &lt;-&gt; based on complex type strategy (See: \[this
+* PHP strings &lt;-&gt; *xsd:string*.
+* PHP integers &lt;-&gt; *xsd:int*.
+* PHP floats and doubles &lt;-&gt; *xsd:float*.
+* PHP booleans &lt;-&gt; *xsd:boolean*.
+* PHP arrays &lt;-&gt; *soap-enc:Array*.
+* PHP object &lt;-&gt; *xsd:struct*.
+* *PHP* class &lt;-&gt; based on complex type strategy (See: \[this
 section\](zend.soap.wsdl.types.add\_complex)) [1].
-- type\[\] or object\[\] (ie. int\[\]) &lt;-&gt; based on complex type strategy
-- PHP void &lt;-&gt; empty type.
-- If type is not matched to any of these types by some reason, then *xsd:anyType* is used.
+* type\[\] or object\[\] (ie. int\[\]) &lt;-&gt; based on complex type strategy
+* PHP void &lt;-&gt; empty type.
+* If type is not matched to any of these types by some reason, then *xsd:anyType* is used.
 
 Where *xsd:* is "<http://www.w3.org/2001/XMLSchema>" namespace, *soap-enc:* is a
 "<http://schemas.xmlsoap.org/soap/encoding/>" namespace, *tns:* is a "target namespace" for a

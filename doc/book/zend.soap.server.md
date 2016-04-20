@@ -24,17 +24,17 @@ If the non-WSDL mode is used, then all protocol options have to be set using opt
 
 `Zend\Soap\Server` constructor takes two optional parameters when it works in WSDL mode:
 
-- `$wsdl`, which is an *URI* of a WSDL file [1].
-- `$options`- options to create *SOAP* server object [2].
+* `$wsdl`, which is an *URI* of a WSDL file [1].
+* `$options`- options to create *SOAP* server object [2].
 
 The following options are recognized in the WSDL mode:
 
-- 'soap\_version' ('soapVersion') - soap version to use (SOAP\_1\_1 or *SOAP*\_1\_2).
-- 'actor' - the actor *URI* for the server.
-- 'classmap' ('classMap') which can be used to map some WSDL types to *PHP* classes. The option must
+* 'soap\_version' ('soapVersion') - soap version to use (SOAP\_1\_1 or *SOAP*\_1\_2).
+* 'actor' - the actor *URI* for the server.
+* 'classmap' ('classMap') which can be used to map some WSDL types to *PHP* classes. The option must
 be an array with WSDL types as keys and names of *PHP* classes as values.
-- 'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
-- 'wsdl' which is equivalent to `setWsdl($wsdlValue)` call.
+* 'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
+* 'wsdl' which is equivalent to `setWsdl($wsdlValue)` call.
 
 ### Zend\\Soap\\Server constructor for the non-WSDL mode
 
@@ -48,12 +48,12 @@ object [3].
 
 The following options are recognized in the non-WSDL mode:
 
-- 'soap\_version' ('soapVersion') - soap version to use (SOAP\_1\_1 or SOAP\_1\_2).
-- 'actor' - the actor *URI* for the server.
-- 'classmap' ('classMap') which can be used to map some WSDL types to *PHP* classes. The option must
+* 'soap\_version' ('soapVersion') - soap version to use (SOAP\_1\_1 or SOAP\_1\_2).
+* 'actor' - the actor *URI* for the server.
+* 'classmap' ('classMap') which can be used to map some WSDL types to *PHP* classes. The option must
 be an array with WSDL types as keys and names of *PHP* classes as values.
-- 'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
-- 'uri' (required) - *URI* namespace for *SOAP* server.
+* 'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
+* 'uri' (required) - *URI* namespace for *SOAP* server.
 
 ## Methods to define Web Service API
 
@@ -166,11 +166,11 @@ $server->handle();
 
 Request object may be represented using any of the following:
 
-- DOMDocument (casted to *XML*)
-- DOMNode (owner document is grabbed and casted to *XML*)
-- SimpleXMLElement (casted to *XML*)
-- stdClass (\_\_toString() is called and verified to be valid *XML*)
-- string (verified to be valid *XML*)
+* DOMDocument (casted to *XML*)
+* DOMNode (owner document is grabbed and casted to *XML*)
+* SimpleXMLElement (casted to *XML*)
+* stdClass (\_\_toString() is called and verified to be valid *XML*)
+* string (verified to be valid *XML*)
 
 Last processed request may be retrieved using `getLastRequest()` method as an *XML* string:
 
