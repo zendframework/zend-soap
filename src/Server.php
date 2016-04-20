@@ -558,12 +558,14 @@ class Server implements ZendServerServer
      */
     public function setSendErrors($sendErrors)
     {
-        $this->sendErrors = $sendErrors;
+        $this->sendErrors = (bool) $sendErrors;
         return $this;
     }
 
     /**
      * Get current SOAP send_errors option
+     *
+     * @return bool
      */
     public function getSendErrors()
     {
