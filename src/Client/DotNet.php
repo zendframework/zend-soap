@@ -67,6 +67,7 @@ class DotNet extends SOAPClient
         parent::__construct($wsdl, $options);
     }
 
+    // @codingStandardsIgnoreStart
     /**
      * Do request proxy method.
      *
@@ -80,8 +81,15 @@ class DotNet extends SOAPClient
      */
     public function _doRequest(CommonClient $client, $request, $location, $action, $version, $oneWay = null)
     {
-        if (!$this->useNtlm) {
-            return parent::_doRequest($client, $request, $location, $action, $version, $oneWay);
+        if (! $this->useNtlm) {
+            return parent::_doRequest(
+                $client,
+                $request,
+                $location,
+                $action,
+                $version,
+                $oneWay
+            );
         }
 
         $curlClient = $this->getCurlClient();
@@ -96,10 +104,15 @@ class DotNet extends SOAPClient
         $uri = new HttpUri($location);
 
         // @todo use parent set* options for ssl certificate authorization
-        $curlClient->setCurlOption(CURLOPT_HTTPAUTH, CURLAUTH_NTLM)
-                   ->setCurlOption(CURLOPT_SSL_VERIFYHOST, false)
-                   ->setCurlOption(CURLOPT_SSL_VERIFYPEER, false)
-                   ->setCurlOption(CURLOPT_USERPWD, $this->options['login'] . ':' . $this->options['password']);
+        $curlClient
+            ->setCurlOption(CURLOPT_HTTPAUTH, CURLAUTH_NTLM)
+            ->setCurlOption(CURLOPT_SSL_VERIFYHOST, false)
+            ->setCurlOption(CURLOPT_SSL_VERIFYPEER, false)
+            ->setCurlOption(CURLOPT_USERPWD, sprintf(
+                '%s:%s',
+                $this->options['login'],
+                $this->options['password']
+            ));
 
         // Perform the cURL request and get the response
         $curlClient->connect($uri->getHost(), $uri->getPort());
@@ -116,6 +129,7 @@ class DotNet extends SOAPClient
         // Return only the XML body
         return $response->getBody();
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Returns the cURL client that is being used.
@@ -182,6 +196,7 @@ class DotNet extends SOAPClient
         return parent::setOptions($options);
     }
 
+    // @codingStandardsIgnoreStart
     /**
      * Perform arguments pre-processing
      *
@@ -193,18 +208,20 @@ class DotNet extends SOAPClient
      */
     protected function _preProcessArguments($arguments)
     {
-        if (count($arguments) > 1  ||
-            (count($arguments) == 1  &&  !is_array(reset($arguments)))
+        if (count($arguments) > 1
+            || (count($arguments) == 1  &&  ! is_array(reset($arguments)))
            ) {
             throw new Exception\RuntimeException(
-                '.Net webservice arguments have to be grouped into array: array("a" => $a, "b" => $b, ...).'
+                '.Net webservice arguments must be grouped into an array: array("a" => $a, "b" => $b, ...).'
             );
         }
 
         // Do nothing
         return $arguments;
     }
+    // @codingStandardsIgnoreEnd
 
+    // @codingStandardsIgnoreStart
     /**
      * Perform result pre-processing
      *
@@ -221,6 +238,7 @@ class DotNet extends SOAPClient
         }
         return $result;
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Flattens an HTTP headers array into a string.

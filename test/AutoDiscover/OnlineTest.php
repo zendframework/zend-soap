@@ -9,21 +9,18 @@
 
 namespace ZendTest\Soap\AutoDiscover;
 
-require_once __DIR__ . '/../TestAsset/commontypes.php';
-
 use Zend\Soap\Client;
 
-/**
- * @group      Zend_Soap
- */
 class OnlineTest extends \PHPUnit_Framework_TestCase
 {
     protected $baseuri;
 
     public function setUp()
     {
-        if (!getenv('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI')) {
-            $this->markTestSkipped('Enable TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI to allow the Online test to work.');
+        if (! getenv('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI')) {
+            $this->markTestSkipped(
+                'Enable TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI to allow the Online test to work.'
+            );
         }
         $this->baseuri = getenv('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI');
     }
@@ -45,10 +42,10 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($ret[0]->baz));
 
         $baz = $ret[0]->baz;
-        $this->assertEquals("bar",  $baz[0]->bar);
-        $this->assertEquals("bar",  $baz[0]->foo);
-        $this->assertEquals("foo",  $baz[1]->bar);
-        $this->assertEquals("foo",  $baz[1]->foo);
+        $this->assertEquals("bar", $baz[0]->bar);
+        $this->assertEquals("bar", $baz[0]->foo);
+        $this->assertEquals("foo", $baz[1]->bar);
+        $this->assertEquals("foo", $baz[1]->foo);
         $this->assertEquals("test", $baz[2]->bar);
         $this->assertEquals("test", $baz[2]->foo);
     }

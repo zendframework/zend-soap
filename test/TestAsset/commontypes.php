@@ -1,4 +1,4 @@
-<?php
+<?php // @codingStandardsIgnoreFile
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -77,7 +77,7 @@ function TestFunc6()
  */
 function TestFunc7()
 {
-    return array('foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123);
+    return ['foo' => 'bar', 'baz' => true, 1 => false, 'bat' => 123];
 }
 
 /**
@@ -87,7 +87,7 @@ function TestFunc7()
  */
 function TestFunc8()
 {
-    $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
+    $return = (object) ['foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false];
     return $return;
 }
 
@@ -113,7 +113,7 @@ class TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    public function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a = 100, $b = 200, $d = 300)
     {
 
     }
@@ -195,10 +195,10 @@ class AutoDiscoverTestClass2
      */
     public function fetchAll()
     {
-        return array(
+        return [
             new AutoDiscoverTestClass1(),
             new AutoDiscoverTestClass1(),
-        );
+        ];
     }
 
     /**
@@ -227,7 +227,7 @@ class ComplexTypeA
     /**
      * @var \ZendTest\Soap\TestAsset\ComplexTypeB[]
      */
-    public $baz = array();
+    public $baz = [];
 }
 
 class ComplexTest
@@ -258,7 +258,7 @@ class ComplexObjectStructure
     /**
      * @var array
      */
-    public $array = array(1, 2, 3);
+    public $array = [1, 2, 3];
 }
 
 class ComplexObjectWithObjectStructure
@@ -347,7 +347,9 @@ class Recursion
     /**
      * @return \ZendTest\Soap\TestAsset\Recursion
      */
-    public function create() {}
+    public function create()
+    {
+    }
 }
 
 /**
@@ -426,14 +428,14 @@ class TestData1
      *
      * @var string
      */
-     public $property1;
+    public $property1;
 
     /**
      * Property2
      *
      * @var float
      */
-     public $property2;
+    public $property2;
 }
 
 /** Test class 2 */
@@ -444,14 +446,14 @@ class TestData2
      *
      * @var integer
      */
-     public $property1;
+    public $property1;
 
     /**
      * Property1
      *
      * @var float
      */
-     public $property2;
+    public $property2;
 }
 
 class MockSoapServer
@@ -461,7 +463,9 @@ class MockSoapServer
     {
         $this->handle = func_get_args();
     }
-    public function __call($name, $args) {}
+    public function __call($name, $args)
+    {
+    }
 }
 
 class MockServer extends \Zend\Soap\Server
@@ -534,38 +538,38 @@ class ServerTestClass
 
 if (extension_loaded('soap')) {
 
-/** Local SOAP client */
-class TestLocalSoapClient extends \SoapClient
-{
-    /**
-     * Server object
-     *
-     * @var \Zend\Soap\Server
-     */
-    public $server;
-
-    /**
-     * Local client constructor
-     *
-     * @param Zend_Soap_Server $server
-     * @param string $wsdl
-     * @param array $options
-     */
-    public function __construct(\Zend\Soap\Server $server, $wsdl, $options)
+    /** Local SOAP client */
+    class TestLocalSoapClient extends \SoapClient
     {
-        $this->server = $server;
-        parent::__construct($wsdl, $options);
-    }
+        /**
+         * Server object
+         *
+         * @var \Zend\Soap\Server
+         */
+        public $server;
 
-    public function __doRequest($request, $location, $action, $version, $one_way = 0)
-    {
-        ob_start();
-        $this->server->handle($request);
-        $response = ob_get_clean();
+        /**
+         * Local client constructor
+         *
+         * @param Zend_Soap_Server $server
+         * @param string $wsdl
+         * @param array $options
+         */
+        public function __construct(\Zend\Soap\Server $server, $wsdl, $options)
+        {
+            $this->server = $server;
+            parent::__construct($wsdl, $options);
+        }
 
-        return $response;
+        public function __doRequest($request, $location, $action, $version, $one_way = 0)
+        {
+            ob_start();
+            $this->server->handle($request);
+            $response = ob_get_clean();
+
+            return $response;
+        }
     }
-}
 
 }
 
@@ -577,8 +581,6 @@ class SequenceTest
     public $var = 5;
 }
 
-
-
 class Book
 {
     /**
@@ -586,6 +588,7 @@ class Book
      */
     public $somevar;
 }
+
 class Cookie
 {
     /**
@@ -593,11 +596,10 @@ class Cookie
      */
     public $othervar;
 }
+
 class Anything
 {
 }
-
-
 
 class PublicPrivateProtected
 {

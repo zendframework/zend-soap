@@ -22,18 +22,18 @@ class ArrayOfTypeSequence extends DefaultComplexType
      */
     public function addComplexType($type)
     {
-        $nestedCounter = $this->_getNestedCount($type);
+        $nestedCounter = $this->getNestedCount($type);
 
         if ($nestedCounter > 0) {
-            $singularType = $this->_getSingularType($type);
+            $singularType = $this->getSingularType($type);
             $complexType = '';
 
             for ($i = 1; $i <= $nestedCounter; $i++) {
-                $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
+                $complexType    = $this->getTypeBasedOnNestingLevel($singularType, $i);
                 $complexTypePhp = $singularType . str_repeat('[]', $i);
-                $childType      = $this->_getTypeBasedOnNestingLevel($singularType, $i-1);
+                $childType      = $this->getTypeBasedOnNestingLevel($singularType, $i-1);
 
-                $this->_addSequenceType($complexType, $childType, $complexTypePhp);
+                $this->addSequenceType($complexType, $childType, $complexTypePhp);
             }
 
             return $complexType;
@@ -56,14 +56,17 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * @param  int    $level
      * @return string
      */
-    protected function _getTypeBasedOnNestingLevel($singularType, $level)
+    protected function getTypeBasedOnNestingLevel($singularType, $level)
     {
         if ($level == 0) {
             // This is not an Array anymore, return the xsd simple type
             return $this->getContext()->getType($singularType);
         }
 
-        return Wsdl::TYPES_NS . ':' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
+        return Wsdl::TYPES_NS
+            . ':'
+            . str_repeat('ArrayOf', $level)
+            . ucfirst($this->getContext()->translateType($singularType));
     }
 
     /**
@@ -72,7 +75,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * @param  string $type
      * @return string
      */
-    protected function _getSingularType($type)
+    protected function getSingularType($type)
     {
         return str_replace('[]', '', $type);
     }
@@ -83,7 +86,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * @param  string $type
      * @return int
      */
-    protected function _getNestedCount($type)
+    protected function getNestedCount($type)
     {
         return substr_count($type, '[]');
     }
@@ -95,7 +98,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * @param  string $childType      Qualified array items type (e.g. 'xsd:int', 'tns:ArrayOfInt')
      * @param  string $phpArrayType   PHP type (e.g. 'int[][]', '\MyNamespace\MyClassName[][][]')
      */
-    protected function _addSequenceType($arrayType, $childType, $phpArrayType)
+    protected function addSequenceType($arrayType, $childType, $phpArrayType)
     {
         if ($this->scanRegisteredTypes($phpArrayType) !== null) {
             return;

@@ -431,15 +431,21 @@ class Client implements ServerClient
     public function setTypemap(array $typeMap)
     {
         foreach ($typeMap as $type) {
-            if (!is_callable($type['from_xml'])) {
-                throw new Exception\InvalidArgumentException('Invalid from_xml callback for type: ' . $type['type_name']);
+            if (! is_callable($type['from_xml'])) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Invalid from_xml callback for type: %s',
+                    $type['type_name']
+                ));
             }
-            if (!is_callable($type['to_xml'])) {
-                throw new Exception\InvalidArgumentException('Invalid to_xml callback for type: ' . $type['type_name']);
+            if (! is_callable($type['to_xml'])) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Invalid to_xml callback for type: %s',
+                    $type['type_name']
+                ));
             }
         }
 
-        $this->typemap   = $typeMap;
+        $this->typemap = $typeMap;
         $this->soapClient = null;
         return $this;
     }
@@ -997,6 +1003,7 @@ class Client implements ServerClient
         return $this->lastMethod;
     }
 
+    // @codingStandardsIgnoreStart
     /**
      * Do request proxy method.
      *
@@ -1014,17 +1021,31 @@ class Client implements ServerClient
     {
         // Perform request as is
         if ($oneWay === null) {
-            return call_user_func([$client, 'SoapClient::__doRequest'], $request, $location, $action, $version);
+            return call_user_func(
+                [$client, 'SoapClient::__doRequest'],
+                $request,
+                $location,
+                $action,
+                $version
+            );
         }
-        return call_user_func([$client, 'SoapClient::__doRequest'], $request, $location, $action, $version, $oneWay);
+        return call_user_func(
+            [$client, 'SoapClient::__doRequest'],
+            $request,
+            $location,
+            $action,
+            $version,
+            $oneWay
+        );
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Initialize SOAP Client object
      *
      * @throws Exception\ExceptionInterface
      */
-    protected function _initSoapClientObject()
+    protected function initSoapClientObject()
     {
         $wsdl = $this->getWSDL();
         $options = array_merge($this->getOptions(), ['trace' => true]);
@@ -1049,7 +1070,7 @@ class Client implements ServerClient
         $this->soapClient = new Client\Common([$this, '_doRequest'], $wsdl, $options);
     }
 
-
+    // @codingStandardsIgnoreStart
     /**
      * Perform arguments pre-processing
      *
@@ -1063,7 +1084,9 @@ class Client implements ServerClient
         // Do nothing
         return $arguments;
     }
+    // @codingStandardsIgnoreEnd
 
+    // @codingStandardsIgnoreStart
     /**
      * Perform result pre-processing
      *
@@ -1077,6 +1100,7 @@ class Client implements ServerClient
         // Do nothing
         return $result;
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Add SOAP input header
@@ -1218,7 +1242,7 @@ class Client implements ServerClient
     public function getSoapClient()
     {
         if ($this->soapClient === null) {
-            $this->_initSoapClientObject();
+            $this->initSoapClientObject();
         }
         return $this->soapClient;
     }
@@ -1230,7 +1254,7 @@ class Client implements ServerClient
      * @param  string $cookieValue
      * @return self
      */
-    public function setCookie($cookieName, $cookieValue=null)
+    public function setCookie($cookieName, $cookieValue = null)
     {
         $soapClient = $this->getSoapClient();
         $soapClient->__setCookie($cookieName, $cookieValue);

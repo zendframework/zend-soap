@@ -762,7 +762,7 @@ class Server implements ZendServerServer
      * @return self
      * @throws Exception\InvalidArgumentException
      */
-    protected function _setRequest($request)
+    protected function setRequest($request)
     {
         $xml = null;
 
@@ -930,11 +930,11 @@ class Server implements ZendServerServer
         }
 
         // Set Server error handler
-        $displayErrorsOriginalState = $this->_initializeSoapErrorContext();
+        $displayErrorsOriginalState = $this->initializeSoapErrorContext();
 
         $setRequestException = null;
         try {
-            $this->_setRequest($request);
+            $this->setRequest($request);
         } catch (\Exception $e) {
             $setRequestException = $e;
         }
@@ -989,7 +989,7 @@ class Server implements ZendServerServer
      *
      * @return bool display_errors original value
      */
-    protected function _initializeSoapErrorContext()
+    protected function initializeSoapErrorContext()
     {
         $displayErrorsOriginalState = ini_get('display_errors');
         ini_set('display_errors', '0');

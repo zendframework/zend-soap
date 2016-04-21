@@ -9,17 +9,9 @@
 
 namespace ZendTest\Soap;
 
-require_once __DIR__ . '/TestAsset/commontypes.php';
-
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Server;
 
-/**
- * Zend_Soap_Server
- *
- * @group      Zend_Soap
- * @group      Zend_Soap_Server
- */
 class ServerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -277,10 +269,16 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $functions = ['\ZendTest\Soap\TestAsset\TestFunc5',
-                            'bogus_function',
-                            '\ZendTest\Soap\TestAsset\TestFunc6'];
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'One or more invalid functions specified in array');
+        $functions = [
+            '\ZendTest\Soap\TestAsset\TestFunc5',
+            'bogus_function',
+            '\ZendTest\Soap\TestAsset\TestFunc6'
+        ];
+
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
+            'One or more invalid functions specified in array'
+        );
         $server->addFunction($functions);
     }
 
@@ -349,7 +347,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Class "Zend_Soap_Server_Test_BogusClass" does not exist');
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
+            'Class "Zend_Soap_Server_Test_BogusClass" does not exist'
+        );
         $server->setClass('Zend_Soap_Server_Test_BogusClass');
     }
 
@@ -372,7 +373,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Invalid object argument (integer)');
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
+            'Invalid object argument (integer)'
+        );
         $server->setObject(465);
     }
 
@@ -383,7 +387,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Invalid object argument (integer)');
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
+            'Invalid object argument (integer)'
+        );
         $int = 1;
         $server->setObject($int);
     }
@@ -464,7 +471,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Invalid persistence mode specified');
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
+            'Invalid persistence mode specified'
+        );
         $server->setPersistence('bogus');
     }
 
@@ -480,8 +490,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testGetLastRequest()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent; enable output buffering to run this test');
-            return;
+            $this->markTestSkipped(sprintf(
+                'Cannot run %s() when headers have already been sent; '
+                . 'enable output buffering to run this test',
+                __METHOD__
+            ));
         }
 
         $server = new Server();
@@ -535,8 +548,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testGetLastResponse()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testGetLastResponse() when headers have already been sent; enable output buffering to run this test');
-            return;
+            $this->markTestSkipped(sprintf(
+                'Cannot run %s() when headers have already been sent; '
+                . 'enable output buffering to run this test',
+                __METHOD__
+            ));
         }
 
         $server = new Server();
@@ -587,8 +603,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         }
 
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testHandle() when headers have already been sent; enable output buffering to run this test');
-            return;
+            $this->markTestSkipped(sprintf(
+                'Cannot run %s() when headers have already been sent; '
+                . 'enable output buffering to run this test',
+                __METHOD__
+            ));
         }
 
         $server = new Server();
@@ -791,8 +810,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandlePhpErrors()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run ' . __METHOD__ . '() when headers have already been sent; enable output buffering to run this test');
-            return;
+            $this->markTestSkipped(sprintf(
+                'Cannot run %s() when headers have already been sent; '
+                . 'enable output buffering to run this test',
+                __METHOD__
+            ));
         }
 
         $wsdlFilename = __DIR__ . '/TestAsset/testHandlePhpErrors.wsdl';
@@ -836,8 +858,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testErrorHandlingOfSoapServerChangesToThrowingSoapFaultWhenInHandleMode()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run ' . __METHOD__ . '() when headers have already been sent; enable output buffering to run this test');
-            return;
+            $this->markTestSkipped(sprintf(
+                'Cannot run %s() when headers have already been sent; '
+                . 'enable output buffering to run this test',
+                __METHOD__
+            ));
         }
 
         $server = new Server();
