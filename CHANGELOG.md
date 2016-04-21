@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- Adds GitHub Pages documentation at https://zendframework.github.io/zend-soap/
 
 ### Deprecated
 
