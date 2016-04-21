@@ -290,7 +290,7 @@ class Server implements ZendServerServer
         if (null !== $this->sendErrors) {
             $options['send_errors'] = $this->getSendErrors();
         }
-        
+
         return $options;
     }
 
