@@ -79,12 +79,12 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
         $this->xpath = new \DOMXPath($obj);
         $this->xpath->registerNamespace('unittest', Wsdl::WSDL_NS_URI);
 
-        $this->xpath->registerNamespace('tns',      $documentNamespace);
-        $this->xpath->registerNamespace('soap',     Wsdl::SOAP_11_NS_URI);
-        $this->xpath->registerNamespace('soap12',   Wsdl::SOAP_12_NS_URI);
-        $this->xpath->registerNamespace('xsd',      Wsdl::XSD_NS_URI);
+        $this->xpath->registerNamespace('tns', $documentNamespace);
+        $this->xpath->registerNamespace('soap', Wsdl::SOAP_11_NS_URI);
+        $this->xpath->registerNamespace('soap12', Wsdl::SOAP_12_NS_URI);
+        $this->xpath->registerNamespace('xsd', Wsdl::XSD_NS_URI);
         $this->xpath->registerNamespace('soap-enc', Wsdl::SOAP_ENC_URI);
-        $this->xpath->registerNamespace('wsdl',     Wsdl::WSDL_NS_URI);
+        $this->xpath->registerNamespace('wsdl', Wsdl::WSDL_NS_URI);
 
         return $obj;
     }
@@ -102,10 +102,12 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
             $element = $this->wsdl->toDomDocument()->documentElement;
         }
 
-        /** @var $node \DOMElement */
         foreach ($element->childNodes as $node) {
             if (in_array($node->nodeType, [XML_ELEMENT_NODE])) {
-                $this->assertNotEmpty($node->namespaceURI, 'Document element: ' . $node->nodeName . ' has no valid namespace. Line: ' . $node->getLineNo());
+                $this->assertNotEmpty(
+                    $node->namespaceURI,
+                    'Document element: ' . $node->nodeName . ' has no valid namespace. Line: ' . $node->getLineNo()
+                );
                 $this->testDocumentNodes($node);
             }
         }

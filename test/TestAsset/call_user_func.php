@@ -8,6 +8,7 @@
  */
 
 namespace Zend\Soap;
+
 use ZendTest\Soap\TestAsset\MockCallUserFunc;
 
 /**
@@ -17,7 +18,7 @@ use ZendTest\Soap\TestAsset\MockCallUserFunc;
  */
 function call_user_func()
 {
-    if (!MockCallUserFunc::$mock) {
+    if (! MockCallUserFunc::$mock) {
         return call_user_func_array('\call_user_func', func_get_args());
     }
 

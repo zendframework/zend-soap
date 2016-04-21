@@ -11,10 +11,6 @@ namespace Zend\Soap\Client;
 
 use SoapClient;
 
-if (! extension_loaded('soap')) {
-    return;
-}
-
 class Common extends SoapClient
 {
     /**

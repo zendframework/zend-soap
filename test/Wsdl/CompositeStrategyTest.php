@@ -44,7 +44,8 @@ class CompositeStrategyTest extends WsdlTestHelper
     {
         $typeMap = ['Book' => '\Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex'];
 
-        $strategy = new ComplexTypeStrategy\Composite($typeMap,
+        $strategy = new ComplexTypeStrategy\Composite(
+            $typeMap,
             new ArrayOfTypeSequence
         );
 
@@ -59,7 +60,8 @@ class CompositeStrategyTest extends WsdlTestHelper
     {
         $strategy = new ComplexTypeStrategy\Composite();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException',
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
             'Invalid type given to Composite Type Map'
         );
         $strategy->connectTypeToStrategy([], 'strategy');
@@ -70,7 +72,8 @@ class CompositeStrategyTest extends WsdlTestHelper
         $strategy = new ComplexTypeStrategy\Composite([], 'invalid');
         $strategy->connectTypeToStrategy('Book', 'strategy');
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException',
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
             'Strategy for Complex Type "Book" is not a valid strategy'
         );
         $strategy->getStrategyOfType('Book');
@@ -81,7 +84,8 @@ class CompositeStrategyTest extends WsdlTestHelper
         $strategy = new ComplexTypeStrategy\Composite([], 'invalid');
         $strategy->connectTypeToStrategy('Book', 'strategy');
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException',
+        $this->setExpectedException(
+            'Zend\Soap\Exception\InvalidArgumentException',
             'Default Strategy for Complex Types is not a valid strategy object'
         );
         $strategy->getStrategyOfType('Anything');
@@ -90,16 +94,18 @@ class CompositeStrategyTest extends WsdlTestHelper
     public function testCompositeDelegatesAddingComplexTypesToSubStrategies()
     {
         $this->strategy = new ComplexTypeStrategy\Composite([], new AnyType);
-        $this->strategy->connectTypeToStrategy('\ZendTest\Soap\TestAsset\Book',
+        $this->strategy->connectTypeToStrategy(
+            '\ZendTest\Soap\TestAsset\Book',
             new ArrayOfTypeComplex
         );
-        $this->strategy->connectTypeToStrategy('\ZendTest\Soap\TestAsset\Cookie',
+        $this->strategy->connectTypeToStrategy(
+            '\ZendTest\Soap\TestAsset\Cookie',
             new DefaultComplexType
         );
 
         parent::setUp();
 
-        $this->assertEquals('tns:Book',   $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Book'));
+        $this->assertEquals('tns:Book', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Book'));
         $this->assertEquals('tns:Cookie', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Cookie'));
         $this->assertEquals('xsd:anyType', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Anything'));
 
