@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Servers - zend-soap</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-soap</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">Servers</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../client/">Clients</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../wsdl/">WSDL Parsing and Generation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../auto-discovery/">WSDL AutoDiscovery</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-soap">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#zend92soap92server">Zend\Soap\Server</a></li>
+        
+            <li><a href="#zendsoapserver-instantiation">Zend\Soap\Server instantiation</a></li>
+        
+            <li><a href="#defining-your-soap-api">Defining your SOAP API</a></li>
+        
+            <li><a href="#request-and-response-handling">Request and response handling</a></li>
+        
+            <li><a href="#documentliteral-wsdl-handling">Document/Literal WSDL Handling</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href=".."><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../client/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">Servers</li>
+</ol>
+
+<h1 id="zend92soap92server">Zend\Soap\Server</h1>
+<p><code>Zend\Soap\Server</code> provides a wrapper around PHP's
+<a href="http://php.net/SoapServer">SoapServer</a> implementation with convenience
+functionality for generating WSDL and registering internal handlers.</p>
+<p>It may be used in WSDL or non-WSDL mode, and can map functionality to either PHP
+classes or functions in order to define your web service API.</p>
+<p>When in WSDL mode, it uses a prepared WSDL document to define server object
+behavior and transport layer options.</p>
+<p>WSDL documents may be auto-generated with functionality provided by the
+<a href="../auto-discovery/">Zend\Soap\AutoDiscover</a> component, or constructed manually
+using the <a href="../wsdl/">Zend\Soap\Wsdl</a> class or any other XML generation tool.</p>
+<p>If the non-WSDL mode is used, then all protocol options must be provided via the
+options mechanism.</p>
+<h2 id="zendsoapserver-instantiation">Zend\Soap\Server instantiation</h2>
+<p>Instantiation of <code>Server</code> instances varies based on whether or not you are using
+WSDL mode.</p>
+<h3 id="instantiation-for-wsdl-mode">Instantiation for WSDL mode</h3>
+<p>When in WSDL mode, the constructor expects two optional paramters:</p>
+<ul>
+<li><code>$wsdl</code>: the URI of a WSDL file. This may be set after-the-fact using
+  <code>$server-&gt;setWsdl($wsdl)</code>.</li>
+<li><code>$options</code>: options to use when creating the instance. These may be set later
+  using <code>$server-&gt;setOptions($options)</code>.</li>
+</ul>
+<p>The following options are recognized in the WSDL mode:</p>
+<ul>
+<li><code>soap_version</code> (<code>soapVersion</code>) - soap version to use (<code>SOAP_1_1</code> or <code>SOAP_1_2</code>).</li>
+<li><code>actor</code> - the actor URI for the server.</li>
+<li><code>classmap</code> (<code>classMap</code>) which can be used to map some WSDL types to PHP
+  classes. The option must be an array with WSDL types as keys, and names of PHP
+  classes as values.</li>
+<li><code>encoding</code> - internal character encoding (UTF-8 is always used as an external encoding).</li>
+<li><code>wsdl</code> - equivalent to calling <code>setWsdl($wsdlValue)</code>.</li>
+</ul>
+<h3 id="instantiation-for-non-wsdl-mode">Instantiation for non-WSDL mode</h3>
+<p>The first constructor parameter <strong>must</strong> be set to <code>NULL</code> if you plan to use
+<code>Zend\Soap\Server</code> functionality in non-WSDL mode.</p>
+<p>You also have to set the <code>uri</code> option in this case (see below).</p>
+<p>The second constructor parameter, <code>$options</code>, is an array of options for
+configuring the behavior of the server; these may also be provided later using
+<code>$server-&gt;setOptions($options)</code>. Options recognized in non-WSDL mode include:</p>
+<ul>
+<li><code>soap_version</code> (<code>soapVersion</code>) - soap version to use (<code>SOAP_1_1</code> or <code>SOAP_1_2</code>).</li>
+<li><code>actor</code> - the actor URI for the server.</li>
+<li><code>classmap</code> (<code>classMap</code>) - an associative array used to map WSDL types to PHP
+  classes. The option must be an associative array using WSDL types as the
+  keys, and PHP class names as values.</li>
+<li><code>encoding</code> - internal character encoding (UTF-8 is always used as an external
+  encoding).</li>
+<li><code>uri</code> (required) - URI namespace for SOAP server.</li>
+</ul>
+<h2 id="defining-your-soap-api">Defining your SOAP API</h2>
+<p>There are two ways to define your SOAP API in order to expose PHP functionality.</p>
+<p>The first one is to attach a class to the <code>Zend\Soap\Server</code> object that
+completely describes your API:</p>
+<pre class="codehilite"><code class="language-php">class MyClass
+{
+    /**
+     * This method takes ...
+     *
+     * @param integer $inputParam
+     * @return string
+     */
+    public function method1($inputParam)
+    {
+        // ...
+    }
+
+    /**
+     * This method takes ...
+     *
+     * @param integer $inputParam1
+     * @param string  $inputParam2
+     * @return float
+     */
+    public function method2($inputParam1, $inputParam2)
+    {
+        // ...
+    }
+
+    /* ... */
+}
+
+$server = new Zend\Soap\Server(null, $options);
+
+// Bind class to Soap Server:
+$server-&gt;setClass(MyClass::class);
+
+// Or bind an instance:
+$server-&gt;setObject(new MyClass());
+
+// Handle a request:
+$server-&gt;handle();</code></pre>
+
+
+<blockquote>
+<h3 id="docblocks-are-required">Docblocks are required</h3>
+<p>You should completely describe each method using a method docblock if you plan
+to use autodiscover functionality to prepare your WSDL.</p>
+</blockquote>
+<p>The second method for defining your API is to use one or more functions, passing
+them to one or more of the <code>addFunction()</code> or <code>loadFunctions()</code> methods:</p>
+<pre class="codehilite"><code class="language-php">/**
+ * This function ...
+ *
+ * @param integer $inputParam
+ * @return string
+ */
+function function1($inputParam)
+{
+    // ...
+}
+
+/**
+ * This function ...
+ *
+ * @param integer $inputParam1
+ * @param string  $inputParam2
+ * @return float
+ */
+function function2($inputParam1, $inputParam2)
+{
+    // ...
+}
+
+$server = new Zend\Soap\Server(null, $options);
+$server-&gt;addFunction('function1');
+$server-&gt;addFunction('function2');
+
+$server-&gt;handle();</code></pre>
+
+
+<h2 id="request-and-response-handling">Request and response handling</h2>
+<p><code>Zend\Soap\Server</code> component performs request/response processing automatically,
+but allows you to intercept each in order to perform pre- or post-processing.</p>
+<h3 id="request-pre-and-post-processing">Request pre- and post-processing</h3>
+<p>The <code>Zend\Soap\Server::handle()</code> method handles a request from the standard
+input stream ('php://input'). It may be overridden either by supplying a request
+instance to the <code>handle()</code> method, or by setting the request via the
+<code>setRequest()</code> method:</p>
+<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+
+// Set request using optional $request parameter to the handle() method:
+$server-&gt;handle($request);
+
+// Set request using setRequest() method:
+$server-&gt;setRequest();
+$server-&gt;handle();</code></pre>
+
+
+<p>A request object may be represented using any of the following, and handled as
+follows:</p>
+<ul>
+<li><code>DOMDocument</code> (casts to XML)</li>
+<li><code>DOMNode</code> (owner document is retrieved and cast to XML)</li>
+<li><code>SimpleXMLElement</code> (casts to XML)</li>
+<li><code>stdClass</code> (<code>__toString()</code> is called and verified to be valid XML)</li>
+<li><code>string</code> (verified to be valid XML)</li>
+</ul>
+<p>The last request processed may be retrieved using the <code>getLastRequest()</code> method,
+which returns the XML string:</p>
+<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+
+$server-&gt;handle();
+$request = $server-&gt;getLastRequest();</code></pre>
+
+
+<h3 id="response-post-processing">Response post-processing</h3>
+<p>The <code>Zend\Soap\Server::handle()</code> method automatically emits the generated
+response to the output stream. It may be blocked using <code>setReturnResponse()</code>
+with <code>true</code> or <code>false</code> as a parameter. When set to <code>true</code>, <code>handle()</code> will
+return the generated response instead of emitting it.</p>
+<p>The returned response will be either an XML string representing the response, or
+a <code>SoapFault</code> exception instance.</p>
+<blockquote>
+<h4 id="do-not-return-soapfaults">Do not return SoapFaults</h4>
+<p>SoapFault instances, when cast to a string, will contain the full exception
+stack trace. For security purposes, you do not want to return that
+information. As such, check your return type before emitting the response
+manually.</p>
+</blockquote>
+<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+
+// Get a response as a return value of handle(),
+// instead of emitting it to standard output:
+$server-&gt;setReturnResponse(true);
+
+$response = $server-&gt;handle();
+
+if ($response instanceof SoapFault) {
+    /* ... */
+} else {
+    /* ... */
+}</code></pre>
+
+
+<p>The last response emitted may also be retrieved for post-processing using
+<code>getLastResponse()</code>:</p>
+<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+
+$server-&gt;handle();
+
+$response = $server-&gt;getLastResponse();
+
+if ($response instanceof SoapFault) {
+    /* ... */
+} else {
+    /* ... */
+}</code></pre>
+
+
+<h2 id="documentliteral-wsdl-handling">Document/Literal WSDL Handling</h2>
+<p>The document/literal binding-style/encoding pattern is used to make SOAP
+messages as human-readable as possible and allow abstraction between very
+incompatible languages. The .NET framework uses this pattern for SOAP service
+generation by default. The central concept of this approach to SOAP is the
+introduction of a Request and an Response object for every function/method of
+the SOAP service. The parameters of the function are properties on the request
+object, and the response object contains a single parameter that is built in the
+style <code>&lt;methodName&gt;Result</code></p>
+<p>zend-soap supports this pattern in both the AutoDiscover and Server
+components. You can write your service object without knowledge of the pattern.
+Use docblock comments to hint the parameter and return types as usual. The
+<code>Zend\Soap\Server\DocumentLiteralWrapper</code> wraps around your service object and
+converts request and response into normal method calls on your service.</p>
+<p>See the class doc block of the <code>DocumentLiteralWrapper</code> for a detailed example
+and discussion.</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href=".."><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../client/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>WSDL Parsing and Generation - zend-soap</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-soap</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../server/">Servers</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../client/">Clients</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">WSDL Parsing and Generation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../auto-discovery/">WSDL AutoDiscovery</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-soap">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#wsdl-parsing-and-generation">WSDL Parsing and Generation</a></li>
+        
+            <li><a href="#instantiation">Instantiation</a></li>
+        
+            <li><a href="#addmessage-method">addMessage() method</a></li>
+        
+            <li><a href="#addporttype-method">addPortType() method</a></li>
+        
+            <li><a href="#addportoperation-method">addPortOperation() method</a></li>
+        
+            <li><a href="#addbinding-method">addBinding() method</a></li>
+        
+            <li><a href="#addbindingoperation-method">addBindingOperation() method</a></li>
+        
+            <li><a href="#addsoapbinding-method">addSoapBinding() method</a></li>
+        
+            <li><a href="#addsoapoperation-method">addSoapOperation() method</a></li>
+        
+            <li><a href="#addservice-method">addService() method</a></li>
+        
+            <li><a href="#type-mapping">Type mapping</a></li>
+        
+            <li><a href="#adddocumentation-method">addDocumentation() method</a></li>
+        
+            <li><a href="#retrieve-the-final-wsdl-document">Retrieve the final WSDL document</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../client/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../auto-discovery/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">WSDL Parsing and Generation</li>
+</ol>
+
+<h1 id="wsdl-parsing-and-generation">WSDL Parsing and Generation</h1>
+<p>The <code>Zend\Soap\Wsdl</code> class is used by <code>Zend\Soap\Server</code> internally to operate
+with WSDL documents. In most cases, you will not interact with it directly.</p>
+<p>Nevertheless, you could also use functionality provided by this class for your
+own needs.  <code>Zend\Soap\Wsdl</code> contains both a parser and a generator for WSDL
+documents.</p>
+<h2 id="instantiation">Instantiation</h2>
+<p>The <code>Zend\Soap\Wsdl</code> constructor takes three parameters:</p>
+<ul>
+<li><code>$name</code> - name of the web service being described.</li>
+<li><code>$uri</code> - URI where the WSDL will be available (could also be a reference to
+  the file in the filesystem.)</li>
+<li><code>$strategy</code> - optional flag used to identify the strategy for complex types
+  (objects) detection.  To read more on complex type detection strategies go to
+  the section on <a href="#adding-complex-type-information">adding complex types</a>.</li>
+<li><code>$classMap</code> - Optional array of class name translations from PHP Type (key) to
+  WSDL type (value).</li>
+</ul>
+<h2 id="addmessage-method">addMessage() method</h2>
+<p>The <code>addMessage($name, $parts)</code> method adds a new message description to the
+WSDL document (<code>/definitions/message</code> element).</p>
+<p>Each message corresponds to methods in terms of <code>Zend\Soap\Server</code> and
+<code>Zend\Soap\Client</code> functionality.</p>
+<p>The <code>$name</code> parameter represents the message name.</p>
+<p>The <code>$parts</code> parameter is an array of message parts which describes SOAP call
+parameters, represented as an associative array of 'part name' (SOAP call
+parameter name) =&gt; 'part type' pairs.</p>
+<p>Type mapping management is performed using one of the <code>addTypes()</code> and
+<code>addComplexType()</code> methods (see below).</p>
+<blockquote>
+<h3 id="message-typing">Message Typing</h3>
+<p>Messages parts can use either the <code>element</code> or <code>type</code> attribute for typing (see
+<a href="http://www.w3.org/TR/wsdl#_messages">the W3C WSDL specification</a>).</p>
+<p>The <code>element</code> attribute must refer to a corresponding element in the data type
+definition. A <code>type</code> attribute refers to a corresponding complexType entry.</p>
+<p>All standard XSD types have both <code>element</code> and <code>complexType</code> definitions (see
+the <a href="http://schemas.xmlsoap.org/soap/encoding/">SOAP encoding specification</a>
+for details).</p>
+<p>All non-standard types, which may be added using the
+<code>Zend\Soap\Wsdl::addComplexType()</code> method, are described using the
+<code>complexType</code> node of the <code>/definitions/types/schema/</code> section of the WSDL
+document.</p>
+<p>The <code>addMessage()</code> method always uses the <code>type</code> attribute to describe types.</p>
+</blockquote>
+<h2 id="addporttype-method">addPortType() method</h2>
+<p>The <code>addPortType($name)</code> method adds a new port type to the WSDL document
+(<code>/definitions/portType</code>) with the specified port type name.</p>
+<p>In terms of the <code>Zend\Soap\Server</code> implementation, it joins a set of web service
+methods into a single operation.</p>
+<p>See <a href="http://www.w3.org/TR/wsdl#_porttypes">the W3C portTypes documentation</a> for
+more details.</p>
+<h2 id="addportoperation-method">addPortOperation() method</h2>
+<p>The <code>addPortOperation($portType, $name, $input = false, $output = false, $fault
+= false)</code> method adds new port operation to the specified port type of the WSDL
+document (<code>/definitions/portType/operation</code>).</p>
+<p>In terms of the <code>Zend\Soap\Server</code> implementation, Each port operation
+corresponds to a class method (if the web service is based on a class) or
+function (if the web service is based on a set of methods).</p>
+<p>It also adds corresponding port operation messages depending on the specified
+<code>$input</code>, <code>$output</code> and <code>$fault</code> parameters.</p>
+<blockquote>
+<h3 id="generated-messages">Generated messages</h3>
+<p><code>Zend\Soap\Server</code> generates two messages for each port operation when
+describing operations it provides:</p>
+<ul>
+<li>input message with name <code>&lt;$methodName&gt;Request</code>.</li>
+<li>output message with name <code>&lt;$methodName&gt;Response</code>.</li>
+</ul>
+</blockquote>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_request-response">W3C WSDL request/response documentation</a>
+for more details.</p>
+<h2 id="addbinding-method">addBinding() method</h2>
+<p>The <code>addBinding($name, $portType)</code> method adds new binding to the WSDL document
+(<code>/definitions/binding</code>).</p>
+<p>A <code>binding</code> WSDL document node defines the message format and protocol details
+for operations and messages defined by a particular portType (see the <a href="http://www.w3.org/TR/wsdl#_bindings">W3C WSDL
+binding documentation</a>).</p>
+<p>The method creates a binding node and returns it; you may then fill the returned
+node with data.</p>
+<p><code>Zend\Soap\Server</code> uses the name <code>&lt;$serviceName&gt;Binding</code> for the 'binding'
+element in the WSDL document.</p>
+<h2 id="addbindingoperation-method">addBindingOperation() method</h2>
+<p>The <code>addBindingOperation($binding, $name, $input = false, $output = false,
+$fault = false)</code> method adds an operation to a binding element
+(<code>/definitions/binding/operation</code>) with the specified name.</p>
+<p>It takes an <code>XML_Tree_Node</code> object returned by <code>addBinding()</code> as an input
+(<code>$binding</code> parameter) to add an 'operation' element with input/output/false
+entries depending on the specified parameters</p>
+<p>The <code>Zend\Soap\Server</code> implementation adds a corresponding binding entry for each web service method with
+input and output entries, defining the <code>soap:body</code> element as <code>&lt;soap:body use="encoded"
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;</code>.</p>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_bindings">W3C WSDL bindings documentation</a>
+for more details.</p>
+<h2 id="addsoapbinding-method">addSoapBinding() method</h2>
+<p>The <code>addSoapBinding($binding, $style = 'document', $transport =
+'http://schemas.xmlsoap.org/soap/http')</code> method adds a SOAP binding
+(<code>soap:binding</code>) entry to the binding element (which is already linked to some
+port type) using the specified style and transport (the <code>Zend\Soap\Server</code>
+implementation uses the RPC style over HTTP).</p>
+<p>A <code>/definitions/binding/soap:binding</code> element is used to signify that the
+binding is bound to the SOAP protocol format.</p>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_bindings">W3C bindings documentation</a> for
+more details.</p>
+<h2 id="addsoapoperation-method">addSoapOperation() method</h2>
+<p>The <code>addSoapOperation($binding, $soap_action)</code> method adds a SOAP operation
+(<code>soap:operation</code>) entry to the binding element with the specified action. The
+<code>style</code> attribute of the <code>soap:operation</code> element is not used since the
+programming model (RPC-oriented or document-oriented) may be using the
+<code>addSoapBinding()</code> method already.</p>
+<p>The <code>soapAction</code> attribute of <code>/definitions/binding/soap:operation</code> element
+specifies the value of the SOAP action header for this operation. This attribute
+is required for SOAP over HTTP and <strong>must not</strong> be specified for other
+transports.</p>
+<p>The <code>Zend\Soap\Server</code> implementation uses the format
+<code>&lt;$serviceUri&gt;#&lt;$methodName&gt;</code> for the SOAP operation action name.</p>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_soap:operation">W3C soap:operation documentation</a>
+for more details.</p>
+<h2 id="addservice-method">addService() method</h2>
+<p>The <code>addService($name, $port_name, $binding, $location)</code> method adds a
+<code>/definitions/service</code> element to the WSDL document with the specified service
+name, port name, binding, and location.</p>
+<p>WSDL 1.1 allows several port types (sets of operations) per service; however,
+zend-soap does not support this ability.</p>
+<p>The <code>Zend\Soap\Server</code> implementation uses:</p>
+<ul>
+<li><code>&lt;$name&gt;Service</code> as the service name.</li>
+<li><code>&lt;$name&gt;Port</code> as the port type name.</li>
+<li><code>tns:&lt;$name&gt;Binding</code> [1] as the binding name. (<code>tns:namespace</code> is defined as
+  the script URI; generally this is <code>'http://' . $_SERVER['HTTP_HOST'] .
+  $_SERVER['SCRIPT_NAME']</code>)</li>
+<li>the script URI (<code>'http://' . $_SERVER['HTTP_HOST'] .  $_SERVER['SCRIPT_NAME']</code>)
+  as the service URI for the service definition.</li>
+</ul>
+<p>where <code>$name</code> is either:</p>
+<ul>
+<li>a class name, for servers representing a PHP class,</li>
+<li>a script name, for servers representing a collection of PHP functions.</li>
+</ul>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_services">W3C WSDL services documentation</a>
+for more details.</p>
+<h2 id="type-mapping">Type mapping</h2>
+<p>The zend-soap WSDL implementation uses the following type mappings between PHP
+and SOAP types:</p>
+<ul>
+<li>PHP strings &lt;-&gt; <code>xsd:string</code>.</li>
+<li>PHP integers &lt;-&gt; <code>xsd:int</code>.</li>
+<li>PHP floats and doubles &lt;-&gt; <code>xsd:float</code>.</li>
+<li>PHP booleans &lt;-&gt; <code>xsd:boolean</code>.</li>
+<li>PHP arrays &lt;-&gt; <code>soap-enc:Array</code>.</li>
+<li>PHP object &lt;-&gt; <code>xsd:struct</code>.</li>
+<li>PHP class &lt;-&gt; based on complex type strategy (See
+  <a href="#adding-complex-type-information">the section on adding complex types</a>).</li>
+<li>PHP void &lt;-&gt; empty type.</li>
+<li>If a type is not matched to any of the above, then <code>xsd:anyType</code> is used.</li>
+</ul>
+<p>Where:</p>
+<ul>
+<li><code>xsd:</code> refers to the <a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a> namespace</li>
+<li><code>soap-enc:</code> refers to the <a href="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</a>
+  namespace</li>
+<li><code>tns:</code> is the "target namespace" for the service.</li>
+</ul>
+<blockquote>
+<h3 id="complex-types">Complex types</h3>
+<p>By default, <code>Zend\Soap\Wsdl</code> will be created with the
+<code>Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType</code> class as its detection
+algorithm for complex types. The first parameter of the <code>AutoDiscover</code>
+constructor takes any complex type strategy implementing
+<code>Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface</code>, or a string
+class name of a class implementing the interface. For backwards compatibility
+with the <code>$extractComplexType</code> setting, boolean variables are parsed the
+following way:</p>
+<ul>
+<li>If <code>TRUE</code>, <code>Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType</code> is used.</li>
+<li>If <code>FALSE</code>, <code>Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType</code> is used.</li>
+</ul>
+</blockquote>
+<h3 id="retrieving-type-information">Retrieving type information</h3>
+<p>The <code>getType($type)</code> method may be used to retrieve the mapping for a specified
+PHP type:</p>
+<pre class="codehilite"><code class="language-php">$wsdl = new Zend\Soap\Wsdl('My_Web_Service', $myWebServiceUri);
+$soapIntType = $wsdl-&gt;getType('int');
+
+class MyClass
+{
+    /* ... */
+}
+
+$soapMyClassType = $wsdl-&gt;getType('MyClass');</code></pre>
+
+
+<h3 id="adding-complex-type-information">Adding complex type information</h3>
+<p>The <code>addComplexType($type)</code> method is used to add complex types (PHP classes) to
+a WSDL document.</p>
+<p>The method is automatically used by the <code>getType()</code> method to add corresponding
+complex types of method parameters or return types.</p>
+<p>The detection and generation algorithm it uses is based on the currently active
+detection strategy for complex types. You can set the detection strategy either
+by specifying the class name as a string or providing an instance of a
+<code>Zend\Soap\Wsdl\ComplexTypeStrategy</code> implementation as the third parameter to
+the constructor, or by calling the <code>setComplexTypeStrategy($strategy)</code> function
+of <code>Zend\Soap\Wsdl</code>.</p>
+<p>The following detection strategies currently exist:</p>
+<ul>
+<li><code>Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType</code>: Enabled by default
+  (when no third constructor parameter is set). Iterates over the public
+  attributes of a class type and registers them as subtypes of the complex
+  object type.</li>
+<li><code>Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType</code>: Casts all complex types into the
+  simple XSD type <code>xsd:anyType</code>. Warning: this shortcut for complex type
+  detection can probably only be handled successfully by weakly typed languages
+  such as PHP.</li>
+<li><code>Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence</code>: This strategy allows
+  specifying arrays of the given type, which can be any PHP scalar type (<code>int</code>,
+  <code>string</code>, <code>bool</code>, <code>float</code>), as well as objects or arrays of objects.</li>
+<li><code>Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex</code>: This strategy allows
+  detecting very complex arrays of objects. Objects types are detected based on
+  the <code>Zend\Soap\Wsdl\Strategy\DefaultComplexType</code>, and an array is wrapped
+  around that definition.</li>
+<li><code>Zend\Soap\Wsdl\ComplexTypeStrategy\Composite</code>: This strategy can combine all
+  strategies by connecting PHP complex types (classes/objects) to the desired
+  strategy via the <code>connectTypeToStrategy($type, $strategy)</code> method. A complete
+  typemap can be given to the constructor as an array with <code>$type</code> / <code>$strategy</code>
+  pairs. The second parameter specifies the default strategy that will be used
+  if an unknown type is requested for adding, and defaults to the
+  <code>Zend\Soap\Wsdl\Strategy\DefaultComplexType</code> strategy.</li>
+</ul>
+<p>The <code>addComplexType()</code> method creates a
+<code>/definitions/types/xsd:schema/xsd:complexType</code> element for each described
+complex type, using the specified PHP class name.</p>
+<p>Class properties <strong>MUST</strong> have a docblock section with the described PHP type in
+order to be included in the WSDL description.</p>
+<p><code>addComplexType()</code> checks if the type is already described within types section
+of the WSDL document, and prevents duplication of types. Additionally, it has
+recursion detection.</p>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_types">W3C WSDL types documentation</a> for
+more details.</p>
+<h2 id="adddocumentation-method">addDocumentation() method</h2>
+<p>The <code>addDocumentation($input_node, $documentation)</code> method adds human readable
+documentation using the optional <code>wsdl:document</code> element.</p>
+<p>The <code>/definitions/binding/soap:binding</code> element is used to signify that the
+binding is bound to the SOAP protocol format.</p>
+<p>See the <a href="http://www.w3.org/TR/wsdl#_documentation">W3C WSDL documentation section</a>
+for more details.</p>
+<h2 id="retrieve-the-final-wsdl-document">Retrieve the final WSDL document</h2>
+<p>Several methods exist for retrieving the full WSDL definition document:</p>
+<ul>
+<li><code>toXML()</code> will generate an XML string.</li>
+<li><code>toDomDocument()</code> will generate a PHP <code>DOMDocument</code> instance.</li>
+<li><code>dump($filename = false)</code> will dump the XML to the specified filename, or, if
+  no filename is provided, return the XML string.</li>
+</ul>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../client/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../auto-discovery/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>
