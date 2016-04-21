@@ -377,9 +377,9 @@ class AutoDiscover
      *
      * @return Wsdl
      */
-    protected function _generateClass()
+    protected function generateClass()
     {
-        return $this->_generateWsdl($this->reflection->reflectClass($this->class)->getMethods());
+        return $this->generateWsdl($this->reflection->reflectClass($this->class)->getMethods());
     }
 
     /**
@@ -387,13 +387,13 @@ class AutoDiscover
      *
      * @return Wsdl
      */
-    protected function _generateFunctions()
+    protected function generateFunctions()
     {
         $methods = [];
         foreach (array_unique($this->functions) as $func) {
             $methods[] = $this->reflection->reflectFunction($func);
         }
-        return $this->_generateWsdl($methods);
+        return $this->generateWsdl($methods);
     }
 
     /**
@@ -402,7 +402,7 @@ class AutoDiscover
      * @param  array $reflectionMethods
      * @return Wsdl
      */
-    protected function _generateWsdl(array $reflectionMethods)
+    protected function generateWsdl(array $reflectionMethods)
     {
         $uri = $this->getUri();
 
@@ -417,10 +417,15 @@ class AutoDiscover
         $binding = $wsdl->addBinding($serviceName . 'Binding', Wsdl::TYPES_NS . ':' . $serviceName . 'Port');
 
         $wsdl->addSoapBinding($binding, $this->bindingStyle['style'], $this->bindingStyle['transport']);
-        $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', Wsdl::TYPES_NS . ':' . $serviceName . 'Binding', $uri);
+        $wsdl->addService(
+            $serviceName . 'Service',
+            $serviceName . 'Port',
+            Wsdl::TYPES_NS . ':' . $serviceName . 'Binding',
+            $uri
+        );
 
         foreach ($reflectionMethods as $method) {
-            $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
+            $this->addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
 
         return $wsdl;
@@ -435,7 +440,7 @@ class AutoDiscover
      * @param  $binding  \DOMElement wsdl:binding
      * @throws Exception\InvalidArgumentException
      */
-    protected function _addFunctionToWsdl($function, $wsdl, $port, $binding)
+    protected function addFunctionToWsdl($function, $wsdl, $port, $binding)
     {
         $uri = $this->getUri();
 
@@ -528,13 +533,15 @@ class AutoDiscover
             $portOperation = $wsdl->addPortOperation(
                 $port,
                 $functionName,
-                Wsdl::TYPES_NS . ':' . $functionName . 'In', Wsdl::TYPES_NS . ':' . $functionName . 'Out'
+                Wsdl::TYPES_NS . ':' . $functionName . 'In',
+                Wsdl::TYPES_NS . ':' . $functionName . 'Out'
             );
         } else {
             $portOperation = $wsdl->addPortOperation(
                 $port,
                 $functionName,
-                Wsdl::TYPES_NS . ':' . $functionName . 'In', false
+                Wsdl::TYPES_NS . ':' . $functionName . 'In',
+                false
             );
         }
         $desc = $this->discoveryStrategy->getFunctionDocumentation($function);
@@ -572,9 +579,9 @@ class AutoDiscover
         }
 
         if ($this->class) {
-            $wsdl = $this->_generateClass();
+            $wsdl = $this->generateClass();
         } else {
-            $wsdl = $this->_generateFunctions();
+            $wsdl = $this->generateFunctions();
         }
 
         return $wsdl;

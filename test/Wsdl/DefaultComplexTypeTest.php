@@ -13,8 +13,6 @@ use Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType;
 use ZendTest\Soap\TestAsset\PublicPrivateProtected;
 use ZendTest\Soap\WsdlTestHelper;
 
-require_once __DIR__ . '/../TestAsset/commontypes.php';
-
 /**
  * @covers \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType
  */

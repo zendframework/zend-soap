@@ -23,15 +23,19 @@ use Zend\Soap\Exception;
  *
  * Example:
  *
- *   class MyCalculatorService
- *   {
- *      /**
- *       * @param int $x
- *       * @param int $y
- *       * @return int
- *       *
- *      public function add($x, $y) {}
- *   }
+ * <code>
+ * class MyCalculatorService
+ * {
+ *     /**
+ *      * @param int $x
+ *      * @param int $y
+ *      * @return int
+ *      *
+ *     public function add($x, $y)
+ *     {
+ *     }
+ * }
+ * </code>
  *
  * The document/literal wrapper pattern would lead php ext/soap to generate a
  * single "request" object that contains $x and $y properties. To solve this a
@@ -42,9 +46,11 @@ use Zend\Soap\Exception;
  * MyCalculatorServiceClient#add(10, 20) would lead PHP ext/soap to create
  * the following request object:
  *
+ * <code>
  * $addRequest = new \stdClass;
  * $addRequest->x = 10;
  * $addRequest->y = 20;
+ * </code>
  *
  * This object does not match the signature of the server-side
  * MyCalculatorService and lead to failure.
@@ -52,8 +58,10 @@ use Zend\Soap\Exception;
  * Also the response object in this case is supposed to be an array
  * or object with a property "addResult":
  *
+ * <code>
  * $addResponse = new \stdClass;
  * $addResponse->addResult = 30;
+ * </code>
  *
  * To keep your service object code free from this implementation detail
  * of SOAP this wrapper service handles the parsing between the formats.
@@ -98,12 +106,12 @@ class DocumentLiteralWrapper
      */
     public function __call($method, $args)
     {
-        $this->_assertOnlyOneArgument($args);
-        $this->_assertServiceDelegateHasMethod($method);
+        $this->assertOnlyOneArgument($args);
+        $this->assertServiceDelegateHasMethod($method);
 
-        $delegateArgs = $this->_parseArguments($method, $args[0]);
+        $delegateArgs = $this->parseArguments($method, $args[0]);
         $ret          = call_user_func_array([$this->object, $method], $delegateArgs);
-        return $this->_getResultMessage($method, $ret);
+        return $this->getResultMessage($method, $ret);
     }
 
     /**
@@ -115,7 +123,7 @@ class DocumentLiteralWrapper
      * @return array
      * @throws Exception\UnexpectedValueException
      */
-    protected function _parseArguments($method, $document)
+    protected function parseArguments($method, $document)
     {
         $reflMethod = $this->reflection->getMethod($method);
         $params = [];
@@ -146,7 +154,7 @@ class DocumentLiteralWrapper
      * @param  mixed $ret
      * @return array
      */
-    protected function _getResultMessage($method, $ret)
+    protected function getResultMessage($method, $ret)
     {
         return [$method . 'Result' => $ret];
     }
@@ -155,7 +163,7 @@ class DocumentLiteralWrapper
      * @param  string $method
      * @throws Exception\BadMethodCallException
      */
-    protected function _assertServiceDelegateHasMethod($method)
+    protected function assertServiceDelegateHasMethod($method)
     {
         if (!$this->reflection->hasMethod($method)) {
             throw new Exception\BadMethodCallException(sprintf(
@@ -170,7 +178,7 @@ class DocumentLiteralWrapper
      * @param  array $args
      * @throws Exception\UnexpectedValueException
      */
-    protected function _assertOnlyOneArgument(array $args)
+    protected function assertOnlyOneArgument(array $args)
     {
         if (count($args) != 1) {
             throw new Exception\UnexpectedValueException(sprintf(

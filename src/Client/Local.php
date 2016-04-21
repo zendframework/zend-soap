@@ -43,6 +43,7 @@ class Local extends SOAPClient
         parent::__construct($wsdl, $options);
     }
 
+    // @codingStandardsIgnoreStart
     /**
      * Actual "do request" method.
      *
@@ -70,4 +71,5 @@ class Local extends SOAPClient
 
         return $response;
     }
+    // @codingStandardsIgnoreEnd
 }

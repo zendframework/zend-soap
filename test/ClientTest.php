@@ -9,16 +9,11 @@
 
 namespace ZendTest\Soap;
 
-require_once __DIR__ . '/TestAsset/commontypes.php';
-
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Client;
 use Zend\Soap\Server;
 use Zend\Soap\Wsdl;
 
-/**
- * @group      Zend_Soap
- */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -301,7 +296,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $count = 0;
         foreach ($typesArray as $element) {
-            if (strpos($element, 'struct AutoDiscoverTestClass1') === 0 or strpos($element, 'AutoDiscoverTestClass1 ArrayOfAutoDiscoverTestClass1') === 0) {
+            if (strpos($element, 'struct AutoDiscoverTestClass1') === 0
+                || strpos($element, 'AutoDiscoverTestClass1 ArrayOfAutoDiscoverTestClass1') === 0
+            ) {
                 $count++;
             }
         }
@@ -316,10 +313,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testGetLastRequest()
     {
         if (headers_sent($file, $line)) {
-            $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent. Output started in '.$file.'@'.$line.' enable output buffering to run this test');
-
-            return;
+            $this->markTestSkipped(sprintf(
+                'Cannot run testGetLastRequest() when headers have already been sent. '
+                . 'Output started in %s@%d; enable output buffering to run this test',
+                $file,
+                $line
+            ));
         }
+
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
@@ -346,9 +347,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testGetLastResponse()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testGetLastResponse() when headers have already been sent; enable output buffering to run this test');
-
-            return;
+            $this->markTestSkipped(
+                'Cannot run testGetLastResponse() when headers have already been sent; '
+                . 'enable output buffering to run this test'
+            );
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -360,17 +362,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->testFunc2('World');
 
         $expectedResponse = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-                          . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
-                          .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-                          .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-                          .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
-                          .     '<env:Body xmlns:rpc="http://www.w3.org/2003/05/soap-rpc">'
-                          .         '<env:testFunc2Response env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
-                          .             '<rpc:result>testFunc2Return</rpc:result>'
-                          .             '<testFunc2Return xsi:type="xsd:string">Hello World!</testFunc2Return>'
-                          .         '</env:testFunc2Response>'
-                          .     '</env:Body>'
-                          . '</env:Envelope>' . "\n";
+            . '<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope" '
+            .               'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
+            .               'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+            .               'xmlns:enc="http://www.w3.org/2003/05/soap-encoding">'
+            .     '<env:Body xmlns:rpc="http://www.w3.org/2003/05/soap-rpc">'
+            .         '<env:testFunc2Response env:encodingStyle="http://www.w3.org/2003/05/soap-encoding">'
+            .             '<rpc:result>testFunc2Return</rpc:result>'
+            .             '<testFunc2Return xsi:type="xsd:string">Hello World!</testFunc2Return>'
+            .         '</env:testFunc2Response>'
+            .     '</env:Body>'
+            . '</env:Envelope>' . "\n";
 
         $this->assertEquals($client->getLastResponse(), $expectedResponse);
     }
@@ -378,9 +380,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testCallInvoke()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
-
-            return;
+            $this->markTestSkipped(
+                'Cannot run testCallInvoke() when headers have already been sent; '
+                . 'enable output buffering to run this test'
+            );
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -394,9 +397,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testCallDirect()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
-
-            return;
+            $this->markTestSkipped(
+                'Cannot run testCallInvoke() when headers have already been sent; '
+                . 'enable output buffering to run this test'
+            );
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -410,9 +414,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testCallDirectWithArgString()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testCallInvoke() when headers have already been sent; enable output buffering to run this test');
-
-            return;
+            $this->markTestSkipped(
+                'Cannot run testCallInvoke() when headers have already been sent; '
+                . 'enable output buffering to run this test'
+            );
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -462,9 +467,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testSetInputHeaders()
     {
         if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testSetInputHeaders() when headers have already been sent; enable output buffering to run this test');
-
-            return;
+            $this->markTestSkipped(
+                'Cannot run testSetInputHeaders() when headers have already been sent; '
+                . 'enable output buffering to run this test'
+            );
         }
 
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
@@ -473,9 +479,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = new Client\Local($server, __DIR__ . '/TestAsset/wsdl_example.wsdl');
 
         // Add request header
-        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader1', 'SOAP header content 1'));
+        $client->addSoapInputHeader(new \SoapHeader(
+            'http://www.example.com/namespace',
+            'MyHeader1',
+            'SOAP header content 1'
+        ));
+
         // Add permanent request header
-        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader2', 'SOAP header content 2'), true);
+        $client->addSoapInputHeader(new \SoapHeader(
+            'http://www.example.com/namespace',
+            'MyHeader2',
+            'SOAP header content 2'
+        ), true);
 
         // Perform request
         $client->testFunc2('World');
@@ -500,7 +515,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($client->getLastRequest(), $expectedRequest);
 
         // Add request header
-        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader3', 'SOAP header content 3'));
+        $client->addSoapInputHeader(
+            new \SoapHeader('http://www.example.com/namespace', 'MyHeader3', 'SOAP header content 3')
+        );
 
         // Perform request
         $client->testFunc2('World');
@@ -527,7 +544,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->resetSoapInputHeaders();
 
         // Add request header
-        $client->addSoapInputHeader(new \SoapHeader('http://www.example.com/namespace', 'MyHeader4', 'SOAP header content 4'));
+        $client->addSoapInputHeader(
+            new \SoapHeader('http://www.example.com/namespace', 'MyHeader4', 'SOAP header content 4')
+        );
 
         // Perform request
         $client->testFunc2('World');
@@ -559,7 +578,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $fixtureCookieKey = "foo";
         $fixtureCookieValue = "bar";
 
-        $clientMock = $this->getMock('SoapClient', ['__setCookie'], [null, ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']]);
+        $clientMock = $this->getMock(
+            'SoapClient',
+            ['__setCookie'],
+            [
+                null,
+                ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
+            ]
+        );
         $clientMock->expects($this->once())
                    ->method('__setCookie')
                    ->with($fixtureCookieKey, $fixtureCookieValue);
@@ -572,7 +598,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSoapClient()
     {
-        $clientMock = $this->getMock('SoapClient', ['__setCookie'], [null, ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']]);
+        $clientMock = $this->getMock(
+            'SoapClient',
+            ['__setCookie'],
+            [
+                null,
+                ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
+            ]
+        );
 
         $soap = new Client();
         $soap->setSoapClient($clientMock);

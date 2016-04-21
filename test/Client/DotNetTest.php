@@ -12,8 +12,7 @@ namespace ZendTest\Soap\Client;
 use PHPUnit_Framework_TestCase;
 use Zend\Soap\Client\Common;
 use Zend\Soap\Client\DotNet as DotNetClient;
-
-require_once __DIR__ . '/../TestAsset/call_user_func.php';
+use ZendTest\Soap\TestAsset\MockCallUserFunc;
 
 /**
  * .NET SOAP client tester.
@@ -43,8 +42,24 @@ class DotNetTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->client = new DotNetClient(null, ['location' => 'http://unithost/test',
-                                                    'uri'      => 'http://unithost/test']);
+        MockCallUserFunc::$mock = false;
+        $this->client = new DotNetClient(
+            null,
+            [
+                'location' => 'http://unithost/test',
+                'uri'      => 'http://unithost/test'
+            ]
+        );
+    }
+
+    /**
+     * Disables mocking of call_user_func
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        MockCallUserFunc::$mock = false;
     }
 
     /**
@@ -166,8 +181,10 @@ class DotNetTest extends PHPUnit_Framework_TestCase
      */
     private function mockCurlClient()
     {
-        $this->curlClient = $this->getMock('Zend\Http\Client\Adapter\Curl',
-                                           ['close', 'connect', 'read', 'write']);
+        $this->curlClient = $this->getMock(
+            'Zend\Http\Client\Adapter\Curl',
+            ['close', 'connect', 'read', 'write']
+        );
         $this->client->setCurlClient($this->curlClient);
     }
 
@@ -178,38 +195,52 @@ class DotNetTest extends PHPUnit_Framework_TestCase
      */
     private function mockNtlmRequest()
     {
-        $headers  = ['Content-Type' => 'text/xml; charset=utf-8',
-                          'Method'       => 'POST',
-                          'SOAPAction'   => '"http://unithost/test#TestMethod"',
-                          'User-Agent'   => 'PHP-SOAP-CURL'];
+        $headers  = [
+            'Content-Type' => 'text/xml; charset=utf-8',
+            'Method'       => 'POST',
+            'SOAPAction'   => '"http://unithost/test#TestMethod"',
+            'User-Agent'   => 'PHP-SOAP-CURL',
+        ];
         $response = "HTTP/1.1 200 OK\n"
-                  . "Cache-Control: private\n"
-                  . "Content-Type: text/xml; charset=utf-8\n"
-                  . "\n\n"
-                  . '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
-                  . '<s:Body>'
-                  . '<TestMethodResponse xmlns="http://unit/test">'
-                  . '<TestMethodResult>'
-                  . '<TestMethodResult><dummy></dummy></TestMethodResult>'
-                  . '</TestMethodResult>'
-                  . '</TestMethodResponse>'
-                  . '</s:Body>'
-                  . '</s:Envelope>';
+            . "Cache-Control: private\n"
+            . "Content-Type: text/xml; charset=utf-8\n"
+            . "\n\n"
+            . '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+            . '<s:Body>'
+            . '<TestMethodResponse xmlns="http://unit/test">'
+            . '<TestMethodResult>'
+            . '<TestMethodResult><dummy></dummy></TestMethodResult>'
+            . '</TestMethodResult>'
+            . '</TestMethodResponse>'
+            . '</s:Body>'
+            . '</s:Envelope>';
 
         $this->mockCurlClient();
 
-        $this->curlClient->expects($this->once())
-                         ->method('connect')
-                         ->with('unithost', 80);
-        $this->curlClient->expects($this->once())
-                         ->method('read')
-                         ->will($this->returnValue($response));
-        $this->curlClient->expects($this->any())
-                         ->method('write')
-                         ->with('POST', $this->isInstanceOf('Zend\Uri\Http'), 1.1, $headers, $this->stringContains('<SOAP-ENV'));
+        $this->curlClient
+            ->expects($this->once())
+            ->method('connect')
+            ->with('unithost', 80);
+        $this->curlClient
+            ->expects($this->once())
+            ->method('read')
+            ->will($this->returnValue($response));
+        $this->curlClient
+            ->expects($this->any())
+            ->method('write')
+            ->with(
+                'POST',
+                $this->isInstanceOf('Zend\Uri\Http'),
+                1.1,
+                $headers,
+                $this->stringContains('<SOAP-ENV')
+            );
 
-        $this->client->setOptions(['authentication' => 'ntlm',
-                                        'login'          => 'username',
-                                        'password'       => 'testpass']);
+
+        $this->client->setOptions([
+            'authentication' => 'ntlm',
+            'login'          => 'username',
+            'password'       => 'testpass'
+        ]);
     }
 }
