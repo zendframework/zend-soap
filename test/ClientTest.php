@@ -74,7 +74,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                                 'features'       => 4,
 
                                 'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
-                                'typemap'        => $typeMap
+                                'typemap'        => $typeMap,
+                                'keep_alive'     => true,
+                                'ssl_method'     => 3,
         ];
 
         $client->setOptions($nonWSDLOptions);
@@ -107,7 +109,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                              'stream_context' => $ctx,
 
                              'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
-                             'typemap'        => $typeMap
+                             'typemap'        => $typeMap,
+                             'keep_alive'     => true,
+                             'ssl_method'     => 3,
         ];
 
         $client1->setOptions($wsdlOptions);
@@ -158,7 +162,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                          'passphrase'     => 'some pass phrase',
 
                          'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
-                         'typemap'        => $typeMap
+                         'typemap'        => $typeMap,
+                         'keep_alive'     => true,
+                         'ssl_method'     => 3,
         ];
 
         $client->setOptions($options);
