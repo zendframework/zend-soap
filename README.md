@@ -8,4 +8,4 @@ protocol in order to design client or server PHP application.
 
 
 - File issues at https://github.com/zendframework/zend-soap/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-soap
+- Documentation is at https://zendframework.github.io/zend-soap/
