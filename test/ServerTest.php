@@ -979,6 +979,29 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 
+    /**
+     * @runInSeparateProcess
+     */
+    public function testNotDefinedNamespacePrefix()
+    {
+        $server = new Server();
+        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setReturnResponse(true);
+
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+
+        $request = '<Envelope>
+   <Header/>
+   <Body>
+         <elementWithNoneExistingPrefixNamespace xsi:type="off:test">
+         </elementWithNoneExistingPrefixNamespace>
+   </Body>
+</Envelope>';
+        $response = $server->handle($request);
+
+        $this->assertContains('Invalid XML', $response->getMessage());
+    }
+
     public function testDebugMode()
     {
         $server = new Server();
