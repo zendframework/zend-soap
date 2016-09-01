@@ -621,7 +621,7 @@ class Server implements ZendServerServer
      *
      * @param  string|object $class Class name or object instance which executes
      *             SOAP Requests at endpoint.
-     * @param  string $namespace
+     * @param  string $namespace Ignored
      * @param  null|array $argv
      * @return self
      * @throws Exception\InvalidArgumentException if called more than once, or if class does not exist
