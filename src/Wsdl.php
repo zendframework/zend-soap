@@ -698,6 +698,9 @@ class Wsdl
             case 'void':
                 return '';
 
+            case 'date':
+                return self::XSD_NS . ':date';
+
             default:
                 // delegate retrieval of complex type to current strategy
                 return $this->addComplexType($type);
