@@ -1557,7 +1557,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertValidWSDL($this->dom);
-        
+
         $this->testDocumentNodes();
     }
 }
