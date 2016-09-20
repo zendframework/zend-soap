@@ -78,6 +78,12 @@ class Wsdl
     protected $wsdl;
 
     /**
+     * Custom targetNamespace.
+     * @var string
+     */
+    protected $targetNamespace;
+
+    /**
      * @param  string  $name Name of the Web Service being Described
      * @param  string|Uri $uri URI where the WSDL will be available
      * @param  null|ComplexTypeStrategy $strategy Strategy for detection of complex types
@@ -88,7 +94,8 @@ class Wsdl
         $name,
         $uri,
         ComplexTypeStrategy $strategy = null,
-        array $classMap = []
+        array $classMap = [],
+        $targetNamespace = null
     ) {
         if ($uri instanceof Uri) {
             $uri = $uri->toString();
@@ -96,8 +103,14 @@ class Wsdl
 
         $this->setUri($uri);
 
+        if (!$targetNamespace) {
+            $targetNamespace = $uri;
+        }
+
+        $this->setTargetNamespace($targetNamespace);
+
         $this->classMap = $classMap;
-        $this->dom      = $this->getDOMDocument($name, $this->getUri());
+        $this->dom      = $this->getDOMDocument($name, $this->getUri(), $this->getTargetNamespace());
         $this->wsdl     = $this->dom->documentElement;
 
         $this->setComplexTypeStrategy($strategy ?: new Wsdl\ComplexTypeStrategy\DefaultComplexType);
@@ -106,11 +119,12 @@ class Wsdl
     /**
      * Get the wsdl XML document with all namespaces and required attributes
      *
-     * @param  string $uri
      * @param  string $name
+     * @param  string $uri
+     * @param  string $targetNamespace
      * @return DOMDocument
      */
-    protected function getDOMDocument($name, $uri = null)
+    protected function getDOMDocument($name, $uri = null, $targetNamespace = null)
     {
         $dom = new DOMDocument();
 
@@ -126,10 +140,12 @@ class Wsdl
 
         $uri = $this->sanitizeUri($uri);
         $this->setAttributeWithSanitization($definitions, 'name', $name);
-        $this->setAttributeWithSanitization($definitions, 'targetNamespace', $uri);
+
+        $targetNamespace = ($this->targetNamespace) ? $this->sanitizeUri($this->targetNamespace) : $uri;
+        $this->setAttributeWithSanitization($definitions, 'targetNamespace', $targetNamespace);
 
         $definitions->setAttributeNS(self::XML_NS_URI, 'xmlns:'. self::WSDL_NS, self::WSDL_NS_URI);
-        $definitions->setAttributeNS(self::XML_NS_URI, 'xmlns:'. self::TYPES_NS, $uri);
+        $definitions->setAttributeNS(self::XML_NS_URI, 'xmlns:'. self::TYPES_NS, $targetNamespace);
         $definitions->setAttributeNS(self::XML_NS_URI, 'xmlns:'. self::SOAP_11_NS, self::SOAP_11_NS_URI);
         $definitions->setAttributeNS(self::XML_NS_URI, 'xmlns:'. self::XSD_NS, self::XSD_NS_URI);
         $definitions->setAttributeNS(self::XML_NS_URI, 'xmlns:'. self::SOAP_ENC_NS, self::SOAP_ENC_URI);
@@ -145,11 +161,11 @@ class Wsdl
      */
     public function getTargetNamespace()
     {
-        $targetNamespace = null;
         if ($this->wsdl !== null) {
-            $targetNamespace = $this->wsdl->getAttribute('targetNamespace');
+            $this->targetNamespace = $this->wsdl->getAttribute('targetNamespace');
         }
-        return $targetNamespace;
+
+        return $this->targetNamespace;
     }
 
     /**
@@ -718,7 +734,8 @@ class Wsdl
             $this->schema = $this->dom->createElementNS(WSDL::XSD_NS_URI, 'schema');
             $types->appendChild($this->schema);
 
-            $this->setAttributeWithSanitization($this->schema, 'targetNamespace', $this->getUri());
+            $targetNamespace = ($this->targetNamespace) ? $this->targetNamespace : $this->getUri();
+            $this->setAttributeWithSanitization($this->schema, 'targetNamespace', $targetNamespace);
         }
 
         return $this;
@@ -918,5 +935,27 @@ class Wsdl
         $schema->appendChild($elementXml);
 
         return self::TYPES_NS . ':' . $element['name'];
+    }
+
+    /**
+     * Set target namespace for WSDL.
+     *
+     * @param string|Uri $uri
+     * @return $this
+     */
+    public function setTargetNamespace($uri)
+    {
+        if ($uri instanceof Uri) {
+            $uri = $uri->toString();
+        }
+
+        $this->targetNamespace = $this->sanitizeUri($uri);
+
+        if ($this->dom instanceof DOMDocument) {
+            $definitions = $this->dom->firstChild;
+            $this->setAttributeWithSanitization($definitions, 'targetNamespace', $this->targetNamespace);
+        }
+
+        return $this;
     }
 }

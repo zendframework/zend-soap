@@ -863,4 +863,21 @@ class WsdlTest extends WsdlTestHelper
 
         $this->assertEquals(count($element['sequence']), $n);
     }
+
+    /**
+     * @dataProvider dataProviderForURITesting
+     *
+     * @param string $uri
+     * @param string|Uri $expectedUri
+     */
+    public function testSetCustomTargetNamespaceAttribute(
+        $uri,
+        $expectedUri
+    ) {
+        $this->wsdl->setTargetNamespace($uri);
+        $this->testDocumentNodes();
+
+        $this->assertEquals($expectedUri, $this->dom->documentElement->getAttribute('targetNamespace'));
+        $this->assertEquals($expectedUri, $this->wsdl->getTargetNamespace());
+    }
 }
