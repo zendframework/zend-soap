@@ -87,6 +87,12 @@ class AutoDiscover
     protected $discoveryStrategy;
 
     /**
+     * Custom targetNamespace.
+     * @var Uri
+     */
+    protected $targetNamespace;
+
+    /**
      * Constructor
      *
      * @param null|ComplexTypeStrategy $strategy
@@ -408,7 +414,9 @@ class AutoDiscover
 
         $serviceName = $this->getServiceName();
 
-        $wsdl = new $this->wsdlClass($serviceName, $uri, $this->strategy, $this->classMap);
+        $targetNamespace = $this->getTargetNamespace();
+
+        $wsdl = new $this->wsdlClass($serviceName, $uri, $this->strategy, $this->classMap, $targetNamespace);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
         $wsdl->addSchemaTypeSection();
@@ -443,6 +451,7 @@ class AutoDiscover
     protected function addFunctionToWsdl($function, $wsdl, $port, $binding)
     {
         $uri = $this->getUri();
+        $targetNamespace = $this->getTargetNamespace();
 
         // We only support one prototype: the one with the maximum number of arguments
         $prototype = null;
@@ -554,7 +563,7 @@ class AutoDiscover
         // attribute (WS-I Basic Profile 1.1 R2717)
         $operationBodyStyle = $this->operationBodyStyle;
         if ($this->bindingStyle['style'] == 'rpc' && !isset($operationBodyStyle['namespace'])) {
-            $operationBodyStyle['namespace'] = '' . $uri;
+            $operationBodyStyle['namespace'] = '' . $targetNamespace;
         }
 
         // Add the binding operation
@@ -563,7 +572,8 @@ class AutoDiscover
         } else {
             $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle);
         }
-        $wsdl->addSoapOperation($operation, $uri . '#' . $functionName);
+        
+        $wsdl->addSoapOperation($operation, $targetNamespace . '#' . $functionName);
     }
 
     /**
@@ -617,5 +627,41 @@ class AutoDiscover
     {
         header('Content-Type: text/xml');
         echo $this->toXml();
+    }
+
+    /**
+     * Set targetNamespace {@see https://www.w3.org/TR/wsdl#_document-n}.
+     *
+     * @param  Uri\Uri|string $uri
+     * @return self
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setTargetNamespace($uri)
+    {
+        if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
+            throw new Exception\InvalidArgumentException(
+                'Argument to \Zend\Soap\AutoDiscover::setTargetNamespace should be string or \Zend\Uri\Uri instance.'
+            );
+        }
+
+        $uri = htmlspecialchars(trim($uri), ENT_QUOTES, 'UTF-8', false);
+
+        if (empty($uri)) {
+            throw new Exception\InvalidArgumentException('targetNamespace is empty');
+        }
+
+        $this->targetNamespace = Uri\UriFactory::factory($uri);
+
+        return $this;
+    }
+
+    /**
+     * Return the current targetNamespace {@see https://www.w3.org/TR/wsdl#_document-n}.
+     *
+     * @return Uri\Uri
+     */
+    public function getTargetNamespace()
+    {
+        return ($this->targetNamespace) ? $this->targetNamespace : $this->getUri();
     }
 }

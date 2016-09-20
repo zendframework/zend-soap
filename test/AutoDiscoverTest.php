@@ -1537,4 +1537,27 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    /**
+     * @dataProvider dataProviderValidUris
+     */
+    public function testChangeTargetNamespace($uri, $expectedUri)
+    {
+        $this->server->setTargetNamespace($uri);
+        $this->bindWsdl($this->server->generate());
+
+        $this->assertEquals(
+            $expectedUri,
+            $this->dom->documentElement->getAttribute('targetNamespace')
+        );
+
+        $this->assertNotEquals(
+            $this->defaultServiceUri,
+            $this->dom->documentElement->getAttribute('targetNamespace')
+        );
+
+        $this->assertValidWSDL($this->dom);
+        
+        $this->testDocumentNodes();
+    }
 }
