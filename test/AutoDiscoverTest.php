@@ -107,7 +107,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testDocumentNodes($element = null)
     {
-        if (!($this->dom instanceof \DOMDocument)) {
+        if (! ($this->dom instanceof \DOMDocument)) {
             return;
         }
 
@@ -1513,7 +1513,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function assertSpecificNodeNumberInXPath($n, $xpath, $msg = null)
     {
         $nodes = $this->xpath->query($xpath);
-        if (!($nodes instanceof \DOMNodeList)) {
+        if (! ($nodes instanceof \DOMNodeList)) {
             $this->fail('Nodes not found. Invalid XPath expression ?');
         }
         $this->assertEquals($n, $nodes->length, $msg . "\nXPath: " . $xpath);

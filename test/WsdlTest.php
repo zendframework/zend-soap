@@ -228,17 +228,17 @@ class WsdlTest extends WsdlTestHelper
             $this->assertTrue($operationNodes->item(0)->hasChildNodes());
         }
 
-        if (!empty($inputRequest)) {
+        if (! empty($inputRequest)) {
             $inputNodes = $operationNodes->item(0)->getElementsByTagName('input');
             $this->assertEquals($inputRequest, $inputNodes->item(0)->getAttribute('message'));
         }
 
-        if (!empty($outputResponse)) {
+        if (! empty($outputResponse)) {
             $outputNodes = $operationNodes->item(0)->getElementsByTagName('output');
             $this->assertEquals($outputResponse, $outputNodes->item(0)->getAttribute('message'));
         }
 
-        if (!empty($fail)) {
+        if (! empty($fail)) {
             $faultNodes = $operationNodes->item(0)->getElementsByTagName('fault');
             $this->assertEquals($fail, $faultNodes->item(0)->getAttribute('message'));
         }
@@ -299,18 +299,18 @@ class WsdlTest extends WsdlTestHelper
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
         $inputArray = [];
-        if (!empty($input) and !empty($inputEncoding)) {
+        if (! empty($input) and ! empty($inputEncoding)) {
             $inputArray = ['use' => $input,     'encodingStyle' => $inputEncoding];
         }
 
         $outputArray = [];
-        if (!empty($output) and !empty($outputEncoding)) {
+        if (! empty($output) and ! empty($outputEncoding)) {
             $outputArray = ['use' => $output, 'encodingStyle' => $outputEncoding];
         }
 
         $faultArray = [];
-        if (!empty($fault) and !empty($faultEncoding) and !empty($faultName)) {
-            $faultArray = ['use' => $fault,     'encodingStyle' => $faultEncoding,     'name'=>$faultName];
+        if (! empty($fault) and ! empty($faultEncoding) and ! empty($faultName)) {
+            $faultArray = ['use' => $fault,     'encodingStyle' => $faultEncoding,     'name' => $faultName];
         }
 
         $this->wsdl->addBindingOperation(
@@ -342,7 +342,7 @@ class WsdlTest extends WsdlTestHelper
             '//wsdl:output/soap:body'   => $outputArray,
             '//wsdl:fault'              => $faultArray
                  ] as $query => $ar) {
-            if (!empty($ar)) {
+            if (! empty($ar)) {
                 $nodes = $this->xpath->query($query);
 
                 $this->assertGreaterThan(0, $nodes->length, 'Missing operation body.');
@@ -745,7 +745,7 @@ class WsdlTest extends WsdlTestHelper
     public function testTranslateTypeFromClassMap()
     {
         $this->wsdl->setClassMap([
-            'SomeType'=>'SomeOtherType'
+            'SomeType' => 'SomeOtherType'
         ]);
 
         $this->assertEquals('SomeOtherType', $this->wsdl->translateType('SomeType'));
@@ -814,7 +814,7 @@ class WsdlTest extends WsdlTestHelper
 
     public function testClassMap()
     {
-        $this->wsdl->setClassMap(['foo'=>'bar']);
+        $this->wsdl->setClassMap(['foo' => 'bar']);
 
         $this->assertArrayHasKey('foo', $this->wsdl->getClassMap());
     }
