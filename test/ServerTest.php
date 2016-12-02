@@ -32,7 +32,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                          'classmap' => ['TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
                                              'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',],
                          'encoding' => 'ISO-8859-1',
-                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php'
+                         'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
+                         'parse_huge' => false
                         ];
         $server->setOptions($options);
 
@@ -50,6 +51,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             ],
             'encoding' => 'ISO-8859-1',
             'uri' => 'http://framework.zend.com/Zend_Soap_ServerTest.php',
+            'parse_huge' => false
         ];
         $server = new Server(null, $options);
 
@@ -937,6 +939,17 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $options = $server->getOptions();
         $this->assertTrue(isset($options['cache_wsdl']));
         $this->assertEquals(100, $options['cache_wsdl']);
+    }
+
+    public function testSetAndGetParseHuge()
+    {
+        $server = new Server();
+        $this->assertNull($server->getParseHuge());
+        $server->setParseHuge(true);
+        $this->assertEquals(true, $server->getParseHuge());
+        $options = $server->getOptions();
+        $this->assertTrue(isset($options['parse_huge']));
+        $this->assertEquals(true, $options['parse_huge']);
     }
 
     /**
