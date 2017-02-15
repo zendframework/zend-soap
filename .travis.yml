@@ -16,6 +16,7 @@ cache:
 env:
   global:
     - SITE_URL: https://zendframework.github.io/zend-soap
+    - COMPOSER_ARGS="--no-interaction"
     - GH_USER_NAME: "Matthew Weier O'Phinney"
     - GH_USER_EMAIL: matthew@weierophinney.net
     - GH_REF: github.com/zendframework/zend-soap.git
@@ -26,15 +27,34 @@ matrix:
   include:
     - php: 5.5
       env:
+        - DEPS=lowest
+    - php: 5.5
+      env:
         - CS_CHECK=true
+        - DEPS=latest
     - php: 5.6
       env:
         - TEST_COVERAGE=true
         - DEPLOY_DOCS="$(if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then echo -n 'true' ; else echo -n 'false' ; fi)"
         - PATH="$HOME/.local/bin:$PATH"
     - php: 7
+      env:
+        - DEPS=lowest
+    - php: 7
+      env:
+        - DEPS=latest
     - php: 7.1
+      env:
+        - DEPS=lowest
+    - php: 7.1
+      env:
+        - DEPS=latest
     - php: hhvm 
+      env:
+        - DEPS=lowest
+    - php: hhvm 
+      env:
+        - DEPS=latest
   allow_failures:
     - php: hhvm
 
@@ -48,7 +68,10 @@ before_install:
 
 install:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer require --dev --no-update satooshi/php-coveralls ; fi
-  - travis_retry composer install --no-interaction --ignore-platform-reqs
+  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
+  - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
+  - travis_retry composer install $COMPOSER_ARGS
+  - composer show
 
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; fi
