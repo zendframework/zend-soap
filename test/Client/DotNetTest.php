@@ -9,7 +9,7 @@
 
 namespace ZendTest\Soap\Client;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\Client\Common;
 use Zend\Soap\Client\DotNet as DotNetClient;
 use ZendTest\Soap\TestAsset\MockCallUserFunc;
@@ -19,7 +19,7 @@ use ZendTest\Soap\TestAsset\MockCallUserFunc;
  *
  * @group      Zend_Soap
  */
-class DotNetTest extends PHPUnit_Framework_TestCase
+class DotNetTest extends TestCase
 {
     /**
      * .NET SOAP client.

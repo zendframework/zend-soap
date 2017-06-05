@@ -9,11 +9,12 @@
 
 namespace ZendTest\Soap;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Wsdl;
 use Zend\Uri\Uri;
 
-class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
+class AutoDiscoverTest extends TestCase
 {
     /**
      * @var AutoDiscover

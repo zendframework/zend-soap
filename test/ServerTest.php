@@ -9,10 +9,11 @@
 
 namespace ZendTest\Soap;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Server;
 
-class ServerTest extends \PHPUnit_Framework_TestCase
+class ServerTest extends TestCase
 {
     public function setUp()
     {
