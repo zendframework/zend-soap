@@ -398,17 +398,6 @@ class ServerTest extends TestCase
         $server->setObject($int);
     }
 
-    /**
-     * @group ZF-4366
-     */
-    public function testSetObjectThrowsExceptionWithBadInput3()
-    {
-        $server = new Server();
-
-        //$this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'foo');
-        $server->setObject(new TestAsset\ServerTestClass());
-    }
-
     public function testGetFunctions()
     {
         $server = new Server();
@@ -439,7 +428,7 @@ class ServerTest extends TestCase
     public function testGetFunctionsWithClassAttached()
     {
         $server = new Server();
-        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+        $server->setClass(TestAsset\ServerTestClass::class);
 
         $this->assertEquals(
             ['testFunc1', 'testFunc2', 'testFunc3', 'testFunc4', 'testFunc5'],

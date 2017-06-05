@@ -104,7 +104,7 @@ class CompositeStrategyTest extends WsdlTestHelper
         $this->assertEquals('tns:Cookie', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Cookie'));
         $this->assertEquals('xsd:anyType', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Anything'));
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testCompositeRequiresContextForAddingComplexTypesOtherwiseThrowsException()
