@@ -10,6 +10,7 @@
 namespace ZendTest\Soap\Client;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Http\Client\Adapter\Curl;
 use Zend\Soap\Client\Common;
 use Zend\Soap\Client\DotNet as DotNetClient;
 use ZendTest\Soap\TestAsset\MockCallUserFunc;
@@ -31,7 +32,7 @@ class DotNetTest extends TestCase
     /**
      * cURL client.
      *
-     * @var \Zend\Http\Client\Adapter\Curl
+     * @var Curl
      */
     private $curlClient = null;
 
@@ -181,10 +182,10 @@ class DotNetTest extends TestCase
      */
     private function mockCurlClient()
     {
-        $this->curlClient = $this->getMock(
-            'Zend\Http\Client\Adapter\Curl',
-            ['close', 'connect', 'read', 'write']
-        );
+        $this->curlClient = $this->getMockBuilder(Curl::class)
+            ->setMethods(['close', 'connect', 'read', 'write'])
+            ->getMock();
+
         $this->client->setCurlClient($this->curlClient);
     }
 
