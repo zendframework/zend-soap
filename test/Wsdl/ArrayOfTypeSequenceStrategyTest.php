@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use Zend\Soap\Exception\InvalidArgumentException;
 use ZendTest\Soap\WsdlTestHelper;
 
 class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
@@ -275,7 +276,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('\Zend\Soap\Exception\InvalidArgumentException', 'Cannot add a complex type');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot add a complex type');
         $this->wsdl->addComplexType('ZendTest\Soap\Wsdl\UnknownClass[]');
     }
 }

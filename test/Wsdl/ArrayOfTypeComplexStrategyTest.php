@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex;
 use ZendTest\Soap\WsdlTestHelper;
@@ -24,17 +25,15 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
 
     public function testNestingObjectsDeepMakesNoSenseThrowingException()
     {
-        $this->setExpectedException(
-            'Zend\Soap\Exception\InvalidArgumentException',
-            'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than one level'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than one level');
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTest[][]');
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException(
-            'Zend\Soap\Exception\InvalidArgumentException',
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'Cannot add a complex type \ZendTest\Soap\TestAsset\UnknownClass that is not an object or where class'
         );
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\UnknownClass[]');
