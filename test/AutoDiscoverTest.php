@@ -108,7 +108,7 @@ class AutoDiscoverTest extends TestCase
     /**
      * @param \DOMElement $element
      */
-    public function testDocumentNodes($element = null)
+    public function documentNodesTest($element = null)
     {
         if (!($this->dom instanceof \DOMDocument)) {
             return;
@@ -127,7 +127,7 @@ class AutoDiscoverTest extends TestCase
                     . $node->nodeName . ' has no valid namespace. Line: '
                     . $node->getLineNo()
                 );
-                $this->testDocumentNodes($node);
+                $this->documentNodesTest($node);
             }
         }
     }
@@ -478,7 +478,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testSetClassWithDifferentStyles()
@@ -726,7 +726,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -857,7 +857,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddFunctionSimpleWithDifferentStyle()
@@ -975,7 +975,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1078,7 +1078,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddFunctionMultiple()
@@ -1196,7 +1196,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1222,7 +1222,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testSetNonStringNonZendUriUriThrowsException()
@@ -1256,7 +1256,7 @@ class AutoDiscoverTest extends TestCase
         );
 
         $this->assertValidWSDL($wsdl->toDomDocument());
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1307,7 +1307,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1352,7 +1352,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1378,7 +1378,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1411,7 +1411,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1434,7 +1434,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1457,7 +1457,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1487,7 +1487,7 @@ class AutoDiscoverTest extends TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**

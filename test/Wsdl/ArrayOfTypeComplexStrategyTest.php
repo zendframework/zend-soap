@@ -79,7 +79,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
             'Invalid array type reference.'
         );
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testThatOverridingStrategyIsReset()
@@ -145,7 +145,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         );
 
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testArrayOfObjectWithObject()
@@ -207,7 +207,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
             'Invalid array type reference.'
         );
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -237,7 +237,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         $nodes = $this->xpath->query('//xsd:complexType[@name="ComplexTest"]');
         $this->assertEquals(1, $nodes->length, 'Invalid complex type detected');
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -267,7 +267,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         $nodes = $this->xpath->query('//xsd:complexType[@name="ComplexTest"]');
         $this->assertEquals(1, $nodes->length, 'Invalid complex type detected');
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -349,6 +349,6 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
             'Invalid array type reference.'
         );
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 }

@@ -93,7 +93,7 @@ class WsdlTestHelper extends TestCase
     /**
      * @param \DOMElement $element
      */
-    public function testDocumentNodes($element = null)
+    public function documentNodesTest($element = null)
     {
         if (!($this->wsdl instanceof Wsdl)) {
             return;
@@ -109,7 +109,7 @@ class WsdlTestHelper extends TestCase
                     $node->namespaceURI,
                     'Document element: ' . $node->nodeName . ' has no valid namespace. Line: ' . $node->getLineNo()
                 );
-                $this->testDocumentNodes($node);
+                $this->documentNodesTest($node);
             }
         }
     }
