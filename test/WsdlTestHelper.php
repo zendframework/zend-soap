@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
@@ -19,7 +20,7 @@ use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
 * @group      Zend_Soap
 * @group      Zend_Soap_Wsdl
 **/
-class WsdlTestHelper extends \PHPUnit_Framework_TestCase
+class WsdlTestHelper extends TestCase
 {
     /**
      * @var Wsdl

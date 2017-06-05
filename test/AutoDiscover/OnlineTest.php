@@ -9,9 +9,10 @@
 
 namespace ZendTest\Soap\AutoDiscover;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\Client;
 
-class OnlineTest extends \PHPUnit_Framework_TestCase
+class OnlineTest extends TestCase
 {
     protected $baseuri;
 
