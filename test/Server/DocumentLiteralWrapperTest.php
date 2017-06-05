@@ -19,8 +19,6 @@ class DocumentLiteralWrapperTest extends TestCase
 {
     const WSDL = '/_files/calculator.wsdl';
 
-    private $client;
-
     public function setUp()
     {
         ini_set("soap.wsdl_cache_enabled", 0);

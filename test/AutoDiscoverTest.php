@@ -9,8 +9,10 @@
 
 namespace ZendTest\Soap;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Zend\Soap\AutoDiscover;
+use \Zend\Soap\Exception\InvalidArgumentException as SoapInvalidArgumentException;
 use Zend\Soap\Wsdl;
 use Zend\Uri\Uri;
 
@@ -213,7 +215,7 @@ class AutoDiscoverTest extends TestCase
     public function testSetServiceName($newName, $shouldBeValid)
     {
         if ($shouldBeValid == false) {
-            $this->setExpectedException('InvalidArgumentException');
+            $this->expectException(InvalidArgumentException::class);
         }
 
         $this->server->setServiceName($newName);
@@ -1227,8 +1229,8 @@ class AutoDiscoverTest extends TestCase
     {
         $server = new AutoDiscover();
 
-        $this->setExpectedException(
-            '\Zend\Soap\Exception\InvalidArgumentException',
+        $this->expectException(SoapInvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'Argument to \Zend\Soap\AutoDiscover::setUri should be string or \Zend\Uri\Uri instance.'
         );
         $server->setUri(["bogus"]);
