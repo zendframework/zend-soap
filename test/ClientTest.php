@@ -585,14 +585,16 @@ class ClientTest extends TestCase
         $fixtureCookieKey = "foo";
         $fixtureCookieValue = "bar";
 
-        $clientMock = $this->getMock(
-            'SoapClient',
-            ['__setCookie'],
-            [
-                null,
-                ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
-            ]
-        );
+        $clientMock = $this->getMockBuilder('SoapClient')
+            ->setMethods(['__setCookie'])
+            ->setConstructorArgs(
+                [
+                    null,
+                    ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
+                ]
+            )
+            ->getMock();
+
         $clientMock->expects($this->once())
                    ->method('__setCookie')
                    ->with($fixtureCookieKey, $fixtureCookieValue);
@@ -605,14 +607,15 @@ class ClientTest extends TestCase
 
     public function testSetSoapClient()
     {
-        $clientMock = $this->getMock(
-            'SoapClient',
-            ['__setCookie'],
-            [
-                null,
-                ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
-            ]
-        );
+        $clientMock = $this->getMockBuilder('SoapClient')
+            ->setMethods(['__setCookie'])
+            ->setConstructorArgs(
+                [
+                    null,
+                    ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
+                ]
+            )
+            ->getMock();
 
         $soap = new Client();
         $soap->setSoapClient($clientMock);
