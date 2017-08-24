@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use Zend\Soap\Exception\InvalidArgumentException;
 use ZendTest\Soap\WsdlTestHelper;
 
 class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
@@ -59,7 +60,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             'Wrong complex type maxOccurs attribute value'
         );
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function dataProviderForFunctionReturningSimpleArrayOfBasicTypes()
@@ -113,7 +114,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             );
         }
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -178,7 +179,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
         $this->assertEquals('var', $nodes->item(0)->getAttribute('name'), 'Invalid name attribute value');
         $this->assertEquals('xsd:int', $nodes->item(0)->getAttribute('type'), 'Invalid type attribute value');
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddComplexTypeArrayOfObject()
@@ -270,12 +271,13 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             );
         }
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('\Zend\Soap\Exception\InvalidArgumentException', 'Cannot add a complex type');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot add a complex type');
         $this->wsdl->addComplexType('ZendTest\Soap\Wsdl\UnknownClass[]');
     }
 }
