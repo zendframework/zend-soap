@@ -12,9 +12,20 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#31](https://github.com/zendframework/zend-soap/pull/31) adds support for
   `xsd:date` elements.
 
+- [#36](https://github.com/zendframework/zend-soap/pull/36) adds support for
+  the libxml `LIBXML_PARSEHUGE` flag when creating a `Server` instance. When the
+  support is enabled, the `Server` instance will pass that flag to
+  `DOMDocument::loadXML()`. The flag may be set in one of two ways:
+
+  - By passing the option `parse_huge` within the configuration `$options`
+    passed to the constructor and/or `setOptions()` method.
+  - Via a new mutator method, `Server::setParseHuge()`.
+
 ### Changed
 
-- Nothing.
+- [#38](https://github.com/zendframework/zend-soap/pull/38) adds `ext-soap` as
+  an explicit package dependency. While it was previously implied; installation
+  will now fail if that dependency is missing.
 
 ### Deprecated
 
