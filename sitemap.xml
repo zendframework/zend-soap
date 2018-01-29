@@ -3,8 +3,8 @@
 
     
     <url>
-     <loc>None/</loc>
-     <lastmod>2016-07-05</lastmod>
+     <loc>/</loc>
+     <lastmod>2018-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,26 +12,26 @@
     
         
     <url>
-     <loc>None/server/</loc>
-     <lastmod>2016-07-05</lastmod>
+     <loc>/server/</loc>
+     <lastmod>2018-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/client/</loc>
-     <lastmod>2016-07-05</lastmod>
+     <loc>/client/</loc>
+     <lastmod>2018-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/wsdl/</loc>
-     <lastmod>2016-07-05</lastmod>
+     <loc>/wsdl/</loc>
+     <lastmod>2018-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/auto-discovery/</loc>
-     <lastmod>2016-07-05</lastmod>
+     <loc>/auto-discovery/</loc>
+     <lastmod>2018-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
