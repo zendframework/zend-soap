@@ -30,7 +30,7 @@ matrix:
       env:
         - DEPS=locked
         - CS_CHECK=true
-        - LEGACY_DEPS="zendframework/zend-code"
+        - LEGACY_DEPS="phpunit/phpunit-mock-objects phpspec/prophecy zendframework/zend-code"
     - php: 7
       env:
         - DEPS=latest
