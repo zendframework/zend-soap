@@ -1146,12 +1146,9 @@ class Server implements ZendServerServer
      *
      * @param  int $errno
      * @param  string $errstr
-     * @param  string $errfile
-     * @param  int $errline
-     * @param  array $errcontext
      * @throws SoapFault
      */
-    public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
+    public function handlePhpErrors($errno, $errstr)
     {
         throw $this->fault($errstr, 'Receiver');
     }
