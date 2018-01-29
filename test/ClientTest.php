@@ -18,7 +18,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (!extension_loaded('soap')) {
+        if (! extension_loaded('soap')) {
             $this->markTestSkipped('SOAP Extension is not loaded');
         }
     }
@@ -636,9 +636,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [null,                             []],
-            [null,                             ['location'=>'http://example.com']],
-            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['use'=>SOAP_ENCODED]],
-            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['style'=>SOAP_DOCUMENT]]
+            [null,                             ['location' => 'http://example.com']],
+            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['use' => SOAP_ENCODED]],
+            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['style' => SOAP_DOCUMENT]]
         ];
     }
 }

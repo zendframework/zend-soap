@@ -122,7 +122,7 @@ class CompositeStrategyTest extends WsdlTestHelper
 
     public function testGetDefaultStrategy()
     {
-        $strategyClass =  'Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType';
+        $strategyClass = 'Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType';
 
         $strategy = new Composite([], $strategyClass);
 

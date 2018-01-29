@@ -132,7 +132,7 @@ class Client implements ServerClient
      */
     public function __construct($wsdl = null, $options = null)
     {
-        if (!extension_loaded('soap')) {
+        if (! extension_loaded('soap')) {
             throw new Exception\ExtensionNotLoadedException('SOAP extension is not loaded.');
         }
 
@@ -370,7 +370,7 @@ class Client implements ServerClient
      */
     public function setSoapVersion($version)
     {
-        if (!in_array($version, [SOAP_1_1, SOAP_1_2])) {
+        if (! in_array($version, [SOAP_1_1, SOAP_1_2])) {
             throw new Exception\InvalidArgumentException(
                 'Invalid soap version specified. Use SOAP_1_1 or SOAP_1_2 constants.'
             );
@@ -401,7 +401,7 @@ class Client implements ServerClient
     public function setClassmap(array $classmap)
     {
         foreach ($classmap as $class) {
-            if (!class_exists($class)) {
+            if (! class_exists($class)) {
                 throw new Exception\InvalidArgumentException('Invalid class in class map: ' . $class);
             }
         }
@@ -469,7 +469,7 @@ class Client implements ServerClient
      */
     public function setEncoding($encoding)
     {
-        if (!is_string($encoding)) {
+        if (! is_string($encoding)) {
             throw new Exception\InvalidArgumentException('Invalid encoding specified');
         }
 
@@ -567,7 +567,7 @@ class Client implements ServerClient
      */
     public function setStyle($style)
     {
-        if (!in_array($style, [SOAP_RPC, SOAP_DOCUMENT])) {
+        if (! in_array($style, [SOAP_RPC, SOAP_DOCUMENT])) {
             throw new Exception\InvalidArgumentException(
                 'Invalid request style specified. Use SOAP_RPC or SOAP_DOCUMENT constants.'
             );
@@ -597,7 +597,7 @@ class Client implements ServerClient
      */
     public function setEncodingMethod($use)
     {
-        if (!in_array($use, [SOAP_ENCODED, SOAP_LITERAL])) {
+        if (! in_array($use, [SOAP_ENCODED, SOAP_LITERAL])) {
             throw new Exception\InvalidArgumentException(
                 'Invalid message encoding method. Use SOAP_ENCODED or SOAP_LITERAL constants.'
             );
@@ -755,7 +755,7 @@ class Client implements ServerClient
      */
     public function setHttpsCertificate($localCert)
     {
-        if (!is_readable($localCert)) {
+        if (! is_readable($localCert)) {
             throw new Exception\InvalidArgumentException('Invalid HTTPS client certificate path.');
         }
 
@@ -844,7 +844,7 @@ class Client implements ServerClient
      */
     public function setStreamContext($context)
     {
-        if (!is_resource($context) || get_resource_type($context) !== "stream-context") {
+        if (! is_resource($context) || get_resource_type($context) !== "stream-context") {
             throw new Exception\InvalidArgumentException('Invalid stream context resource given.');
         }
 
@@ -1051,10 +1051,10 @@ class Client implements ServerClient
         $options = array_merge($this->getOptions(), ['trace' => true]);
 
         if ($wsdl === null) {
-            if (!isset($options['location'])) {
+            if (! isset($options['location'])) {
                 throw new Exception\UnexpectedValueException('"location" parameter is required in non-WSDL mode.');
             }
-            if (!isset($options['uri'])) {
+            if (! isset($options['uri'])) {
                 throw new Exception\UnexpectedValueException('"uri" parameter is required in non-WSDL mode.');
             }
         } else {
@@ -1150,7 +1150,7 @@ class Client implements ServerClient
      */
     public function __call($name, $arguments)
     {
-        if (!is_array($arguments)) {
+        if (! is_array($arguments)) {
             $arguments = [$arguments];
         }
         $soapClient = $this->getSoapClient();
@@ -1162,7 +1162,7 @@ class Client implements ServerClient
             $name,
             $this->_preProcessArguments($arguments),
             [], /* Options are already set to the SOAP client object */
-            (count($soapHeaders) > 0)? $soapHeaders : [],
+            (count($soapHeaders) > 0) ? $soapHeaders : [],
             $this->soapOutputHeaders
         );
 

@@ -126,8 +126,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][]',
                 'ArrayOfArrayOfString',
                 [
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString'
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString'
                 ]
             ],
 
@@ -135,9 +135,9 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][][]',
                 'ArrayOfArrayOfArrayOfString',
                 [
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
-                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString'
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               => 'tns:ArrayOfArrayOfString'
                 ]
             ],
 
@@ -145,10 +145,10 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][][][]',
                 'ArrayOfArrayOfArrayOfArrayOfString',
                 [
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
-                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString',
-                    'ArrayOfArrayOfArrayOfArrayOfString'        =>'tns:ArrayOfArrayOfArrayOfString'
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               => 'tns:ArrayOfArrayOfString',
+                    'ArrayOfArrayOfArrayOfArrayOfString'        => 'tns:ArrayOfArrayOfArrayOfString'
                 ]
             ],
 
@@ -156,8 +156,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'int[][]',
                 'ArrayOfArrayOfInt',
                 [
-                    'ArrayOfInt'                                =>'xsd:int',
-                    'ArrayOfArrayOfInt'                         =>'tns:ArrayOfInt'
+                    'ArrayOfInt'                                => 'xsd:int',
+                    'ArrayOfArrayOfInt'                         => 'tns:ArrayOfInt'
                 ]
             ],
         ];
@@ -237,8 +237,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
 
         // array of class a and class b
         foreach ([
-            'ArrayOfComplexTypeB'       =>      'ComplexTypeB',
-            'ArrayOfComplexTypeA'       =>      'ComplexTypeA'
+            'ArrayOfComplexTypeB'       => 'ComplexTypeB',
+            'ArrayOfComplexTypeA'       => 'ComplexTypeA'
                 ] as $arrayTypeName => $typeName) {
             $nodes = $this->xpath->query(
                 '//wsdl:types/xsd:schema/xsd:complexType[@name="'.$arrayTypeName.'"]'

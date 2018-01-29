@@ -156,7 +156,7 @@ class AutoDiscover
      */
     public function setClassMap($classMap)
     {
-        if (!is_array($classMap)) {
+        if (! is_array($classMap)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array; received "%s"',
                 __METHOD__,
@@ -197,7 +197,7 @@ class AutoDiscover
      */
     public function getServiceName()
     {
-        if (!$this->serviceName) {
+        if (! $this->serviceName) {
             if ($this->class) {
                 return $this->reflection->reflectClass($this->class)->getShortName();
             } else {
@@ -216,7 +216,7 @@ class AutoDiscover
      */
     public function setUri($uri)
     {
-        if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
+        if (! is_string($uri) && ! ($uri instanceof Uri\Uri)) {
             throw new Exception\InvalidArgumentException(
                 'Argument to \Zend\Soap\AutoDiscover::setUri should be string or \Zend\Uri\Uri instance.'
             );
@@ -261,7 +261,7 @@ class AutoDiscover
      */
     public function setWsdlClass($wsdlClass)
     {
-        if (!is_string($wsdlClass) && !is_subclass_of($wsdlClass, '\Zend\Soap\Wsdl')) {
+        if (! is_string($wsdlClass) && ! is_subclass_of($wsdlClass, '\Zend\Soap\Wsdl')) {
             throw new Exception\InvalidArgumentException(
                 'No \Zend\Soap\Wsdl subclass given to Zend\Soap\AutoDiscover::setWsdlClass as string.'
             );
@@ -293,7 +293,7 @@ class AutoDiscover
      */
     public function setOperationBodyStyle(array $operationStyle = [])
     {
-        if (!isset($operationStyle['use'])) {
+        if (! isset($operationStyle['use'])) {
             throw new Exception\InvalidArgumentException('Key "use" is required in Operation soap:body style.');
         }
         $this->operationBodyStyle = $operationStyle;
@@ -553,7 +553,7 @@ class AutoDiscover
         // When using the RPC style, make sure the operation style includes a 'namespace'
         // attribute (WS-I Basic Profile 1.1 R2717)
         $operationBodyStyle = $this->operationBodyStyle;
-        if ($this->bindingStyle['style'] == 'rpc' && !isset($operationBodyStyle['namespace'])) {
+        if ($this->bindingStyle['style'] == 'rpc' && ! isset($operationBodyStyle['namespace'])) {
             $operationBodyStyle['namespace'] = '' . $uri;
         }
 

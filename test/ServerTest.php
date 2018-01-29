@@ -16,7 +16,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (!extension_loaded('soap')) {
+        if (! extension_loaded('soap')) {
             $this->markTestSkipped('SOAP Extension is not loaded');
         }
     }
@@ -412,12 +412,12 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
-        $functions  =  ['\ZendTest\Soap\TestAsset\TestFunc2',
+        $functions  = ['\ZendTest\Soap\TestAsset\TestFunc2',
                              '\ZendTest\Soap\TestAsset\TestFunc3',
                              '\ZendTest\Soap\TestAsset\TestFunc4'];
         $server->addFunction($functions);
 
-        $functions  =  ['\ZendTest\Soap\TestAsset\TestFunc3',
+        $functions  = ['\ZendTest\Soap\TestAsset\TestFunc3',
                              '\ZendTest\Soap\TestAsset\TestFunc5',
                              '\ZendTest\Soap\TestAsset\TestFunc6'];
         $server->addFunction($functions);
@@ -498,7 +498,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $server->setReturnResponse(true);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
@@ -556,7 +556,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $server->setReturnResponse(true);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
@@ -598,7 +598,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandle()
     {
-        if (!extension_loaded('soap')) {
+        if (! extension_loaded('soap')) {
             $this->markTestSkipped('Soap extension not loaded');
         }
 
@@ -611,7 +611,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
@@ -619,8 +619,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             $server,
             null,
             [
-                'location'=>'test://',
-                'uri'=>'http://framework.zend.com'
+                'location' => 'test://',
+                'uri' => 'http://framework.zend.com'
             ]
         );
 
@@ -659,7 +659,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           . '</SOAP-ENV:Envelope>' . "\n";
 
         $server1 = new Server();
-        $server1->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server1->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
 
         $server1->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $server1->setReturnResponse(true);
@@ -670,7 +670,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testEmptyRequest()
     {
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $server->setReturnResponse(true);
 
         $server->setClass(TestAsset\ServerTestClass::class);
@@ -692,7 +692,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $server->registerFaultException($exception);
 
-        if (!is_array($exception)) {
+        if (! is_array($exception)) {
             $this->assertContains($exception, $server->getFaultExceptions());
         } else {
             foreach ($exception as $row) {
@@ -731,7 +731,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->registerFaultException($exception);
 
 
-        if (!is_array($exception)) {
+        if (! is_array($exception)) {
             $this->assertTrue($server->isRegisteredAsFaultException($exception));
         } else {
             foreach ($exception as $row) {
@@ -866,7 +866,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         }
 
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $server->setReturnResponse(true);
 
         // Requesting Method with enforced parameter without it.
@@ -955,7 +955,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testShouldThrowExceptionIfHandledRequestContainsDoctype()
     {
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $server->setReturnResponse(true);
 
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
@@ -1005,7 +1005,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testGetSoapInternalInstance()
     {
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $internalServer = $server->getSoap();
         $this->assertInstanceOf('\SoapServer', $internalServer);
         $this->assertSame($internalServer, $server->getSoap());
@@ -1014,7 +1014,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testDisableEntityLoaderAfterException()
     {
         $server = new Server();
-        $server->setOptions(['location'=>'test://', 'uri'=>'http://framework.zend.com']);
+        $server->setOptions(['location' => 'test://', 'uri' => 'http://framework.zend.com']);
         $server->setReturnResponse(true);
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
         $loadEntities = libxml_disable_entity_loader(false);

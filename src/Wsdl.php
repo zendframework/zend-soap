@@ -349,7 +349,7 @@ class Wsdl
         }
 
         if (is_string($output) && (strlen(trim($output)) >= 1)) {
-            $node= $this->dom->createElementNS(self::WSDL_NS_URI, 'output');
+            $node = $this->dom->createElementNS(self::WSDL_NS_URI, 'output');
             $operation->appendChild($node);
             $node->setAttribute('message', $output);
         }
@@ -414,7 +414,7 @@ class Wsdl
 
         $this->setAttribute($operation, 'name', $name);
 
-        if (is_array($input) && !empty($input)) {
+        if (is_array($input) && ! empty($input)) {
             $node = $this->dom->createElementNS(self::WSDL_NS_URI, 'input');
             $operation->appendChild($node);
 
@@ -424,7 +424,7 @@ class Wsdl
             $this->arrayToAttributes($soapNode, $input);
         }
 
-        if (is_array($output) && !empty($output)) {
+        if (is_array($output) && ! empty($output)) {
             $node = $this->dom->createElementNS(self::WSDL_NS_URI, 'output');
             $operation->appendChild($node);
 
@@ -434,7 +434,7 @@ class Wsdl
             $this->arrayToAttributes($soapNode, $output);
         }
 
-        if (is_array($fault) && !empty($fault)) {
+        if (is_array($fault) && ! empty($fault)) {
             $node = $this->dom->createElementNS(self::WSDL_NS_URI, 'fault');
             $operation->appendChild($node);
 
@@ -587,7 +587,7 @@ class Wsdl
      */
     public function addType($type, $wsdlType)
     {
-        if (!isset($this->includedTypes[$type])) {
+        if (! isset($this->includedTypes[$type])) {
             $this->includedTypes[$type] = $wsdlType;
         }
         return $this;
@@ -648,7 +648,7 @@ class Wsdl
     {
         $this->dom->normalizeDocument();
 
-        if (!$filename) {
+        if (! $filename) {
             echo $this->toXML();
             return true;
         }
@@ -741,7 +741,7 @@ class Wsdl
         // remove namespace,
         $pos = strrpos($type, '\\');
         if ($pos) {
-            $type = substr($type, $pos+1);
+            $type = substr($type, $pos + 1);
         }
 
         return $type;
@@ -776,7 +776,7 @@ class Wsdl
      */
     protected function parseElement($element)
     {
-        if (!is_array($element)) {
+        if (! is_array($element)) {
             throw new Exception\RuntimeException('The "element" parameter needs to be an associative array.');
         }
 

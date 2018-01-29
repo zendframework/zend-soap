@@ -133,7 +133,7 @@ class DocumentLiteralWrapper
 
         $delegateArgs = [];
         foreach (get_object_vars($document) as $argName => $argValue) {
-            if (!isset($params[$argName])) {
+            if (! isset($params[$argName])) {
                 throw new Exception\UnexpectedValueException(sprintf(
                     "Received unknown argument %s which is not an argument to %s::%s",
                     $argName,
@@ -165,7 +165,7 @@ class DocumentLiteralWrapper
      */
     protected function assertServiceDelegateHasMethod($method)
     {
-        if (!$this->reflection->hasMethod($method)) {
+        if (! $this->reflection->hasMethod($method)) {
             throw new Exception\BadMethodCallException(sprintf(
                 "Method %s does not exist on delegate object %s",
                 $method,
