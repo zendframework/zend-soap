@@ -695,6 +695,9 @@ class Wsdl
             case 'mixed':
                 return self::XSD_NS . ':anyType';
 
+            case 'date':
+                return self::XSD_NS . ':date';
+
             case 'void':
                 return '';
 
