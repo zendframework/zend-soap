@@ -189,6 +189,12 @@ options mechanism.</p>
 <h2 id="zendsoapserver-instantiation">Zend\Soap\Server instantiation</h2>
 <p>Instantiation of <code>Server</code> instances varies based on whether or not you are using
 WSDL mode.</p>
+<h3 id="options-available-in-either-mode">Options available in either mode</h3>
+<ul>
+<li><code>parse_huge</code> (since 2.7.0): when set to a boolean true, ensures the
+  <code>LIBXML_PARSEHUGE</code> flag is passed to <code>DOMDocument::loadXML()</code> when handling an
+  incoming request. This can resolve issues with receiving large payloads.</li>
+</ul>
 <h3 id="instantiation-for-wsdl-mode">Instantiation for WSDL mode</h3>
 <p>When in WSDL mode, the constructor expects two optional parameters:</p>
 <ul>
