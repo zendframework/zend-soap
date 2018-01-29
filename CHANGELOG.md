@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#42](https://github.com/zendframework/zend-soap/pull/42) adds support for PHP
   versions 7.1 and 7.2.
 
+- [#31](https://github.com/zendframework/zend-soap/pull/31) adds support for
+  `xsd:date` elements.
+
 ### Changed
 
 - Nothing.
