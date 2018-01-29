@@ -685,6 +685,9 @@ class Wsdl
             case 'boolean':
             case 'bool':
                 return self::XSD_NS . ':boolean';
+                
+            case 'datetime':
+                return self::XSD_NS . ':dateTime';
 
             case 'array':
                 return self::SOAP_ENC_NS . ':Array';
