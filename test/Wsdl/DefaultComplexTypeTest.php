@@ -43,7 +43,7 @@ class DefaultComplexTypeTest extends WsdlTestHelper
         $nodes = $this->xpath->query('//xsd:element[@name="'.(PublicPrivateProtected::PRIVATE_VAR_NAME).'"]');
         $this->assertEquals(0, $nodes->length, 'Document should not contain private fields');
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testDoubleClassesAreDiscoveredByStrategy()
@@ -54,6 +54,6 @@ class DefaultComplexTypeTest extends WsdlTestHelper
         $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]');
         $this->assertEquals(1, $nodes->length);
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 }

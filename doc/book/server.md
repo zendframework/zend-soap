@@ -24,7 +24,7 @@ WSDL mode.
 
 ### Instantiation for WSDL mode
 
-When in WSDL mode, the constructor expects two optional paramters:
+When in WSDL mode, the constructor expects two optional parameters:
 
 - `$wsdl`: the URI of a WSDL file. This may be set after-the-fact using
   `$server->setWsdl($wsdl)`.

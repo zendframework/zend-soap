@@ -9,16 +9,15 @@
 
 namespace ZendTest\Soap\Server;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\Client\Local as SoapClient;
 use Zend\Soap\Server;
 use Zend\Soap\Server\DocumentLiteralWrapper;
 use ZendTest\Soap\TestAsset\MyCalculatorService;
 
-class DocumentLiteralWrapperTest extends \PHPUnit_Framework_TestCase
+class DocumentLiteralWrapperTest extends TestCase
 {
     const WSDL = '/_files/calculator.wsdl';
-
-    private $client;
 
     public function setUp()
     {

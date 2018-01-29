@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
@@ -19,7 +20,7 @@ use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
 * @group      Zend_Soap
 * @group      Zend_Soap_Wsdl
 **/
-class WsdlTestHelper extends \PHPUnit_Framework_TestCase
+class WsdlTestHelper extends TestCase
 {
     /**
      * @var Wsdl
@@ -51,7 +52,7 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (empty($this->strategy) or !($this->strategy instanceof ComplexTypeStrategyInterface)) {
+        if (empty($this->strategy) or ! ($this->strategy instanceof ComplexTypeStrategyInterface)) {
             $this->strategy = new Wsdl\ComplexTypeStrategy\DefaultComplexType();
         }
 
@@ -92,9 +93,9 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
     /**
      * @param \DOMElement $element
      */
-    public function testDocumentNodes($element = null)
+    public function documentNodesTest($element = null)
     {
-        if (!($this->wsdl instanceof Wsdl)) {
+        if (! ($this->wsdl instanceof Wsdl)) {
             return;
         }
 
@@ -108,7 +109,7 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
                     $node->namespaceURI,
                     'Document element: ' . $node->nodeName . ' has no valid namespace. Line: ' . $node->getLineNo()
                 );
-                $this->testDocumentNodes($node);
+                $this->documentNodesTest($node);
             }
         }
     }

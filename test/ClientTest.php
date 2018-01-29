@@ -9,16 +9,17 @@
 
 namespace ZendTest\Soap;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Client;
 use Zend\Soap\Server;
 use Zend\Soap\Wsdl;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     public function setUp()
     {
-        if (!extension_loaded('soap')) {
+        if (! extension_loaded('soap')) {
             $this->markTestSkipped('SOAP Extension is not loaded');
         }
     }
@@ -584,14 +585,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $fixtureCookieKey = "foo";
         $fixtureCookieValue = "bar";
 
-        $clientMock = $this->getMock(
-            'SoapClient',
-            ['__setCookie'],
-            [
-                null,
-                ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
-            ]
-        );
+        $clientMock = $this->getMockBuilder('SoapClient')
+            ->setMethods(['__setCookie'])
+            ->setConstructorArgs(
+                [
+                    null,
+                    ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
+                ]
+            )
+            ->getMock();
+
         $clientMock->expects($this->once())
                    ->method('__setCookie')
                    ->with($fixtureCookieKey, $fixtureCookieValue);
@@ -604,14 +607,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testSetSoapClient()
     {
-        $clientMock = $this->getMock(
-            'SoapClient',
-            ['__setCookie'],
-            [
-                null,
-                ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
-            ]
-        );
+        $clientMock = $this->getMockBuilder('SoapClient')
+            ->setMethods(['__setCookie'])
+            ->setConstructorArgs(
+                [
+                    null,
+                    ['uri' => 'http://www.zend.com', 'location' => 'http://www.zend.com']
+                ]
+            )
+            ->getMock();
 
         $soap = new Client();
         $soap->setSoapClient($clientMock);
@@ -636,9 +640,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [null,                             []],
-            [null,                             ['location'=>'http://example.com']],
-            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['use'=>SOAP_ENCODED]],
-            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['style'=>SOAP_DOCUMENT]]
+            [null,                             ['location' => 'http://example.com']],
+            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['use' => SOAP_ENCODED]],
+            [__DIR__ . './TestAsset/wsdl_example.wsdl',    ['style' => SOAP_DOCUMENT]]
         ];
     }
 }
