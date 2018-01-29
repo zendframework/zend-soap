@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl\ComplexTypeStrategy;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\Composite;
@@ -60,10 +61,8 @@ class CompositeStrategyTest extends WsdlTestHelper
     {
         $strategy = new ComplexTypeStrategy\Composite();
 
-        $this->setExpectedException(
-            'Zend\Soap\Exception\InvalidArgumentException',
-            'Invalid type given to Composite Type Map'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid type given to Composite Type Map');
         $strategy->connectTypeToStrategy([], 'strategy');
     }
 
@@ -72,10 +71,8 @@ class CompositeStrategyTest extends WsdlTestHelper
         $strategy = new ComplexTypeStrategy\Composite([], 'invalid');
         $strategy->connectTypeToStrategy('Book', 'strategy');
 
-        $this->setExpectedException(
-            'Zend\Soap\Exception\InvalidArgumentException',
-            'Strategy for Complex Type "Book" is not a valid strategy'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Strategy for Complex Type "Book" is not a valid strategy');
         $strategy->getStrategyOfType('Book');
     }
 
@@ -84,10 +81,8 @@ class CompositeStrategyTest extends WsdlTestHelper
         $strategy = new ComplexTypeStrategy\Composite([], 'invalid');
         $strategy->connectTypeToStrategy('Book', 'strategy');
 
-        $this->setExpectedException(
-            'Zend\Soap\Exception\InvalidArgumentException',
-            'Default Strategy for Complex Types is not a valid strategy object'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Default Strategy for Complex Types is not a valid strategy object');
         $strategy->getStrategyOfType('Anything');
     }
 
@@ -109,20 +104,21 @@ class CompositeStrategyTest extends WsdlTestHelper
         $this->assertEquals('tns:Cookie', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Cookie'));
         $this->assertEquals('xsd:anyType', $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\Anything'));
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testCompositeRequiresContextForAddingComplexTypesOtherwiseThrowsException()
     {
         $strategy = new ComplexTypeStrategy\Composite();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Cannot add complex type "Test"');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot add complex type "Test"');
         $strategy->addComplexType('Test');
     }
 
     public function testGetDefaultStrategy()
     {
-        $strategyClass =  'Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType';
+        $strategyClass = 'Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType';
 
         $strategy = new Composite([], $strategyClass);
 

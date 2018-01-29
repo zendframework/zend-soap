@@ -31,7 +31,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
             for ($i = 1; $i <= $nestedCounter; $i++) {
                 $complexType    = $this->getTypeBasedOnNestingLevel($singularType, $i);
                 $complexTypePhp = $singularType . str_repeat('[]', $i);
-                $childType      = $this->getTypeBasedOnNestingLevel($singularType, $i-1);
+                $childType      = $this->getTypeBasedOnNestingLevel($singularType, $i - 1);
 
                 $this->addSequenceType($complexType, $childType, $complexTypePhp);
             }

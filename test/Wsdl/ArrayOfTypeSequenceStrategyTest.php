@@ -9,6 +9,7 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use Zend\Soap\Exception\InvalidArgumentException;
 use ZendTest\Soap\WsdlTestHelper;
 
 class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
@@ -59,7 +60,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             'Wrong complex type maxOccurs attribute value'
         );
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function dataProviderForFunctionReturningSimpleArrayOfBasicTypes()
@@ -113,7 +114,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             );
         }
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -126,8 +127,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][]',
                 'ArrayOfArrayOfString',
                 [
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString'
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString'
                 ]
             ],
 
@@ -135,9 +136,9 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][][]',
                 'ArrayOfArrayOfArrayOfString',
                 [
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
-                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString'
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               => 'tns:ArrayOfArrayOfString'
                 ]
             ],
 
@@ -145,10 +146,10 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'string[][][][]',
                 'ArrayOfArrayOfArrayOfArrayOfString',
                 [
-                    'ArrayOfString'                             =>'xsd:string',
-                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
-                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString',
-                    'ArrayOfArrayOfArrayOfArrayOfString'        =>'tns:ArrayOfArrayOfArrayOfString'
+                    'ArrayOfString'                             => 'xsd:string',
+                    'ArrayOfArrayOfString'                      => 'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               => 'tns:ArrayOfArrayOfString',
+                    'ArrayOfArrayOfArrayOfArrayOfString'        => 'tns:ArrayOfArrayOfArrayOfString'
                 ]
             ],
 
@@ -156,8 +157,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
                 'int[][]',
                 'ArrayOfArrayOfInt',
                 [
-                    'ArrayOfInt'                                =>'xsd:int',
-                    'ArrayOfArrayOfInt'                         =>'tns:ArrayOfInt'
+                    'ArrayOfInt'                                => 'xsd:int',
+                    'ArrayOfArrayOfInt'                         => 'tns:ArrayOfInt'
                 ]
             ],
         ];
@@ -178,7 +179,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
         $this->assertEquals('var', $nodes->item(0)->getAttribute('name'), 'Invalid name attribute value');
         $this->assertEquals('xsd:int', $nodes->item(0)->getAttribute('type'), 'Invalid type attribute value');
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddComplexTypeArrayOfObject()
@@ -237,8 +238,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
 
         // array of class a and class b
         foreach ([
-            'ArrayOfComplexTypeB'       =>      'ComplexTypeB',
-            'ArrayOfComplexTypeA'       =>      'ComplexTypeA'
+            'ArrayOfComplexTypeB'       => 'ComplexTypeB',
+            'ArrayOfComplexTypeA'       => 'ComplexTypeA'
                 ] as $arrayTypeName => $typeName) {
             $nodes = $this->xpath->query(
                 '//wsdl:types/xsd:schema/xsd:complexType[@name="'.$arrayTypeName.'"]'
@@ -270,12 +271,13 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             );
         }
 
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        $this->setExpectedException('\Zend\Soap\Exception\InvalidArgumentException', 'Cannot add a complex type');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot add a complex type');
         $this->wsdl->addComplexType('ZendTest\Soap\Wsdl\UnknownClass[]');
     }
 }

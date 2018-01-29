@@ -9,11 +9,14 @@
 
 namespace ZendTest\Soap;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Zend\Soap\AutoDiscover;
+use \Zend\Soap\Exception\InvalidArgumentException as SoapInvalidArgumentException;
 use Zend\Soap\Wsdl;
 use Zend\Uri\Uri;
 
-class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
+class AutoDiscoverTest extends TestCase
 {
     /**
      * @var AutoDiscover
@@ -105,9 +108,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @param \DOMElement $element
      */
-    public function testDocumentNodes($element = null)
+    public function documentNodesTest($element = null)
     {
-        if (!($this->dom instanceof \DOMDocument)) {
+        if (! ($this->dom instanceof \DOMDocument)) {
             return;
         }
 
@@ -124,7 +127,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                     . $node->nodeName . ' has no valid namespace. Line: '
                     . $node->getLineNo()
                 );
-                $this->testDocumentNodes($node);
+                $this->documentNodesTest($node);
             }
         }
     }
@@ -212,7 +215,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function testSetServiceName($newName, $shouldBeValid)
     {
         if ($shouldBeValid == false) {
-            $this->setExpectedException('InvalidArgumentException');
+            $this->expectException(InvalidArgumentException::class);
         }
 
         $this->server->setServiceName($newName);
@@ -475,7 +478,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testSetClassWithDifferentStyles()
@@ -723,7 +726,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -854,7 +857,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddFunctionSimpleWithDifferentStyle()
@@ -972,7 +975,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1075,7 +1078,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testAddFunctionMultiple()
@@ -1193,7 +1196,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1219,15 +1222,15 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     public function testSetNonStringNonZendUriUriThrowsException()
     {
         $server = new AutoDiscover();
 
-        $this->setExpectedException(
-            '\Zend\Soap\Exception\InvalidArgumentException',
+        $this->expectException(SoapInvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'Argument to \Zend\Soap\AutoDiscover::setUri should be string or \Zend\Uri\Uri instance.'
         );
         $server->setUri(["bogus"]);
@@ -1253,7 +1256,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertValidWSDL($wsdl->toDomDocument());
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1304,7 +1307,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1349,7 +1352,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1375,7 +1378,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1408,7 +1411,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1431,7 +1434,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1454,7 +1457,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1484,7 +1487,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertValidWSDL($this->dom);
-        $this->testDocumentNodes();
+        $this->documentNodesTest();
     }
 
     /**
@@ -1513,7 +1516,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function assertSpecificNodeNumberInXPath($n, $xpath, $msg = null)
     {
         $nodes = $this->xpath->query($xpath);
-        if (!($nodes instanceof \DOMNodeList)) {
+        if (! ($nodes instanceof \DOMNodeList)) {
             $this->fail('Nodes not found. Invalid XPath expression ?');
         }
         $this->assertEquals($n, $nodes->length, $msg . "\nXPath: " . $xpath);

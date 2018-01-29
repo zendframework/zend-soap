@@ -6,23 +6,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#42](https://github.com/zendframework/zend-soap/pull/42) adds support for PHP
+  versions 7.1 and 7.2.
 
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 2.6.1 - TBD
-
-### Added
+### Changed
 
 - Nothing.
 
@@ -32,7 +19,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#42](https://github.com/zendframework/zend-soap/pull/42) removes support for
+  PHP 5.5.
+
+- [#42](https://github.com/zendframework/zend-soap/pull/42) removes support for
+  HHVM.
 
 ### Fixed
 
