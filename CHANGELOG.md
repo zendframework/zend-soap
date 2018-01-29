@@ -28,6 +28,10 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#42](https://github.com/zendframework/zend-soap/pull/42) removes support for
   HHVM.
 
+- [#49](https://github.com/zendframework/zend-soap/pull/49) removes all
+  arguments besides `$errno` and `$errstr` from the `Server::handlePhpError()`
+  method, as they were unused.
+
 ### Fixed
 
 - Nothing.
