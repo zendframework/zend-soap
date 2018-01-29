@@ -631,6 +631,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals('soap-enc:Array', $this->wsdl->getType('array'), 'soap-enc:Array detection failed.');
         $this->assertEquals('xsd:struct', $this->wsdl->getType('object'), 'xsd:struct detection failed.');
         $this->assertEquals('xsd:anyType', $this->wsdl->getType('mixed'), 'xsd:anyType detection failed.');
+        $this->assertEquals('xsd:date', $this->wsdl->getType('date'), 'xsd:date detection failed.');
         $this->assertEquals('', $this->wsdl->getType('void'), 'void  detection failed.');
     }
 
@@ -787,6 +788,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals("xsd:int", $this->wsdl->getType("INTEGER"));
         $this->assertEquals("xsd:float", $this->wsdl->getType("FLOAT"));
         $this->assertEquals("xsd:double", $this->wsdl->getType("douBLE"));
+        $this->assertEquals("xsd:date", $this->wsdl->getType("daTe"));
 
         $this->assertEquals("xsd:long", $this->wsdl->getType("long"));
     }
