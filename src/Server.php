@@ -152,6 +152,12 @@ class Server implements ZendServerServer
     protected $sendErrors;
 
     /**
+     * Allows LIBXML_PARSEHUGE Options of DOMDocument->loadXML( string $source [, int $options = 0 ] ) to be set
+     * @var bool
+     */
+    protected $parseHuge;
+
+    /**
      * Constructor
      *
      * Sets display_errors INI setting to off (prevent client errors due to bad
@@ -239,6 +245,10 @@ class Server implements ZendServerServer
                     $this->setSendErrors($value);
                     break;
 
+                case 'parse_huge':
+                    $this->setParseHuge($value);
+                    break;
+
                 default:
                     break;
             }
@@ -289,6 +299,10 @@ class Server implements ZendServerServer
 
         if (null !== $this->sendErrors) {
             $options['send_errors'] = $this->getSendErrors();
+        }
+
+        if (null !== $this->parseHuge) {
+            $options['parse_huge'] = $this->getParseHuge();
         }
 
         return $options;
@@ -573,6 +587,28 @@ class Server implements ZendServerServer
     }
 
     /**
+     * Set flag to allow DOMDocument->loadXML() to parse huge nodes
+     *
+     * @param  bool $parseHuge
+     * @return self
+     */
+    public function setParseHuge($parseHuge)
+    {
+        $this->parseHuge = (bool) $parseHuge;
+        return $this;
+    }
+
+    /**
+     * Get flag to allow DOMDocument->loadXML() to parse huge nodes
+     *
+     * @return bool
+     */
+    public function getParseHuge()
+    {
+        return $this->parseHuge;
+    }
+
+    /**
      * Attach a function as a server method
      *
      * @param  array|string $function Function name, array of function names to attach,
@@ -787,7 +823,12 @@ class Server implements ZendServerServer
             $loadEntities = libxml_disable_entity_loader(true);
 
             $dom = new DOMDocument();
-            $loadStatus = $dom->loadXML($xml);
+
+            if (true === $this->getParseHuge()) {
+                $loadStatus = $dom->loadXML($xml, LIBXML_PARSEHUGE);
+            } else {
+                $loadStatus = $dom->loadXML($xml);
+            }
 
             libxml_disable_entity_loader($loadEntities);
 
