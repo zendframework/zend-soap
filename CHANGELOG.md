@@ -14,7 +14,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#38](https://github.com/zendframework/zend-soap/pull/38) adds `ext-soap` as
+  an explicit package dependency. While it was previously implied; installation
+  will now fail if that dependency is missing.
 
 ### Deprecated
 
