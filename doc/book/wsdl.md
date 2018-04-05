@@ -193,6 +193,8 @@ and SOAP types:
 - PHP floats and doubles &lt;-&gt; `xsd:float`.
 - PHP booleans &lt;-&gt; `xsd:boolean`.
 - PHP arrays &lt;-&gt; `soap-enc:Array`.
+- PHP Date &lt;-&gt; `xsd:date`.
+- PHP DateTime &lt;-&gt; `xsd:dateTime`.
 - PHP object &lt;-&gt; `xsd:struct`.
 - PHP class &lt;-&gt; based on complex type strategy (See
   [the section on adding complex types](#adding-complex-type-information)).
