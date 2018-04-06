@@ -63,6 +63,11 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
         return;
     }
 
+    /**
+     * Sets the strategy for generating complex type documentation
+     *
+     * @param DocumentationStrategyInterface $documentationStrategy
+     */
     public function setDocumentationStrategy(DocumentationStrategyInterface $documentationStrategy)
     {
         $this->documentationStrategy = $documentationStrategy;

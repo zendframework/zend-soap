@@ -66,9 +66,11 @@ class DefaultComplexTypeTest extends WsdlTestHelper
     {
         $documentation = $this->prophesize(DocumentationStrategyInterface::class);
         $documentation->getPropertyDocumentation(Argument::type(ReflectionProperty::class))
-            ->shouldBeCalledTimes(2);
+            ->shouldBeCalledTimes(2)
+            ->willReturn('Property');
         $documentation->getComplexTypeDocumentation(Argument::type(ReflectionClass::class))
-            ->shouldBeCalledTimes(1);
+            ->shouldBeCalledTimes(1)
+            ->willReturn('Complex type');
         $this->strategy->setDocumentationStrategy($documentation->reveal());
         $this->strategy->addComplexType(WsdlTestClass::class);
     }
