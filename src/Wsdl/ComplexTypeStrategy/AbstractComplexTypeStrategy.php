@@ -10,6 +10,7 @@
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\DocumentationStrategy\DocumentationStrategyInterface;
 
 /**
  * Abstract class for Zend\Soap\Wsdl\Strategy.
@@ -21,6 +22,11 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      * @var Wsdl
      */
     protected $context;
+
+    /**
+     * @var DocumentationStrategyInterface
+     */
+    protected $documentationStrategy;
 
     /**
      * Set the WSDL Context object this strategy resides in.
@@ -55,5 +61,10 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
             return $soapTypes[$phpType];
         }
         return;
+    }
+
+    public function setDocumentationStrategy(DocumentationStrategyInterface $documentationStrategy)
+    {
+        $this->documentationStrategy = $documentationStrategy;
     }
 }

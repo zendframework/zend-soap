@@ -302,6 +302,20 @@ binding is bound to the SOAP protocol format.
 See the [W3C WSDL documentation section](http://www.w3.org/TR/wsdl#_documentation)
 for more details.
 
+## Documenting complex types
+
+To automatically generate documentation for complex types add a class implementing
+`Zend\Soap\Wsdl\DocumentationStrategy\DocumentationStrategyInterface` to your
+complex type strategy. A `ReflectionDocumentation` strategy is included, which 
+will parse class and property docblocks and generate documentation based on the
+comments found:
+
+```php
+$strategy = new ArrayOfTypeSequence();
+$strategy->setDocumentationStrategy(new ReflectionDocumentation());
+$wsdl = new Zend\Soap\Wsdl('MyService', $myWebServiceUri, $strategy);
+```
+
 ## Retrieve the final WSDL document
 
 Several methods exist for retrieving the full WSDL definition document:
