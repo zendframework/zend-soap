@@ -548,11 +548,18 @@ class Wsdl
             $node = $inputNode;
         }
 
-        $doc = $this->dom->createElementNS(WSDL::WSDL_NS_URI, 'documentation');
-        if ($node->hasChildNodes()) {
-            $node->insertBefore($doc, $node->firstChild);
+        if ($node->namespaceURI == Wsdl::XSD_NS_URI) {
+            // complex types require annotation element for documentation
+            $doc = $this->dom->createElementNS(Wsdl::XSD_NS_URI, 'documentation');
+            $child = $this->dom->createElementNS(Wsdl::XSD_NS_URI, 'annotation');
+            $child->appendChild($doc);
         } else {
-            $node->appendChild($doc);
+            $doc = $child = $this->dom->createElementNS(WSDL::WSDL_NS_URI, 'documentation');
+        }
+        if ($node->hasChildNodes()) {
+            $node->insertBefore($child, $node->firstChild);
+        } else {
+            $node->appendChild($child);
         }
 
         $docCData = $this->dom->createTextNode(str_replace(["\r\n", "\r"], "\n", $documentation));

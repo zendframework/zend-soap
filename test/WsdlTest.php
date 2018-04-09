@@ -573,6 +573,20 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals('documentation', $nodes->item(0)->nodeName);
     }
 
+    public function testComplexTypeDocumentationAddedAsAnnotation()
+    {
+        $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]');
+
+        $this->wsdl->addDocumentation($nodes->item(0), 'documentation');
+
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]/*[1]');
+        $this->assertEquals('xsd:annotation', $nodes->item(0)->nodeName);
+
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]/xsd:annotation/*[1]');
+        $this->assertEquals('xsd:documentation', $nodes->item(0)->nodeName);
+    }
+
     public function testDumpToFile()
     {
         $file = tempnam(sys_get_temp_dir(), 'zfunittest');
