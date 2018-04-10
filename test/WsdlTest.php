@@ -632,6 +632,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals('xsd:struct', $this->wsdl->getType('object'), 'xsd:struct detection failed.');
         $this->assertEquals('xsd:anyType', $this->wsdl->getType('mixed'), 'xsd:anyType detection failed.');
         $this->assertEquals('xsd:date', $this->wsdl->getType('date'), 'xsd:date detection failed.');
+        $this->assertEquals('xsd:dateTime', $this->wsdl->getType('datetime'), 'xsd:dateTime detection failed.');
         $this->assertEquals('', $this->wsdl->getType('void'), 'void  detection failed.');
     }
 

@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#52](https://github.com/zendframework/zend-soap/pull/52) adds support for for
+  the `xsd:dateTime` type, mapping it to PHP `DateTime` instances.
 
 ### Changed
 
