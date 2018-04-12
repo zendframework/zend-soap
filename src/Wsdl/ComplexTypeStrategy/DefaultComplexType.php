@@ -1,24 +1,25 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-soap for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-soap/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use DOMElement;
 use ReflectionClass;
+use ReflectionProperty;
 use Zend\Soap\Exception;
 use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\DocumentationStrategy\DocumentationStrategyInterface;
 
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
     /**
      * Add a complex type by recursively using all the class properties fetched via Reflection.
      *
-     * @param  string $type Name of the class to be specified
+     * @param string $type Name of the class to be specified
      * @return string XSD Type for the given PHP type
      * @throws Exception\InvalidArgumentException if class does not exist
      */
@@ -69,13 +70,41 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
                     $element->setAttribute('nillable', 'true');
                 }
 
+                $this->addPropertyDocumentation($property, $element);
                 $all->appendChild($element);
             }
         }
 
         $complexType->appendChild($all);
+        $this->addComplexTypeDocumentation($class, $complexType);
         $this->getContext()->getSchema()->appendChild($complexType);
 
         return $soapType;
+    }
+
+    /**
+     * @return void
+     */
+    private function addPropertyDocumentation(ReflectionProperty $property, DOMElement $element)
+    {
+        if ($this->documentationStrategy instanceof DocumentationStrategyInterface) {
+            $documentation = $this->documentationStrategy->getPropertyDocumentation($property);
+            if ($documentation) {
+                $this->getContext()->addDocumentation($element, $documentation);
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function addComplexTypeDocumentation(ReflectionClass $class, DOMElement $element)
+    {
+        if ($this->documentationStrategy instanceof DocumentationStrategyInterface) {
+            $documentation = $this->documentationStrategy->getComplexTypeDocumentation($class);
+            if ($documentation) {
+                $this->getContext()->addDocumentation($element, $documentation);
+            }
+        }
     }
 }
