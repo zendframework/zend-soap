@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-soap for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-soap/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Soap\Wsdl\DocumentationStrategy;
@@ -14,16 +12,26 @@ use ReflectionProperty;
 
 final class ReflectionDocumentation implements DocumentationStrategyInterface
 {
+    /**
+     * @return string
+     */
     public function getPropertyDocumentation(ReflectionProperty $property)
     {
         return $this->parseDocComment($property->getDocComment());
     }
 
+    /**
+     * @return string
+     */
     public function getComplexTypeDocumentation(ReflectionClass $class)
     {
         return $this->parseDocComment($class->getDocComment());
     }
 
+    /**
+     * @param string $docComment
+     * @return string
+     */
     private function parseDocComment($docComment)
     {
         $documentation = [];

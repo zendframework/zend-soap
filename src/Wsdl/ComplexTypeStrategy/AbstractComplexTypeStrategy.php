@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-soap for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-soap/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
@@ -19,6 +17,7 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
 {
     /**
      * Context object
+     *
      * @var Wsdl
      */
     protected $context;
@@ -51,8 +50,8 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
     /**
      * Look through registered types
      *
-     * @param  string $phpType
-     * @return string
+     * @param string $phpType
+     * @return null|string
      */
     public function scanRegisteredTypes($phpType)
     {
@@ -67,6 +66,7 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      * Sets the strategy for generating complex type documentation
      *
      * @param DocumentationStrategyInterface $documentationStrategy
+     * @return void
      */
     public function setDocumentationStrategy(DocumentationStrategyInterface $documentationStrategy)
     {
