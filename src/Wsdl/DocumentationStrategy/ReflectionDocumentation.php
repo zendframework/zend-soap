@@ -24,7 +24,7 @@ final class ReflectionDocumentation implements DocumentationStrategyInterface
         return $this->parseDocComment($class->getDocComment());
     }
 
-    private function parseDocComment(string $docComment)
+    private function parseDocComment($docComment)
     {
         $documentation = [];
         foreach (explode("\n", $docComment) as $i => $line) {
