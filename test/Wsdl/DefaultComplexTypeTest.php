@@ -9,8 +9,13 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use Prophecy\Argument;
+use ReflectionClass;
+use ReflectionProperty;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType;
+use Zend\Soap\Wsdl\DocumentationStrategy\DocumentationStrategyInterface;
 use ZendTest\Soap\TestAsset\PublicPrivateProtected;
+use ZendTest\Soap\TestAsset\WsdlTestClass;
 use ZendTest\Soap\WsdlTestHelper;
 
 /**
@@ -55,5 +60,18 @@ class DefaultComplexTypeTest extends WsdlTestHelper
         $this->assertEquals(1, $nodes->length);
 
         $this->documentNodesTest();
+    }
+
+    public function testDocumentationStrategyCalled()
+    {
+        $documentation = $this->prophesize(DocumentationStrategyInterface::class);
+        $documentation->getPropertyDocumentation(Argument::type(ReflectionProperty::class))
+            ->shouldBeCalledTimes(2)
+            ->willReturn('Property');
+        $documentation->getComplexTypeDocumentation(Argument::type(ReflectionClass::class))
+            ->shouldBeCalledTimes(1)
+            ->willReturn('Complex type');
+        $this->strategy->setDocumentationStrategy($documentation->reveal());
+        $this->strategy->addComplexType(WsdlTestClass::class);
     }
 }

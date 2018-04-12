@@ -11,6 +11,7 @@ namespace ZendTest\Soap;
 
 use Zend\Soap\Wsdl;
 use Zend\Uri\Uri;
+use ZendTest\Soap\TestAsset\WsdlTestClass;
 
 /**
  * Zend_Soap_Server
@@ -571,6 +572,20 @@ class WsdlTest extends WsdlTestHelper
 
         $nodes = $this->xpath->query('//wsdl:message[@name="myMessage"]/*[1]');
         $this->assertEquals('documentation', $nodes->item(0)->nodeName);
+    }
+
+    public function testComplexTypeDocumentationAddedAsAnnotation()
+    {
+        $this->wsdl->addComplexType(WsdlTestClass::class);
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]');
+
+        $this->wsdl->addDocumentation($nodes->item(0), 'documentation');
+
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]/*[1]');
+        $this->assertEquals('xsd:annotation', $nodes->item(0)->nodeName);
+
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]/xsd:annotation/*[1]');
+        $this->assertEquals('xsd:documentation', $nodes->item(0)->nodeName);
     }
 
     public function testDumpToFile()

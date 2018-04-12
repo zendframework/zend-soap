@@ -3,15 +3,18 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use DOMElement;
 use ReflectionClass;
+use ReflectionProperty;
 use Zend\Soap\Exception;
 use Zend\Soap\Wsdl;
+use Zend\Soap\Wsdl\DocumentationStrategy\DocumentationStrategyInterface;
 
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
@@ -69,13 +72,35 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
                     $element->setAttribute('nillable', 'true');
                 }
 
+                $this->addPropertyDocumentation($property, $element);
                 $all->appendChild($element);
             }
         }
 
         $complexType->appendChild($all);
+        $this->addComplexTypeDocumentation($class, $complexType);
         $this->getContext()->getSchema()->appendChild($complexType);
 
         return $soapType;
+    }
+
+    private function addPropertyDocumentation(ReflectionProperty $property, DOMElement $element)
+    {
+        if ($this->documentationStrategy instanceof DocumentationStrategyInterface) {
+            $documentation = $this->documentationStrategy->getPropertyDocumentation($property);
+            if ($documentation) {
+                $this->getContext()->addDocumentation($element, $documentation);
+            }
+        }
+    }
+
+    private function addComplexTypeDocumentation(ReflectionClass $class, DOMElement $element)
+    {
+        if ($this->documentationStrategy instanceof DocumentationStrategyInterface) {
+            $documentation = $this->documentationStrategy->getComplexTypeDocumentation($class);
+            if ($documentation) {
+                $this->getContext()->addDocumentation($element, $documentation);
+            }
+        }
     }
 }
