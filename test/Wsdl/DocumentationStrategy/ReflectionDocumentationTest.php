@@ -12,6 +12,7 @@ namespace ZendTest\Soap\Wsdl\DocumentationStrategy;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Zend\Soap\Wsdl\DocumentationStrategy\ReflectionDocumentation;
+use ZendTest\Soap\TestAsset\PropertyDocumentationTestClass;
 use ZendTest\Soap\TestAsset\WsdlTestClass;
 
 class ReflectionDocumentationTest extends TestCase
@@ -28,43 +29,25 @@ class ReflectionDocumentationTest extends TestCase
 
     public function testGetPropertyDocumentationParsesDocComment()
     {
-        $class = new class {
-            /**
-             * Property documentation
-             */
-            public $foo;
-        };
-
+        $class = new PropertyDocumentationTestClass();
         $reflection = new ReflectionClass($class);
-        $actual = $this->documentation->getPropertyDocumentation($reflection->getProperty('foo'));
+        $actual = $this->documentation->getPropertyDocumentation($reflection->getProperty('withoutType'));
         $this->assertEquals('Property documentation', $actual);
     }
 
     public function testGetPropertyDocumentationSkipsAnnotations()
     {
-
-        $class = new class {
-            /**
-             * Property documentation
-             * @type int
-             */
-            public $foo;
-        };
-
+        $class = new PropertyDocumentationTestClass();
         $reflection = new ReflectionClass($class);
-        $actual = $this->documentation->getPropertyDocumentation($reflection->getProperty('foo'));
+        $actual = $this->documentation->getPropertyDocumentation($reflection->getProperty('withType'));
         $this->assertEquals('Property documentation', $actual);
     }
 
     public function testGetPropertyDocumentationReturnsEmptyString()
     {
-
-        $class = new class {
-            public $foo;
-        };
-
+        $class = new PropertyDocumentationTestClass();
         $reflection = new ReflectionClass($class);
-        $actual = $this->documentation->getPropertyDocumentation($reflection->getProperty('foo'));
+        $actual = $this->documentation->getPropertyDocumentation($reflection->getProperty('noDoc'));
         $this->assertEquals('', $actual);
     }
 
