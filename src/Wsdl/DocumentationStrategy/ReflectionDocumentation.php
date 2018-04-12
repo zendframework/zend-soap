@@ -14,12 +14,12 @@ use ReflectionProperty;
 
 final class ReflectionDocumentation implements DocumentationStrategyInterface
 {
-    public function getPropertyDocumentation(ReflectionProperty $property) : string
+    public function getPropertyDocumentation(ReflectionProperty $property)
     {
         return $this->parseDocComment($property->getDocComment());
     }
 
-    public function getComplexTypeDocumentation(ReflectionClass $class) : string
+    public function getComplexTypeDocumentation(ReflectionClass $class)
     {
         return $this->parseDocComment($class->getDocComment());
     }

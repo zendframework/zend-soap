@@ -13,7 +13,7 @@ use ReflectionClass;
 use ReflectionProperty;
 
 /**
- * Implement this interface to provide contents for <wsdl:documentation> elements on complex types
+ * Implement this interface to provide contents for <xsd:documentation> elements on complex types
  */
 interface DocumentationStrategyInterface
 {
@@ -21,15 +21,17 @@ interface DocumentationStrategyInterface
      * Returns documentation for complex type property
      *
      * @param ReflectionProperty $property
+     *
      * @return string
      */
-    public function getPropertyDocumentation(ReflectionProperty $property) : string;
+    public function getPropertyDocumentation(ReflectionProperty $property);
 
     /**
      * Returns documentation for complex type
      *
      * @param ReflectionClass $class
+     *
      * @return string
      */
-    public function getComplexTypeDocumentation(ReflectionClass $class) : string;
+    public function getComplexTypeDocumentation(ReflectionClass $class);
 }
