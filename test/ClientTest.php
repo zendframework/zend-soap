@@ -71,7 +71,7 @@ class ClientTest extends TestCase
                                 'passphrase'     => 'some pass phrase',
 
                                 'stream_context' => $ctx,
-                                'cache_wsdl'     => 8,
+                                'cache_wsdl'     => WSDL_CACHE_NONE,
                                 'features'       => 4,
 
                                 'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
@@ -242,6 +242,15 @@ class ClientTest extends TestCase
         $this->assertNull($client->getWsdlCache());
         $options = $client->getOptions();
         $this->assertArrayNotHasKey('cache_wsdl', $options);
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\InvalidArgumentException
+     */
+    public function testInvalidCacheWsdlOptionException()
+    {
+        $client = new Client();
+        $client->setWsdlCache(100);
     }
 
     /**
