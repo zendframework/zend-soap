@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-soap">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>Clients - zend-soap - Zend Framework Docs</title>
+    <title>zend-soap - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-soap</a>
+            <a href="/.">zend-soap</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,7 +75,7 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-soap</a>
+                        <a href="/." class="subnavigation__link">zend-soap</a>
                     </li>
                 
             
@@ -86,25 +86,25 @@
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../server/" class="subnavigation__link">Servers</a>
-    </li>
-
-                            
-                                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Clients</a>
+        <a href="/server/" class="subnavigation__link">Servers</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
+        <a href="/client/" class="subnavigation__link">Clients</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
+        <a href="/wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="/auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
     </li>
 
                             
@@ -181,205 +181,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
-
-        
-            <li><a href="..">zend-soap</a></li>
-
-            
-                
-                    <li>Reference</li>
-                
-            
-
-            <li class="active">Clients</li>
-        
-    
-</ol>
-
-
-    
-        <h2 class="chapter__headline">Reference</h2>
-    
-
-    
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#instantiation" class="toc__link">Instantiation</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#performing-soap-requests" class="toc__link">Performing SOAP Requests</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
-
-    <h1 id="zend92soap92client">Zend\Soap\Client</h1>
-<p>The <code>Zend\Soap\Client</code> class simplifies SOAP client development for PHP
-programmers, and may be used in either WSDL or non-WSDL mode.</p>
-<p>Under WSDL mode, <code>Zend\Soap\Client</code> uses a WSDL document to define transport
-layer options.</p>
-<p>The WSDL description is usually provided by the web service the client will
-access.  If the WSDL description is not made available, you may want to use
-<code>Zend\Soap\Client</code> in non-WSDL mode. Under this mode, all SOAP protocol options
-have to be set explicitly on the <code>Zend\Soap\Client</code> class.</p>
-<h2 id="instantiation">Instantiation</h2>
-<p>The <code>Zend\Soap\Client</code> constructor takes two parameters:</p>
-<ul>
-<li><code>$wsdl</code> - the URI of a WSDL file.</li>
-<li><code>$options</code> - options for modifying the behavior of the client instance.</li>
-</ul>
-<p>Both of these parameters may be set later using the <code>setWsdl($wsdl)</code> and
-<code>setOptions($options)</code> methods respectively.</p>
+<h1 class="content__title">404</h1>
 <blockquote>
-<h3 id="non-wsdl-mode-requirements">Non-WSDL mode requirements</h3>
-<p>If you use <code>Zend\Soap\Client</code> component in non-WSDL mode, you <strong>must</strong> set the
-'location' and 'uri' options.</p>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
 </blockquote>
-<p>The following options are recognized:</p>
-<ul>
-<li><code>soap_version</code> (<code>soapVersion</code>) - soap version to use (<code>SOAP_1_1</code> or
-  <code>SOAP_1_2</code>).</li>
-<li><code>classmap</code> (<code>classMap</code>) - maps WSDL types to PHP classes; option must be an
-  array where keys are the WSDL types, and values are the PHP class to which
-  to map.</li>
-<li><code>encoding</code> - internal character encoding (UTF-8 is always used as an external
-  encoding).</li>
-<li><code>wsdl</code> - specifying this option sets the client in WSDL mode. Can be set
-  after-the-fact using <code>setWsdl($wsdl)</code>.</li>
-<li><code>uri</code> - target namespace for the SOAP service (required for non-WSDL-mode;
-  no-op when in WSDL mode).</li>
-<li><code>location</code> - the URL to request (required for non-WSDL-mode; no-op when in
-  WSDL mode).</li>
-<li><code>style</code> - request style (non-WSDL mode only); one of <code>SOAP_RPC</code> or
-  <code>SOAP_DOCUMENT</code>.</li>
-<li><code>use</code> - method to use when encoding messages (non-WSDL mode only);
-  either <code>SOAP_ENCODED</code> or <code>SOAP_LITERAL</code>.</li>
-<li><code>login</code> and <code>password</code> - login and password for HTTP authentication.</li>
-<li><code>proxy_host</code>, <code>proxy_port</code>, <code>proxy_login</code>, and <code>proxy_password</code> - use when
-  specifying a service behind a proxy server.</li>
-<li><code>local_cert</code> and <code>passphrase</code> - HTTPS client certificate authentication
-  options.</li>
-<li><code>compression</code> - compression options; combination of
-  <code>SOAP_COMPRESSION_ACCEPT</code>, <code>SOAP_COMPRESSION_GZIP</code> and/or
-  <code>SOAP_COMPRESSION_DEFLATE</code> options.</li>
-</ul>
-<p>The following demonstrate usage of compression options:</p>
-<pre class="codehilite"><code class="language-php">// Accept response compression
-$client = new Zend\Soap\Client(
-    'some.wsdl',
-    ['compression' =&gt; SOAP_COMPRESSION_ACCEPT]
-);
 
-// Compress requests using gzip with compression level 5
-$client = new Zend\Soap\Client(
-    'some.wsdl',
-    ['compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5]
-);
-
-// Compress requests using deflate compression
-$client = new Zend\Soap\Client(
-    "some.wsdl",
-    ['compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE]
-);</code></pre>
-
-<h2 id="performing-soap-requests">Performing SOAP Requests</h2>
-<p>After we've created a <code>Zend\Soap\Client</code> instance, we can perform SOAP requests.</p>
-<p>Each web service method is mapped to a virtual <code>Zend\Soap\Client</code> instance
-method which takes parameters with common PHP types.</p>
-<p>As an example, given the following server:</p>
-<pre class="codehilite"><code class="language-php">class MyClass
-{
-    /**
-     * This method takes ...
-     *
-     * @param integer $inputParam
-     * @return string
-     */
-    public function method1($inputParam)
-    {
-        /* ... */
-    }
-
-    /**
-     * This method takes ...
-     *
-     * @param integer $inputParam1
-     * @param string  $inputParam2
-     * @return float
-     */
-    public function method2($inputParam1, $inputParam2)
-    {
-        /* ... */
-    }
-
-    /* ... */
-}
-
-$server = new Zend\Soap\Server(null, $options);
-$server-&gt;setClass('MyClass');
-$server-&gt;handle();</code></pre>
-
-<p>We can write a client as follows:</p>
-<pre class="codehilite"><code class="language-php">$client = new Zend\Soap\Client("MyService.wsdl");
-
-// $result1 is a string
-$result1 = $client-&gt;method1(10);
-
-// $result2 is a float
-$result2 = $client-&gt;method2(22, 'some string');</code></pre>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../server/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../wsdl/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-soap/edit/master/doc/book/client.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -395,7 +208,7 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-soap</a>
+            <a href="/.">zend-soap</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -404,7 +217,7 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-soap</a>
+                        <a href="/." class="subnavigation__link">zend-soap</a>
                     </li>
                 
             
@@ -415,25 +228,25 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../server/" class="subnavigation__link">Servers</a>
-    </li>
-
-                            
-                                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Clients</a>
+        <a href="/server/" class="subnavigation__link">Servers</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
+        <a href="/client/" class="subnavigation__link">Clients</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
+        <a href="/wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="/auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
     </li>
 
                             
@@ -512,11 +325,11 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
 </footer>
 
     <script>
-        var base_url = '..',
+        var base_url = '/',
             siteName = 'zend-soap';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
