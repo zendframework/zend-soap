@@ -11,7 +11,8 @@
 
     <title>Clients - zend-soap</title>
 
-    <link rel="stylesheet" href="../css/styles-e3f3751b65.css">
+    <link rel="stylesheet" href="../css/styles-18b942728f.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
 </head>
 <body id="page-top">
 
@@ -63,56 +64,58 @@
             
             
                 <div class="nav navbar-nav navbar-collapse visible-xs-block ">
-                    <div class="subnavigation hidden-print">
-    <h4 class="subnavigation__title">
-        <a href="..">zend-soap</a>
-    </h4>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="">zend-soap</a>
+        </h4>
 
-    <h5 class="subnavigation__subtitle">Table of Contents</h5>
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
-    <ul class="subnavigation__list">
-        
+        <ul class="subnavigation__list">
             
-                <li class="subnavigation__list-item ">
-                    <a href=".." class="subnavigation__link">zend-soap</a>
-                </li>
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="" class="subnavigation__link">zend-soap</a>
+                    </li>
+                
             
-        
-            
-                <li class="subnavigation__list-item">
-                    <span class="subnavigation__headline">Reference</span>
-                    <ul class="subnavigation__list">
-                        
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Reference</span>
+                        <ul class="subnavigation__list">
                             
+                                
     <li class="subnavigation__list-item ">
-        <a href="../server/" class="subnavigation__link">Servers</a>
+        <a href="server/" class="subnavigation__link">Servers</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Clients</a>
+        <a href="client/" class="subnavigation__link">Clients</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
-        <a href="../wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
+        <a href="wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
-        <a href="../auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
+        <a href="auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
     </li>
 
-                        
-                    </ul>
-                </li>
+                            
+                        </ul>
+                    </li>
+                
             
-        
-    </ul>
-</div>
+        </ul>
+    </div>
+
                 </div>
             
 
@@ -163,23 +166,40 @@
 </header>
 
     
+    <div class="laminas-announcement">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
     <div class="container">
         <div class="row">
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
                     <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="https://framework.zend.com/">Home</a></li>
-  <li><a href="https://docs.zendframework.com/">Docs</a></li>
-  <li><a href="..">zend-soap</a></li>
-  
+    <li><a href="https://framework.zend.com/">Home</a></li>
+
     
-      
-        <li>Reference</li>
-      
+        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+
+        
+            <li><a href="">zend-soap</a></li>
+
+            
+                
+                    <li>Reference</li>
+                
+            
+
+            <li class="active">Clients</li>
+        
     
-  
-  <li class="active">Clients</li>
 </ol>
 
 
@@ -270,7 +290,7 @@ $client = new Zend\Soap\Client(
 
 // Compress requests using deflate compression
 $client = new Zend\Soap\Client(
-    &quot;some.wsdl&quot;,
+    "some.wsdl",
     ['compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE]
 );</code></pre>
 
@@ -312,7 +332,7 @@ $server-&gt;setClass('MyClass');
 $server-&gt;handle();</code></pre>
 
 <p>We can write a client as follows:</p>
-<pre class="codehilite"><code class="language-php">$client = new Zend\Soap\Client(&quot;MyService.wsdl&quot;);
+<pre class="codehilite"><code class="language-php">$client = new Zend\Soap\Client("MyService.wsdl");
 
 // $result1 is a string
 $result1 = $client-&gt;method1(10);
@@ -328,7 +348,7 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../server/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="server/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -337,7 +357,7 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../wsdl/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="wsdl/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -346,14 +366,16 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
 </nav>
 
 
-<div class="help-wanted">
-    <p>
-        Found a mistake or want to contribute to the documentation?
-        <a href="https://github.com/zendframework/zend-soap/edit/master/doc/book/client.md" target="_blank" class="help-wanted__link">
-            Edit this page on GitHub!
-        </a>
-    </p>
-</div>
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/zendframework/zend-soap/edit/master/doc/book/client.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
                 
             <!-- content:end -->
             </div>
@@ -367,56 +389,58 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
         <optgroup label="Components"></optgroup>
     </select>
 </div>
-                    <div class="subnavigation hidden-print">
-    <h4 class="subnavigation__title">
-        <a href="..">zend-soap</a>
-    </h4>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="">zend-soap</a>
+        </h4>
 
-    <h5 class="subnavigation__subtitle">Table of Contents</h5>
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
-    <ul class="subnavigation__list">
-        
+        <ul class="subnavigation__list">
             
-                <li class="subnavigation__list-item ">
-                    <a href=".." class="subnavigation__link">zend-soap</a>
-                </li>
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="" class="subnavigation__link">zend-soap</a>
+                    </li>
+                
             
-        
-            
-                <li class="subnavigation__list-item">
-                    <span class="subnavigation__headline">Reference</span>
-                    <ul class="subnavigation__list">
-                        
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Reference</span>
+                        <ul class="subnavigation__list">
                             
+                                
     <li class="subnavigation__list-item ">
-        <a href="../server/" class="subnavigation__link">Servers</a>
+        <a href="server/" class="subnavigation__link">Servers</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Clients</a>
+        <a href="client/" class="subnavigation__link">Clients</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
-        <a href="../wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
+        <a href="wsdl/" class="subnavigation__link">WSDL Parsing and Generation</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
-        <a href="../auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
+        <a href="auto-discovery/" class="subnavigation__link">WSDL AutoDiscovery</a>
     </li>
 
-                        
-                    </ul>
-                </li>
+                            
+                        </ul>
+                    </li>
+                
             
-        
-    </ul>
-</div>
+        </ul>
+    </div>
+
                 
             </div>
         </div>
@@ -469,6 +493,15 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
+                    <li class="support__list-item">
+                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -479,9 +512,8 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
         var base_url = '..',
             siteName = 'zend-soap';
     </script>
-    <script src="../js/scripts-dcbafde59f.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+    <script src="../js/scripts-edc4cfa790.js"></script>
+        <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
@@ -510,6 +542,14 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
             </div>
         </div>
     </div>
+
+<script>
+// Anchors
+anchors.options.placement = 'left';
+anchors.add(
+    '.content h1:not(.content__title), .content h2, .content > h3, .content h4, .content h5'
+);
+</script>
 
 
 
