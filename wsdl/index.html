@@ -288,6 +288,10 @@
                     </li>
                 
                     <li class="toc__entry">
+                        <a href="#documenting-complex-types" class="toc__link">Documenting complex types</a>
+                    </li>
+                
+                    <li class="toc__entry">
                         <a href="#retrieve-the-final-wsdl-document" class="toc__link">Retrieve the final WSDL document</a>
                     </li>
                 
@@ -446,6 +450,8 @@ and SOAP types:</p>
 <li>PHP floats and doubles &lt;-&gt; <code>xsd:float</code>.</li>
 <li>PHP booleans &lt;-&gt; <code>xsd:boolean</code>.</li>
 <li>PHP arrays &lt;-&gt; <code>soap-enc:Array</code>.</li>
+<li>PHP Date &lt;-&gt; <code>xsd:date</code>.</li>
+<li>PHP DateTime &lt;-&gt; <code>xsd:dateTime</code>.</li>
 <li>PHP object &lt;-&gt; <code>xsd:struct</code>.</li>
 <li>PHP class &lt;-&gt; based on complex type strategy (See
   <a href="#adding-complex-type-information">the section on adding complex types</a>).</li>
@@ -540,6 +546,16 @@ documentation using the optional <code>wsdl:document</code> element.</p>
 binding is bound to the SOAP protocol format.</p>
 <p>See the <a href="http://www.w3.org/TR/wsdl#_documentation">W3C WSDL documentation section</a>
 for more details.</p>
+<h2 id="documenting-complex-types">Documenting complex types</h2>
+<p>To automatically generate documentation for complex types add a class implementing
+<code>Zend\Soap\Wsdl\DocumentationStrategy\DocumentationStrategyInterface</code> to your
+complex type strategy. A <code>ReflectionDocumentation</code> strategy is included, which 
+will parse class and property docblocks and generate documentation based on the
+comments found:</p>
+<pre class="codehilite"><code class="language-php">$strategy = new ArrayOfTypeSequence();
+$strategy-&gt;setDocumentationStrategy(new ReflectionDocumentation());
+$wsdl = new Zend\Soap\Wsdl('MyService', $myWebServiceUri, $strategy);</code></pre>
+
 <h2 id="retrieve-the-final-wsdl-document">Retrieve the final WSDL document</h2>
 <p>Several methods exist for retrieving the full WSDL definition document:</p>
 <ul>
