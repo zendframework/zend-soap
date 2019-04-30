@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.8.0 - TBD
+## 2.8.0 - 2019-04-30
 
 ### Added
 
@@ -21,28 +21,6 @@ All notable changes to this project will be documented in this file, in reverse 
   the `xsd:dateTime` type, mapping it to PHP `DateTime` instances.
 
 - [#59](https://github.com/zendframework/zend-soap/pull/59) adds support for PHP 7.3.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 2.7.1 - TBD
-
-### Added
-
-- Nothing.
 
 ### Changed
 
