@@ -275,7 +275,7 @@ have to be set explicitly on the <code>Zend\Soap\Client</code> class.</p>
 <p>Both of these parameters may be set later using the <code>setWsdl($wsdl)</code> and
 <code>setOptions($options)</code> methods respectively.</p>
 <blockquote>
-<h3 id="non-wsdl-mode-requirements">Non-WSDL mode requirements</h3>
+<h3>Non-WSDL mode requirements</h3>
 <p>If you use <code>Zend\Soap\Client</code> component in non-WSDL mode, you <strong>must</strong> set the
 'location' and 'uri' options.</p>
 </blockquote>
@@ -308,7 +308,7 @@ have to be set explicitly on the <code>Zend\Soap\Client</code> class.</p>
   <code>SOAP_COMPRESSION_DEFLATE</code> options.</li>
 </ul>
 <p>The following demonstrate usage of compression options:</p>
-<pre class="codehilite"><code class="language-php">// Accept response compression
+<p> <pre class=codehilite><code class=language-php>// Accept response compression
 $client = new Zend\Soap\Client(
     'some.wsdl',
     ['compression' =&gt; SOAP_COMPRESSION_ACCEPT]
@@ -322,16 +322,15 @@ $client = new Zend\Soap\Client(
 
 // Compress requests using deflate compression
 $client = new Zend\Soap\Client(
-    "some.wsdl",
+    &quot;some.wsdl&quot;,
     ['compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE]
-);</code></pre>
-
+);</code></pre></p>
 <h2 id="performing-soap-requests">Performing SOAP Requests</h2>
 <p>After we've created a <code>Zend\Soap\Client</code> instance, we can perform SOAP requests.</p>
 <p>Each web service method is mapped to a virtual <code>Zend\Soap\Client</code> instance
 method which takes parameters with common PHP types.</p>
 <p>As an example, given the following server:</p>
-<pre class="codehilite"><code class="language-php">class MyClass
+<p> <pre class=codehilite><code class=language-php>class MyClass
 {
     /**
      * This method takes ...
@@ -361,16 +360,15 @@ method which takes parameters with common PHP types.</p>
 
 $server = new Zend\Soap\Server(null, $options);
 $server-&gt;setClass('MyClass');
-$server-&gt;handle();</code></pre>
-
+$server-&gt;handle();</code></pre></p>
 <p>We can write a client as follows:</p>
-<pre class="codehilite"><code class="language-php">$client = new Zend\Soap\Client("MyService.wsdl");
+<p> <pre class=codehilite><code class=language-php>$client = new Zend\Soap\Client(&quot;MyService.wsdl&quot;);
 
 // $result1 is a string
 $result1 = $client-&gt;method1(10);
 
 // $result2 is a float
-$result2 = $client-&gt;method2(22, 'some string');</code></pre>
+$result2 = $client-&gt;method2(22, 'some string');</code></pre></p>
 
 
 
@@ -404,7 +402,7 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-soap/edit/master/doc/client.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-soap/edit/master/doc/book/client.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

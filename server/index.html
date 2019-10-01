@@ -281,13 +281,13 @@ options mechanism.</p>
 <h2 id="zendsoapserver-instantiation">Zend\Soap\Server instantiation</h2>
 <p>Instantiation of <code>Server</code> instances varies based on whether or not you are using
 WSDL mode.</p>
-<h3 id="options-available-in-either-mode">Options available in either mode</h3>
+<h3>Options available in either mode</h3>
 <ul>
 <li><code>parse_huge</code> (since 2.7.0): when set to a boolean true, ensures the
   <code>LIBXML_PARSEHUGE</code> flag is passed to <code>DOMDocument::loadXML()</code> when handling an
   incoming request. This can resolve issues with receiving large payloads.</li>
 </ul>
-<h3 id="instantiation-for-wsdl-mode">Instantiation for WSDL mode</h3>
+<h3>Instantiation for WSDL mode</h3>
 <p>When in WSDL mode, the constructor expects two optional parameters:</p>
 <ul>
 <li><code>$wsdl</code>: the URI of a WSDL file. This may be set after-the-fact using
@@ -305,7 +305,7 @@ WSDL mode.</p>
 <li><code>encoding</code> - internal character encoding (UTF-8 is always used as an external encoding).</li>
 <li><code>wsdl</code> - equivalent to calling <code>setWsdl($wsdlValue)</code>.</li>
 </ul>
-<h3 id="instantiation-for-non-wsdl-mode">Instantiation for non-WSDL mode</h3>
+<h3>Instantiation for non-WSDL mode</h3>
 <p>The first constructor parameter <strong>must</strong> be set to <code>NULL</code> if you plan to use
 <code>Zend\Soap\Server</code> functionality in non-WSDL mode.</p>
 <p>You also have to set the <code>uri</code> option in this case (see below).</p>
@@ -326,7 +326,7 @@ configuring the behavior of the server; these may also be provided later using
 <p>There are two ways to define your SOAP API in order to expose PHP functionality.</p>
 <p>The first one is to attach a class to the <code>Zend\Soap\Server</code> object that
 completely describes your API:</p>
-<pre class="codehilite"><code class="language-php">class MyClass
+<p> <pre class=codehilite><code class=language-php>class MyClass
 {
     /**
      * This method takes ...
@@ -363,16 +363,15 @@ $server-&gt;setClass(MyClass::class);
 $server-&gt;setObject(new MyClass());
 
 // Handle a request:
-$server-&gt;handle();</code></pre>
-
+$server-&gt;handle();</code></pre></p>
 <blockquote>
-<h3 id="docblocks-are-required">Docblocks are required</h3>
+<h3>Docblocks are required</h3>
 <p>You should completely describe each method using a method docblock if you plan
 to use autodiscover functionality to prepare your WSDL.</p>
 </blockquote>
 <p>The second method for defining your API is to use one or more functions, passing
 them to one or more of the <code>addFunction()</code> or <code>loadFunctions()</code> methods:</p>
-<pre class="codehilite"><code class="language-php">/**
+<p> <pre class=codehilite><code class=language-php>/**
  * This function ...
  *
  * @param integer $inputParam
@@ -399,25 +398,23 @@ $server = new Zend\Soap\Server(null, $options);
 $server-&gt;addFunction('function1');
 $server-&gt;addFunction('function2');
 
-$server-&gt;handle();</code></pre>
-
+$server-&gt;handle();</code></pre></p>
 <h2 id="request-and-response-handling">Request and response handling</h2>
 <p><code>Zend\Soap\Server</code> component performs request/response processing automatically,
 but allows you to intercept each in order to perform pre- or post-processing.</p>
-<h3 id="request-pre-and-post-processing">Request pre- and post-processing</h3>
+<h3>Request pre- and post-processing</h3>
 <p>The <code>Zend\Soap\Server::handle()</code> method handles a request from the standard
 input stream ('php://input'). It may be overridden either by supplying a request
 instance to the <code>handle()</code> method, or by setting the request via the
 <code>setRequest()</code> method:</p>
-<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
 
 // Set request using optional $request parameter to the handle() method:
 $server-&gt;handle($request);
 
 // Set request using setRequest() method:
 $server-&gt;setRequest();
-$server-&gt;handle();</code></pre>
-
+$server-&gt;handle();</code></pre></p>
 <p>A request object may be represented using any of the following, and handled as
 follows:</p>
 <ul>
@@ -429,12 +426,11 @@ follows:</p>
 </ul>
 <p>The last request processed may be retrieved using the <code>getLastRequest()</code> method,
 which returns the XML string:</p>
-<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
 
 $server-&gt;handle();
-$request = $server-&gt;getLastRequest();</code></pre>
-
-<h3 id="response-post-processing">Response post-processing</h3>
+$request = $server-&gt;getLastRequest();</code></pre></p>
+<h3>Response post-processing</h3>
 <p>The <code>Zend\Soap\Server::handle()</code> method automatically emits the generated
 response to the output stream. It may be blocked using <code>setReturnResponse()</code>
 with <code>true</code> or <code>false</code> as a parameter. When set to <code>true</code>, <code>handle()</code> will
@@ -442,13 +438,13 @@ return the generated response instead of emitting it.</p>
 <p>The returned response will be either an XML string representing the response, or
 a <code>SoapFault</code> exception instance.</p>
 <blockquote>
-<h4 id="do-not-return-soapfaults">Do not return SoapFaults</h4>
+<h4>Do not return SoapFaults</h4>
 <p>SoapFault instances, when cast to a string, will contain the full exception
 stack trace. For security purposes, you do not want to return that
 information. As such, check your return type before emitting the response
 manually.</p>
 </blockquote>
-<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
 
 // Get a response as a return value of handle(),
 // instead of emitting it to standard output:
@@ -460,11 +456,10 @@ if ($response instanceof SoapFault) {
     /* ... */
 } else {
     /* ... */
-}</code></pre>
-
+}</code></pre></p>
 <p>The last response emitted may also be retrieved for post-processing using
 <code>getLastResponse()</code>:</p>
-<pre class="codehilite"><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
+<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
 
 $server-&gt;handle();
 
@@ -474,8 +469,7 @@ if ($response instanceof SoapFault) {
     /* ... */
 } else {
     /* ... */
-}</code></pre>
-
+}</code></pre></p>
 <h2 id="documentliteral-wsdl-handling">Document/Literal WSDL Handling</h2>
 <p>The document/literal binding-style/encoding pattern is used to make SOAP
 messages as human-readable as possible and allow abstraction between very
@@ -525,7 +519,7 @@ and discussion.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-soap/edit/master/doc/server.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-soap/edit/master/doc/book/server.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
