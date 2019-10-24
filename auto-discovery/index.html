@@ -330,30 +330,31 @@ will interact with your SOAP server.</p>
 retrieval of WSDL is performed using HTTP GET. As such, you <em>can</em> server both
 from the same script, provided you detect the incoming method and respond
 accordingly:</p>
-<p>```php
+<p><pre class=codehilite><code class=language-php>
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (! isset($_GET['wsdl'])) {
         header('HTTP/1.1 400 Client Error');
         return;
-    }</p>
-<pre class="codehilite"><code>$autodiscover = new Zend\Soap\AutoDiscover();
-$autodiscover-&gt;setClass('HelloWorldService')
-    -&gt;setUri('http://example.com/soap.php');
-header('Content-Type: application/wsdl+xml');
-echo $autodiscover-&gt;toXml();
-return;</code></pre>
+    }
 
+    $autodiscover = new Zend\Soap\AutoDiscover();
+    $autodiscover-&gt;setClass('HelloWorldService')
+        -&gt;setUri('http://example.com/soap.php');
+    header('Content-Type: application/wsdl+xml');
+    echo $autodiscover-&gt;toXml();
+    return;
+}
 
-<p>}</p>
-<p>if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header('HTTP/1.1 400 Client Error');
     return;
-}</p>
-<p>// pointing to the current file here
-$soap = new Zend\Soap\Server("http://example.com/soap.php?wsdl");
+}
+
+// pointing to the current file here
+$soap = new Zend\Soap\Server(&quot;http://example.com/soap.php?wsdl&quot;);
 $soap-&gt;setClass('HelloWorldService');
 $soap-&gt;handle();
-```</p>
+</code></pre></p>
 </blockquote>
 <h2 id="class-autodiscovery">Class autodiscovery</h2>
 <p>If a class is used to provide SOAP server functionality, then the same class
