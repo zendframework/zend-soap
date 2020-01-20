@@ -2,7 +2,7 @@
 
 > ## Repository abandoned 2019-12-31
 >
-> This repository has moved to laminas/laminas-soap.
+> This repository has moved to [laminas/laminas-soap](https://github.com/laminas/laminas-soap).
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-soap.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-soap)
 [![Coverage Status](https://coveralls.io/repos/zendframework/zend-soap/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-soap?branch=master)
