@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-soap">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-soap/server/">
+    <link rel="canonical" href="https://docs.zendframework.com/server/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Servers - zend-soap - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -187,9 +187,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-soap/">laminas/laminas-soap.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -326,7 +326,7 @@ configuring the behavior of the server; these may also be provided later using
 <p>There are two ways to define your SOAP API in order to expose PHP functionality.</p>
 <p>The first one is to attach a class to the <code>Zend\Soap\Server</code> object that
 completely describes your API:</p>
-<p> <pre class=codehilite><code class=language-php>class MyClass
+<pre><code class="language-php">class MyClass
 {
     /**
      * This method takes ...
@@ -363,7 +363,9 @@ $server-&gt;setClass(MyClass::class);
 $server-&gt;setObject(new MyClass());
 
 // Handle a request:
-$server-&gt;handle();</code></pre></p>
+$server-&gt;handle();
+</code></pre>
+
 <blockquote>
 <h3>Docblocks are required</h3>
 <p>You should completely describe each method using a method docblock if you plan
@@ -371,7 +373,7 @@ to use autodiscover functionality to prepare your WSDL.</p>
 </blockquote>
 <p>The second method for defining your API is to use one or more functions, passing
 them to one or more of the <code>addFunction()</code> or <code>loadFunctions()</code> methods:</p>
-<p> <pre class=codehilite><code class=language-php>/**
+<pre><code class="language-php">/**
  * This function ...
  *
  * @param integer $inputParam
@@ -398,7 +400,9 @@ $server = new Zend\Soap\Server(null, $options);
 $server-&gt;addFunction('function1');
 $server-&gt;addFunction('function2');
 
-$server-&gt;handle();</code></pre></p>
+$server-&gt;handle();
+</code></pre>
+
 <h2 id="request-and-response-handling">Request and response handling</h2>
 <p><code>Zend\Soap\Server</code> component performs request/response processing automatically,
 but allows you to intercept each in order to perform pre- or post-processing.</p>
@@ -407,14 +411,16 @@ but allows you to intercept each in order to perform pre- or post-processing.</p
 input stream ('php://input'). It may be overridden either by supplying a request
 instance to the <code>handle()</code> method, or by setting the request via the
 <code>setRequest()</code> method:</p>
-<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
+<pre><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
 
 // Set request using optional $request parameter to the handle() method:
 $server-&gt;handle($request);
 
 // Set request using setRequest() method:
 $server-&gt;setRequest();
-$server-&gt;handle();</code></pre></p>
+$server-&gt;handle();
+</code></pre>
+
 <p>A request object may be represented using any of the following, and handled as
 follows:</p>
 <ul>
@@ -426,10 +432,12 @@ follows:</p>
 </ul>
 <p>The last request processed may be retrieved using the <code>getLastRequest()</code> method,
 which returns the XML string:</p>
-<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
+<pre><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
 
 $server-&gt;handle();
-$request = $server-&gt;getLastRequest();</code></pre></p>
+$request = $server-&gt;getLastRequest();
+</code></pre>
+
 <h3>Response post-processing</h3>
 <p>The <code>Zend\Soap\Server::handle()</code> method automatically emits the generated
 response to the output stream. It may be blocked using <code>setReturnResponse()</code>
@@ -444,7 +452,7 @@ stack trace. For security purposes, you do not want to return that
 information. As such, check your return type before emitting the response
 manually.</p>
 </blockquote>
-<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
+<pre><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
 
 // Get a response as a return value of handle(),
 // instead of emitting it to standard output:
@@ -456,10 +464,12 @@ if ($response instanceof SoapFault) {
     /* ... */
 } else {
     /* ... */
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The last response emitted may also be retrieved for post-processing using
 <code>getLastResponse()</code>:</p>
-<p> <pre class=codehilite><code class=language-php>$server = new Zend\Soap\Server(/* ... */);
+<pre><code class="language-php">$server = new Zend\Soap\Server(/* ... */);
 
 $server-&gt;handle();
 
@@ -469,7 +479,9 @@ if ($response instanceof SoapFault) {
     /* ... */
 } else {
     /* ... */
-}</code></pre></p>
+}
+</code></pre>
+
 <h2 id="documentliteral-wsdl-handling">Document/Literal WSDL Handling</h2>
 <p>The document/literal binding-style/encoding pattern is used to make SOAP
 messages as human-readable as possible and allow abstraction between very
@@ -639,7 +651,7 @@ and discussion.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -647,10 +659,10 @@ and discussion.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -658,27 +670,28 @@ and discussion.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-soap';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

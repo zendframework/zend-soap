@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-soap">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-soap/client/">
+    <link rel="canonical" href="https://docs.zendframework.com/client/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Clients - zend-soap - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -187,9 +187,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-soap/">laminas/laminas-soap.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -308,7 +308,7 @@ have to be set explicitly on the <code>Zend\Soap\Client</code> class.</p>
   <code>SOAP_COMPRESSION_DEFLATE</code> options.</li>
 </ul>
 <p>The following demonstrate usage of compression options:</p>
-<p> <pre class=codehilite><code class=language-php>// Accept response compression
+<pre><code class="language-php">// Accept response compression
 $client = new Zend\Soap\Client(
     'some.wsdl',
     ['compression' =&gt; SOAP_COMPRESSION_ACCEPT]
@@ -324,13 +324,15 @@ $client = new Zend\Soap\Client(
 $client = new Zend\Soap\Client(
     &quot;some.wsdl&quot;,
     ['compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE]
-);</code></pre></p>
+);
+</code></pre>
+
 <h2 id="performing-soap-requests">Performing SOAP Requests</h2>
 <p>After we've created a <code>Zend\Soap\Client</code> instance, we can perform SOAP requests.</p>
 <p>Each web service method is mapped to a virtual <code>Zend\Soap\Client</code> instance
 method which takes parameters with common PHP types.</p>
 <p>As an example, given the following server:</p>
-<p> <pre class=codehilite><code class=language-php>class MyClass
+<pre><code class="language-php">class MyClass
 {
     /**
      * This method takes ...
@@ -360,15 +362,18 @@ method which takes parameters with common PHP types.</p>
 
 $server = new Zend\Soap\Server(null, $options);
 $server-&gt;setClass('MyClass');
-$server-&gt;handle();</code></pre></p>
+$server-&gt;handle();
+</code></pre>
+
 <p>We can write a client as follows:</p>
-<p> <pre class=codehilite><code class=language-php>$client = new Zend\Soap\Client(&quot;MyService.wsdl&quot;);
+<pre><code class="language-php">$client = new Zend\Soap\Client(&quot;MyService.wsdl&quot;);
 
 // $result1 is a string
 $result1 = $client-&gt;method1(10);
 
 // $result2 is a float
-$result2 = $client-&gt;method2(22, 'some string');</code></pre></p>
+$result2 = $client-&gt;method2(22, 'some string');
+</code></pre>
 
 
 
@@ -522,7 +527,7 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre></p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -530,10 +535,10 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre></p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -541,27 +546,28 @@ $result2 = $client-&gt;method2(22, 'some string');</code></pre></p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-soap';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
