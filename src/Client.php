@@ -890,14 +890,16 @@ class Client implements ServerClient
      *
      * @param  string|int|bool|null $caching
      * @return self
+     * @throws Exception\InvalidArgumentException
      */
     public function setWSDLCache($caching)
     {
-        //@todo check WSDL_CACHE_* constants?
         if ($caching === null) {
             $this->cacheWsdl = null;
-        } else {
+        } elseif (in_array($caching, [WSDL_CACHE_NONE, WSDL_CACHE_DISK, WSDL_CACHE_MEMORY, WSDL_CACHE_BOTH])) {
             $this->cacheWsdl = (int) $caching;
+        } else {
+            throw new Exception\InvalidArgumentException("Invalid value for cache_wsdl option");
         }
 
         return $this;
